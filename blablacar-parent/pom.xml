@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cz.muni.fi.pa165</groupId>
-  <artifactId>blablacar-parent</artifactId>
+  <artifactId>blablacar</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>blablacar Parent</name>
+  <name>Blablacar</name>
  
     <parent>
         <groupId>org.springframework.boot</groupId>
