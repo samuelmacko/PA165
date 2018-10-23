@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-//@ComponentScan(basePackageClasses = {UserDao.class}, basePackages = "cz.fi.muni.pa165")
+@ComponentScan(basePackages = "cz.muni.fi.pa165.blablacar.persistence")
 public class PersistenceSampleApplicationContext {
 
     /**

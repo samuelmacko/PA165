@@ -6,6 +6,8 @@
 package cz.muni.fi.pa165.blablacar.persistence.dao;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,11 +17,15 @@ import javax.persistence.PersistenceContext;
  * Implementation of UserDao interface
  * @author Matus Sakala
  */
+@Repository
 public class UserDaoImpl implements UserDao{
     
     @PersistenceContext
     private EntityManager em;
-    
+
+    public UserDaoImpl() {
+    }
+
     @Override
     public void addUser(User u) {
         em.persist(u);
