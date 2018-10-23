@@ -18,7 +18,7 @@ import javax.persistence.PersistenceUnit;
 
 
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
+//@TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
