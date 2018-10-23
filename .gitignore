@@ -1,0 +1,6 @@
+blablacar/target/
+blablacar-parent/target/
+blablacar-parent/blablacar-persistence/target/
+blablacar-parent/.idea
+*.iml
+.DS_Store
