@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * City Entity
@@ -17,6 +19,28 @@ public class City {
 
     @Column(nullable=false,unique=true)
     private String name;
+
+    @OneToMany(mappedBy = "fromCity")
+    private Set<Drive> beginningOfDrives = new HashSet<>();
+
+    @OneToMany(mappedBy = "toCity")
+    private Set<Drive> endOfDrives = new HashSet<>();
+
+    public Set<Drive> getBeginningOfDrives() {
+        return beginningOfDrives;
+    }
+
+    public Set<Drive> getEndOfDrives() {
+        return endOfDrives;
+    }
+
+    public void setBeginningOfDrives(Set<Drive> beginningOfDrives) {
+        this.beginningOfDrives = beginningOfDrives;
+    }
+
+    public void setEndOfDrives(Set<Drive> endOfDrives) {
+        this.endOfDrives = endOfDrives;
+    }
 
     public Long getId() {
         return id;

@@ -1,12 +1,9 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
 /**
  * Class representing user
@@ -31,7 +28,29 @@ public class User {
     private String login;
 
     private char[] password;
-    
+
+    @OneToMany(mappedBy = "driver")
+    private Set<Drive> beingDriver = new HashSet<>();
+
+    @ManyToMany(mappedBy = "customers")
+    private Set<Drive> beingCustomer = new HashSet<>();
+
+    public Set<Drive> getBeingDriver() {
+        return beingDriver;
+    }
+
+    public Set<Drive> getBeingCustomer() {
+        return beingCustomer;
+    }
+
+    public void setBeingDriver(Set<Drive> beingDriver) {
+        this.beingDriver = beingDriver;
+    }
+
+    public void setBeingCustomer(Set<Drive> beingCustomer) {
+        this.beingCustomer = beingCustomer;
+    }
+
     public char[] getPassword(){
         return this.password;
     }
