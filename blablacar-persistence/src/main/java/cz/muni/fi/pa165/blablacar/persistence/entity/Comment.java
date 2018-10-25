@@ -17,7 +17,6 @@ public class Comment {
     private Long id;
 
     @ManyToOne
-    @Column(nullable = false)
     private User author;
 
     @Column(nullable = false)
