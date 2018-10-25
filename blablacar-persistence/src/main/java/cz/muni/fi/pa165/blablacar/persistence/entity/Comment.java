@@ -86,7 +86,9 @@ public class Comment {
     @Override
     public int hashCode() {
         return Objects.hash(getAuthor(), getContent(), getCreatedDate(), getUpdateDate());
-    
+    }
+
+    @ManyToOne
     private Drive drive;
 
     public Drive getDrive() {
