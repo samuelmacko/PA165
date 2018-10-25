@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.blablacar.persistence.dao;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Samuel Macko
  */
 @Repository
+@Transactional
 public class DriveDaoImpl implements DriveDao {
 
     @PersistenceContext
