@@ -86,5 +86,14 @@ public class Comment {
     @Override
     public int hashCode() {
         return Objects.hash(getAuthor(), getContent(), getCreatedDate(), getUpdateDate());
+    
+    private Drive drive;
+
+    public Drive getDrive() {
+        return drive;
+    }
+
+    public void setDrive(Drive drive) {
+        this.drive = drive;
     }
 }
