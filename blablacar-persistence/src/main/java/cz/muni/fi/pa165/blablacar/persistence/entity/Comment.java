@@ -19,6 +19,9 @@ public class Comment {
     @ManyToOne
     private User author;
 
+    @ManyToOne
+    private Drive drive;
+
     @Column(nullable = false)
     private String content;
 
@@ -86,9 +89,6 @@ public class Comment {
     public int hashCode() {
         return Objects.hash(getAuthor(), getContent(), getCreatedDate(), getUpdateDate());
     }
-
-    @ManyToOne
-    private Drive drive;
 
     public Drive getDrive() {
         return drive;

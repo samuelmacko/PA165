@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
+import org.springframework.context.annotation.Bean;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,13 +29,16 @@ public class User {
     @Column(nullable=false,unique=true)
     private String login;
 
-    private char[] password;
+    private String password;
 
     @OneToMany(mappedBy = "driver")
     private Set<Drive> beingDriver = new HashSet<>();
 
     @ManyToMany(mappedBy = "customers")
     private Set<Drive> beingCustomer = new HashSet<>();
+
+    @OneToMany(mappedBy = "author")
+    private Set<Comment> comments = new HashSet<>();
 
     public Set<Drive> getBeingDriver() {
         return beingDriver;
@@ -51,11 +56,11 @@ public class User {
         this.beingCustomer = beingCustomer;
     }
 
-    public char[] getPassword(){
+    public String getPassword(){
         return this.password;
     }
     
-    public void setPassword(char[] pswd){
+    public void setPassword(String pswd){
         this.password = pswd;
     }
     
@@ -89,6 +94,14 @@ public class User {
     
     public void setLastName(String lName){
         this.lastName = lName;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public User(){
@@ -156,9 +169,4 @@ public class User {
                 ", lastName=" + lastName + 
                 ", login=" + login + '}';
     }
-    
-    
-    
-    
-    
 }
