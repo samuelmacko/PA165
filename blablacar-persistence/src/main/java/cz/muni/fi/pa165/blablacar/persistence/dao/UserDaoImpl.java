@@ -7,29 +7,27 @@ package cz.muni.fi.pa165.blablacar.persistence.dao;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
  * Implementation of UserDao interface
+ *
  * @author Matus Sakala
  */
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao{
-    
+public class UserDaoImpl implements UserDao {
+
     @PersistenceContext
     private EntityManager em;
 
-    public UserDaoImpl() {
-    }
-
     @Override
-    public void addUser(User u) {
+    public void addUser(User u) throws IllegalArgumentException {
         em.persist(u);
     }
 
@@ -50,23 +48,23 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User findUserByFullName(String fName, String lName) {
-        try{
+        try {
             return em.createQuery("select u from User u where firstName = :fName and lastName = :lName", User.class)
-                .setParameter(":fName", fName)
-                .setParameter(":lName", lName)
-                .getSingleResult();
-        } catch(NoResultException nre){
+                    .setParameter("fName", fName)
+                    .setParameter("lName", lName)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
             return null;
         }
     }
 
     @Override
     public User findUserByLogin(String login) {
-        try{
+        try {
             return em.createQuery("select u from User u where login = :login", User.class)
-                .setParameter(":login", login)
-                .getSingleResult();
-        }catch(NoResultException nre){
+                    .setParameter("login", login)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
             return null;
         }
     }
@@ -76,5 +74,5 @@ public class UserDaoImpl implements UserDao{
         return em.createQuery("select u from User u", User.class)
                 .getResultList();
     }
-    
+
 }

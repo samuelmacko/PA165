@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.blablacar.persistence.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
