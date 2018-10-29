@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
+import java.util.ArrayList;
 import org.springframework.context.annotation.Bean;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
@@ -38,7 +40,7 @@ public class User {
     private Set<Drive> beingCustomer = new HashSet<>();
 
     @OneToMany(mappedBy = "author")
-    private Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Set<Drive> getBeingDriver() {
         return beingDriver;
@@ -96,11 +98,11 @@ public class User {
         this.lastName = lName;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -119,7 +121,7 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + ((login == null) ? 0 : login.hashCode());
         hash = 97 * hash + ((firstName == null) ? 0 : firstName.hashCode());
         hash = 97 * hash + ((lastName == null) ? 0 : lastName.hashCode());
         return hash;
@@ -140,23 +142,29 @@ public class User {
         if (this.id != other.getId()) {
             return false;
         }
-        if(this.firstName == null && other.getFirstName() != null){
-            return false;
+        if(this.firstName == null ){
+            if(other.getFirstName() != null)
+                return false;
+        }else{
+            if(!this.firstName.equals(other.getFirstName())){
+                return false;
+            }
         }
-        if (!this.firstName.equals(other.getFirstName())){
-            return false;
+        if(this.lastName == null){
+            if(other.getLastName() != null)
+                return false;
+        }else{
+            if(!this.lastName.equals(other.getLastName())){
+                return false;
+            }
         }
-        if(this.lastName == null && other.getLastName() != null){
-            return false;
-        }
-        if (!this.lastName.equals(other.getLastName())){
-            return false;
-        }
-        if(this.login == null && other.getLogin() != null){
-            return false;
-        }
-        if (!this.login.equals(other.getLogin())){
-            return false;
+        if(this.login == null){
+            if(other.getLogin() != null)
+                return false;
+        }else{
+            if (!this.login.equals(other.getLogin())){
+               return false;
+            }
         }
         return true;
     }

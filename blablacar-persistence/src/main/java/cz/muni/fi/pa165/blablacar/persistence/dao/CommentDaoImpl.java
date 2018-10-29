@@ -48,7 +48,7 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<Comment> findAllCommentsOfUser(User author) {
+    public List<Comment> findAllCommentsOfUser(User author) throws IllegalArgumentException{
         Preconditions.checkArgument(author != null, "Can not find comments for null user");
         Preconditions.checkArgument(author.getId() != null, "Can not find comments for user with null id");
         return em.createQuery("SELECT c FROM Comment c WHERE c.author.id = :id", Comment.class).setParameter("id", author.getId()).getResultList();
