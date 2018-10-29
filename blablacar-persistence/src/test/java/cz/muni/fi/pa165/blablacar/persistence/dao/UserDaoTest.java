@@ -57,7 +57,9 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void addUserTest() {
+        assertThat(em.createQuery("select u from User u").getResultList()).isEmpty();
         userDao.addUser(firstUser);
+        assertThat(em.createQuery("select u from User u").getResultList().get(0)).isEqualTo(firstUser);
     }
 
     @Test
