@@ -54,8 +54,9 @@ public interface CommentDao {
     /**
      * Find all comments of given user
      * @param author of comments
+     * @throws IllegalArgumentException if author or authors id is null
      * @return list of all comment of given user
      */
-    public List<Comment> findAllCommentsOfUser(User author);
+    public List<Comment> findAllCommentsOfUser(User author) throws IllegalArgumentException;
 
 }

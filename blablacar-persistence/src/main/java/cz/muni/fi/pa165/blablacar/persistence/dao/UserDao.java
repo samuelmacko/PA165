@@ -16,42 +16,48 @@ public interface UserDao {
     /**
      * Adds user to database
      * @param u user to be added
+     * @throws IllegalArgumentException if user is null
      */
-    public void addUser(User u);
+    public void addUser(User u) throws IllegalArgumentException;
     
     /**
      * Removes use from database
      * @param u user to be removed
+     * @throws IllegalArgumentException if user is null
      */
-    public void removeUser(User u);
+    public void removeUser(User u) throws IllegalArgumentException;
     
     /**
      * Updates user in database
      * @param u user to be updated
+     * @throws IllegalArgumentException if user is null
      */
-    public void updateUser(User u);
+    public void updateUser(User u) throws IllegalArgumentException;
     
     /**
      * Finds user in database by id
      * @param id id of specific user
      * @return User with specified id
+     * @throws IllegalArgumentException if user is null
      */
-    public User findUserById(Long id);
+    public User findUserById(Long id) throws IllegalArgumentException;
     
     /**
      * Finds user by his full name
      * @param fName first name of user
      * @param lName last name of user
+     * @throws IllegalArgumentException if first or last name is null
      * @return User with specified name
      */
-    public User findUserByFullName(String fName, String lName);
+    public User findUserByFullName(String fName, String lName) throws IllegalArgumentException;
     
     /**
      * Finds user by his login
      * @param login login of user
+     * @throws IllegalArgumentException if login is null
      * @return User with specified login
      */
-    public User findUserByLogin(String login);
+    public User findUserByLogin(String login) throws IllegalArgumentException;
     
     /**
      * Find all users
