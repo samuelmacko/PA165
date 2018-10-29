@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.blablacar.persistence.PersistenceSampleApplicationContex
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -17,8 +16,9 @@ import org.testng.annotations.Test;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -116,7 +116,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(found).isEqualTo(drive);
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void addNullDriveTest() {
         driveDao.addDrive(null);
     }
@@ -127,7 +127,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(driveDao.findDriveById(storedDrive.getId())).isEqualTo(storedDrive);
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void findDriveByNullIdTest() {
         driveDao.findDriveById(null);
     }
@@ -145,7 +145,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(foundDrive.getDate()).isEqualTo(date);
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void updateNullDriveTest() {
         driveDao.updateDrive(null);
     }
@@ -167,7 +167,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(driveDao.findDriveById(storedDrive.getId())).isNull();
     }
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNullDriveTest() {
         driveDao.removeDrive(null);
     }

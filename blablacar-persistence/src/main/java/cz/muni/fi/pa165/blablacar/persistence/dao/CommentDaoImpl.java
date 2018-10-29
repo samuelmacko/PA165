@@ -1,15 +1,14 @@
 package cz.muni.fi.pa165.blablacar.persistence.dao;
 
+import com.google.common.base.Preconditions;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-
-import com.google.common.base.Preconditions;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
@@ -48,7 +47,7 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<Comment> findAllCommentsOfUser(User author) throws IllegalArgumentException{
+    public List<Comment> findAllCommentsOfUser(User author) throws IllegalArgumentException {
         Preconditions.checkArgument(author != null, "Can not find comments for null user");
         Preconditions.checkArgument(author.getId() != null, "Can not find comments for user with null id");
         return em.createQuery("SELECT c FROM Comment c WHERE c.author.id = :id", Comment.class).setParameter("id", author.getId()).getResultList();

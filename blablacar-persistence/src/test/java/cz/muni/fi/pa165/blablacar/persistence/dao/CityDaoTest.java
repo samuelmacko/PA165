@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * Tests for City dao implementation
+ *
  * @author Samuel Macko
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)

@@ -1,34 +1,32 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import org.springframework.context.annotation.Bean;
-
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import javax.persistence.*;
 
 /**
  * Class representing user
+ *
  * @author Matus Sakala
  */
 
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
 public class User {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(nullable=false,unique=false)
+
+    @Column(nullable = false, unique = false)
     private String firstName;
-    
-    @Column(nullable=false,unique=false)
+
+    @Column(nullable = false, unique = false)
     private String lastName;
-    
-    @Column(nullable=false,unique=true)
+
+    @Column(nullable = false, unique = true)
     private String login;
 
     private String password;
@@ -42,38 +40,50 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Comment> comments = new ArrayList<>();
 
-    public Set<Drive> getBeingDriver() {
-        return beingDriver;
+    public User() {
     }
 
-    public Set<Drive> getBeingCustomer() {
-        return beingCustomer;
+    public User(String log) {
+        this.login = log;
+    }
+
+    public User(String fName, String lName) {
+        this.firstName = fName;
+        this.lastName = lName;
+    }
+
+    public Set<Drive> getBeingDriver() {
+        return beingDriver;
     }
 
     public void setBeingDriver(Set<Drive> beingDriver) {
         this.beingDriver = beingDriver;
     }
 
+    public Set<Drive> getBeingCustomer() {
+        return beingCustomer;
+    }
+
     public void setBeingCustomer(Set<Drive> beingCustomer) {
         this.beingCustomer = beingCustomer;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
-    
-    public void setPassword(String pswd){
+
+    public void setPassword(String pswd) {
         this.password = pswd;
     }
-    
-    public String getLogin(){
+
+    public String getLogin() {
         return this.login;
     }
-    
-    public void setLogin(String log){
+
+    public void setLogin(String log) {
         this.login = log;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -89,12 +99,12 @@ public class User {
     public void setFirstName(String fName) {
         this.firstName = fName;
     }
-    
-    public String getLastName(){
+
+    public String getLastName() {
         return this.lastName;
     }
-    
-    public void setLastName(String lName){
+
+    public void setLastName(String lName) {
         this.lastName = lName;
     }
 
@@ -106,18 +116,6 @@ public class User {
         this.comments = comments;
     }
 
-    public User(){
-    }
-    
-    public User(String log){
-        this.login = log;
-    }
-    
-    public User(String fName, String lName){
-        this.firstName = fName;
-        this.lastName = lName;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -142,28 +140,28 @@ public class User {
         if (this.id != other.getId()) {
             return false;
         }
-        if(this.firstName == null ){
-            if(other.getFirstName() != null)
+        if (this.firstName == null) {
+            if (other.getFirstName() != null)
                 return false;
-        }else{
-            if(!this.firstName.equals(other.getFirstName())){
-                return false;
-            }
-        }
-        if(this.lastName == null){
-            if(other.getLastName() != null)
-                return false;
-        }else{
-            if(!this.lastName.equals(other.getLastName())){
+        } else {
+            if (!this.firstName.equals(other.getFirstName())) {
                 return false;
             }
         }
-        if(this.login == null){
-            if(other.getLogin() != null)
+        if (this.lastName == null) {
+            if (other.getLastName() != null)
                 return false;
-        }else{
-            if (!this.login.equals(other.getLogin())){
-               return false;
+        } else {
+            if (!this.lastName.equals(other.getLastName())) {
+                return false;
+            }
+        }
+        if (this.login == null) {
+            if (other.getLogin() != null)
+                return false;
+        } else {
+            if (!this.login.equals(other.getLogin())) {
+                return false;
             }
         }
         return true;
@@ -171,10 +169,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + 
-                "id=" + id + 
-                ", firstName=" + firstName + 
-                ", lastName=" + lastName + 
+        return "User{" +
+                "id=" + id +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
                 ", login=" + login + '}';
     }
 }

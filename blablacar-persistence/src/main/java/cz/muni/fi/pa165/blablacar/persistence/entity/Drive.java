@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Drive entity
+ *
  * @author Samuel Macko
  */
 @Entity
@@ -45,68 +46,68 @@ public class Drive {
         return id;
     }
 
-    public User getDriver() {
-        return driver;
-    }
-
-    public Set<User> getCustomers() {
-        return customers;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public City getFromCity() {
-        return fromCity;
-    }
-
-    public City getToCity() {
-        return toCity;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getDriver() {
+        return driver;
     }
 
     public void setDriver(User driver) {
         this.driver = driver;
     }
 
+    public Set<User> getCustomers() {
+        return customers;
+    }
+
     public void setCustomers(Set<User> customers) {
         customers = customers;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
+    public City getFromCity() {
+        return fromCity;
+    }
+
     public void setFromCity(City fromCity) {
         this.fromCity = fromCity;
+    }
+
+    public City getToCity() {
+        return toCity;
     }
 
     public void setToCity(City toCity) {
         this.toCity = toCity;
     }
 
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public void setDate(Date date) {

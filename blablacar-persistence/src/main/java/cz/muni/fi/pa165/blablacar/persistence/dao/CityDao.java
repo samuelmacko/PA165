@@ -11,29 +11,34 @@ import java.util.List;
 
 /**
  * City DAO interface
+ *
  * @author Bruno Mizik
  */
 public interface CityDao {
     /**
      * Adds city to database
+     *
      * @param c city to be added
      */
     public void addCity(City c);
 
     /**
      * Removes city from database
+     *
      * @param c city to be removed
      */
     public void removeCity(City c);
 
     /**
      * Updates city in database
+     *
      * @param c city to be updated
      */
     public void updateCity(City c);
 
     /**
      * Finds city in database by id
+     *
      * @param id id of specific city
      * @return City with specified id
      */
@@ -41,6 +46,7 @@ public interface CityDao {
 
     /**
      * Finds city by its name
+     *
      * @param name name of city
      * @return City with specified name
      */
@@ -49,6 +55,7 @@ public interface CityDao {
 
     /**
      * Find all cities
+     *
      * @return list of all cities in database
      */
     public List<City> findAll();

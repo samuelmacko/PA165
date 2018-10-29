@@ -6,18 +6,19 @@ import java.util.Set;
 
 /**
  * City Entity
+ *
  * @author Bruno Mizik
  */
 
 @Entity
-@Table(name="CITIES")
+@Table(name = "CITIES")
 public class City {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false,unique=true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "fromCity")
@@ -30,12 +31,12 @@ public class City {
         return beginningOfDrives;
     }
 
-    public Set<Drive> getEndOfDrives() {
-        return endOfDrives;
-    }
-
     public void setBeginningOfDrives(Set<Drive> beginningOfDrives) {
         this.beginningOfDrives = beginningOfDrives;
+    }
+
+    public Set<Drive> getEndOfDrives() {
+        return endOfDrives;
     }
 
     public void setEndOfDrives(Set<Drive> endOfDrives) {

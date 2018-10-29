@@ -28,42 +28,42 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User u) throws IllegalArgumentException {
-        if(u == null){
+        if (u == null) {
             throw new IllegalArgumentException("User is null");
         }
         em.persist(u);
     }
 
     @Override
-    public void updateUser(User u) throws IllegalArgumentException{
-        if(u == null){
+    public void updateUser(User u) throws IllegalArgumentException {
+        if (u == null) {
             throw new IllegalArgumentException("User is null");
         }
         em.merge(u);
     }
 
     @Override
-    public void removeUser(User u) throws IllegalArgumentException{
-        if(u == null){
+    public void removeUser(User u) throws IllegalArgumentException {
+        if (u == null) {
             throw new IllegalArgumentException("User is null");
         }
         em.remove(u);
     }
 
     @Override
-    public User findUserById(Long id) throws IllegalArgumentException{
-        if(id == null){
+    public User findUserById(Long id) throws IllegalArgumentException {
+        if (id == null) {
             throw new IllegalArgumentException("Id is null");
         }
         return em.find(User.class, id);
     }
 
     @Override
-    public User findUserByFullName(String fName, String lName) throws IllegalArgumentException{
-        if(fName == null){
+    public User findUserByFullName(String fName, String lName) throws IllegalArgumentException {
+        if (fName == null) {
             throw new IllegalArgumentException("First name is null");
         }
-        if(lName == null){
+        if (lName == null) {
             throw new IllegalArgumentException("Last name is null");
         }
         try {
@@ -77,8 +77,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserByLogin(String login) throws IllegalArgumentException{
-        if(login == null){
+    public User findUserByLogin(String login) throws IllegalArgumentException {
+        if (login == null) {
             throw new IllegalArgumentException("Login is null");
         }
         try {
