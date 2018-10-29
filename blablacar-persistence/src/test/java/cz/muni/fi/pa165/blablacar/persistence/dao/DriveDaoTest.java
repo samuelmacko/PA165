@@ -103,24 +103,36 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
     public void addDriveTest() {
         Drive drive = createTestDrive();
         driveDao.addDrive(drive);
 
         assertThat(drive.getId()).isNotNull();
-        assertThat(driveDao.findAll().size()).isEqualTo(2);
+
+        Drive found = em.createQuery("select d from Drive d where d.id = :id", Drive.class)
+                .setParameter("id", drive.getId())
+                .getSingleResult();
+
+        assertThat(found).isEqualTo(drive);
     }
+
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void addNullDriveTest() {
+        driveDao.addDrive(null);
+    }
+
 
     @Test
     public void findDriveByIdTest() {
         assertThat(driveDao.findDriveById(storedDrive.getId())).isEqualTo(storedDrive);
     }
 
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void findDriveByNullIdTest() {
+        driveDao.findDriveById(null);
+    }
+
     @Test
-    @Transactional
-    @Rollback(true)
     public void updateDriveTest() {
         storedDrive.setPrice(55.5);
         driveDao.updateDrive(storedDrive);
@@ -133,9 +145,12 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(foundDrive.getDate()).isEqualTo(date);
     }
 
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void updateNullDriveTest() {
+        driveDao.updateDrive(null);
+    }
+
     @Test
-    @Transactional
-    @Rollback(true)
     public void findAllDrivesTest() {
         Drive drive = createTestDrive();
         drive.setPrice(1000);
@@ -147,11 +162,14 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
     public void removeDriveTest() {
         driveDao.removeDrive(storedDrive);
         assertThat(driveDao.findDriveById(storedDrive.getId())).isNull();
+    }
+
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void removeNullDriveTest() {
+        driveDao.removeDrive(null);
     }
 
 }
