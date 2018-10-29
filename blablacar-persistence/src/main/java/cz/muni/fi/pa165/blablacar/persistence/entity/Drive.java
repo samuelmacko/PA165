@@ -31,7 +31,7 @@ public class Drive {
     @ManyToOne
     private City toCity;
 
-    @OneToMany(mappedBy = "drive")
+    @OneToMany(mappedBy = "drive", cascade = CascadeType.PERSIST)
     private Set<Comment> comments = new HashSet<>();
 
     @Column(nullable = false)
