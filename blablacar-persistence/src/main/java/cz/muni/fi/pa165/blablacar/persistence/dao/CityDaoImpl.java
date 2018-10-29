@@ -16,27 +16,42 @@ public class CityDaoImpl implements CityDao {
     private EntityManager em;
 
     @Override
-    public void addCity(City c) {
+    public void addCity(City c) throws IllegalArgumentException {
+        if (c == null) {
+            throw new IllegalArgumentException("City is null");
+        }
         em.persist(c);
     }
 
     @Override
-    public void removeCity(City c) {
+    public void removeCity(City c) throws IllegalArgumentException {
+        if (c == null) {
+            throw new IllegalArgumentException("City is null");
+        }
         em.remove(c);
     }
 
     @Override
-    public void updateCity(City c) {
+    public void updateCity(City c) throws IllegalArgumentException {
+        if (c == null) {
+            throw new IllegalArgumentException("City is null");
+        }
         em.merge(c);
     }
 
     @Override
-    public City findCityById(Long id) {
+    public City findCityById(Long id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("Id is null");
+        }
         return em.find(City.class, id);
     }
 
     @Override
-    public City findCityByName(String name) {
+    public City findCityByName(String name) throws IllegalArgumentException {
+        if (name == null) {
+            throw new IllegalArgumentException("City name is null");
+        }
         try {
             return em
                     .createQuery("select c from City c where c.name = :name", City.class)
