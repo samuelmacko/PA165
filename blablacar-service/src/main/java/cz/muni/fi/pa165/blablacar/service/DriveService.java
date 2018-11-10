@@ -19,10 +19,9 @@ public interface DriveService {
      * Creates a drive
      *
      * @param d a drive to be added
-     * @return added drive
      * @throws IllegalArgumentException if d is null
      */
-    Drive addDrive(Drive d) throws IllegalArgumentException;
+    void addDrive(Drive d) throws IllegalArgumentException;
 
     /**
      * Removes a drive
