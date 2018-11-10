@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.blablacar.persistence.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class Drive {
     private Set<Comment> comments = new HashSet<>();
 
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
@@ -98,11 +99,11 @@ public class Drive {
         this.comments = comments;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
