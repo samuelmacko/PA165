@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.muni.fi.pa165</groupId>
-    <artifactId>blablacar</artifactId>
+    <artifactId>blablacar-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
