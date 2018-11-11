@@ -21,9 +21,10 @@ public class DriveServiceImpl implements DriveService {
     private DriveDao driveDao;
 
     @Override
-    public void addDrive(Drive d) throws IllegalArgumentException {
+    public Drive addDrive(Drive d) throws IllegalArgumentException {
         if (d == null) throw new IllegalArgumentException("d is null");
         driveDao.addDrive(d);
+        return d;
     }
 
     @Override

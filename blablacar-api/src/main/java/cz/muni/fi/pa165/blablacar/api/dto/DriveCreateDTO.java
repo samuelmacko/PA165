@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.blablacar.api.dto;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
