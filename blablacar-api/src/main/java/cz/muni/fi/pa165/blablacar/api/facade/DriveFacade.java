@@ -21,11 +21,11 @@ public interface DriveFacade {
     Long createDrive(DriveCreateDTO driveCreateDTO);
 
     /**
-     * Delete a drive
+     * Remove a drive
      *
      * @param id id of a drive
      */
-    void deleteDrive(Long id);
+    void removeDrive(Long id);
 
     /**
      * Add a customer to a drive
@@ -52,10 +52,9 @@ public interface DriveFacade {
     /**
      * Change a driver
      *
-     * @param id id of a drive
      * @param changeDriverDTO parameters of a driver
      */
-    void changeDriver(Long id, ChangeDriverDTO changeDriverDTO);
+    void changeDriver(ChangeDriverDTO changeDriverDTO);
 
     /**
      * Change a date
