@@ -36,5 +36,8 @@
 
     <modules>
         <module>blablacar-persistence</module>
+        <module>blablacar-api</module>
+        <module>blablacar-service</module>
+
     </modules>
 </project>
