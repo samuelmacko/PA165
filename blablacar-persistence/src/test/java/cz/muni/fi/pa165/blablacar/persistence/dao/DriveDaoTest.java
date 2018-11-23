@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -64,7 +65,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
 
         storedDrive.setCapacity(4);
 
-        storedDrive.setPrice(100.0);
+        storedDrive.setPrice(new BigDecimal("100.0"));
         storedDrive.setDate(date);
 
         em.persist(storedDrive);
@@ -96,7 +97,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
 
         drive.setCapacity(4);
 
-        drive.setPrice(99.9);
+        drive.setPrice(new BigDecimal("99.9"));
         drive.setDate(date);
 
         return drive;
@@ -134,10 +135,10 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void updateDriveTest() {
-        storedDrive.setPrice(55.5);
+        storedDrive.setPrice(new BigDecimal("55.5"));
         driveDao.updateDrive(storedDrive);
         Drive foundDrive = driveDao.findDriveById(storedDrive.getId());
-        assertThat(foundDrive.getPrice()).isEqualTo(55.5);
+        assertThat(foundDrive.getPrice()).isEqualTo(new BigDecimal("55.5"));
         assertThat(foundDrive.getCapacity()).isEqualTo(4);
         assertThat(foundDrive.getFromCity().getName()).isEqualTo("Praha");
         assertThat(foundDrive.getToCity().getName()).isEqualTo("Brno");
@@ -153,7 +154,7 @@ public class DriveDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findAllDrivesTest() {
         Drive drive = createTestDrive();
-        drive.setPrice(1000);
+        drive.setPrice(new BigDecimal("1000"));
         driveDao.addDrive(drive);
 
         Long countDrives = (Long) em.createQuery("select count(d) from Drive d").getSingleResult();

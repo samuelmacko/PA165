@@ -60,8 +60,16 @@ public class User {
         this.beingDriver = beingDriver;
     }
 
+    public void addToBeingDriver(Drive d) {
+        this.beingDriver.add(d);
+    }
+
     public Set<Drive> getBeingCustomer() {
         return beingCustomer;
+    }
+
+    public void addToBeingCustomer(Drive d) {
+        this.beingCustomer.add(d);
     }
 
     public void setBeingCustomer(Set<Drive> beingCustomer) {

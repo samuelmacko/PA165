@@ -31,6 +31,10 @@ public class City {
         return beginningOfDrives;
     }
 
+    public void addToBegginingOfDrives(Drive d) {
+        this.beginningOfDrives.add(d);
+    }
+
     public void setBeginningOfDrives(Set<Drive> beginningOfDrives) {
         this.beginningOfDrives = beginningOfDrives;
     }
@@ -41,6 +45,10 @@ public class City {
 
     public void setEndOfDrives(Set<Drive> endOfDrives) {
         this.endOfDrives = endOfDrives;
+    }
+
+    public void addToEndOfDrives(Drive d) {
+        this.endOfDrives.add(d);
     }
 
     public Long getId() {
