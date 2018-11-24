@@ -12,20 +12,18 @@ import java.util.List;
 
 public interface CommentFacade {
     /**
-     * Creates comment
-     *
      * @param commentCreateDTO parameters will be used in creation of comment
      * @return id of created comment
      */
     Long createComment(CommentCreateDTO commentCreateDTO);
 
     /**
-     * Sets new text for existing comment
+     * Sets new content for existing comment
      *
-     * @param commentId of comment which text will be changed
-     * @param newText text to set
+     * @param commentId of comment which content will be changed
+     * @param newContent content to set
      */
-    void changeText(Long commentId, String newText);
+    void changeContent(Long commentId, String newContent);
 
     /**
      * Deletes comment
@@ -40,7 +38,7 @@ public interface CommentFacade {
      * @param commentId of comment which will be retrieved
      * @return found comment or null if none found
      */
-    CommentDTO getCommentWithId(Long commentId);
+    CommentDTO getComment(Long commentId);
 
     /**
      * Retrieves all comments
@@ -50,12 +48,12 @@ public interface CommentFacade {
     List<CommentDTO> getAllComments();
 
     /**
-     * Retrieves comments for specific ride
+     * Retrieves comments for specific drive
      *
-     * @param rideId of ride which comments will be retrieved
+     * @param driveId of drive which comments will be retrieved
      * @return list of comments
      */
-    List<CommentDTO> getCommentsWithRide(Long rideId);
+    List<CommentDTO> getCommentsOfDrive(Long driveId);
 
     /**
      * Retrieved comments for specific user
@@ -63,5 +61,5 @@ public interface CommentFacade {
      * @param userId of author
      * @return list of comments
      */
-    List<CommentDTO> getCommentsWithAuthor(Long userId);
+    List<CommentDTO> getCommentsOfAuthor(Long userId);
 }

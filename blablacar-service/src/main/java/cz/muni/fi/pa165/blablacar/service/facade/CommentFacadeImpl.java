@@ -13,7 +13,7 @@ public class CommentFacadeImpl implements CommentFacade {
     }
 
     @Override
-    public void changeText(Long commentId, String newText) {
+    public void changeContent(Long commentId, String newContent) {
 
     }
 
@@ -23,7 +23,7 @@ public class CommentFacadeImpl implements CommentFacade {
     }
 
     @Override
-    public CommentDTO getCommentWithId(Long commentId) {
+    public CommentDTO getComment(Long commentId) {
         return null;
     }
 
@@ -33,12 +33,12 @@ public class CommentFacadeImpl implements CommentFacade {
     }
 
     @Override
-    public List<CommentDTO> getCommentsWithRide(Long rideId) {
+    public List<CommentDTO> getCommentsOfDrive(Long driveId) {
         return null;
     }
 
     @Override
-    public List<CommentDTO> getCommentsWithAuthor(Long userId) {
+    public List<CommentDTO> getCommentsOfAuthor(Long userId) {
         return null;
     }
 }
