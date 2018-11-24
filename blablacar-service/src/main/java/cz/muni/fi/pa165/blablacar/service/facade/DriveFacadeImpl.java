@@ -36,17 +36,17 @@ public class DriveFacadeImpl implements DriveFacade {
     public Long createDrive(DriveCreateDTO driveCreateDTO) {
         Drive mappedDrive = beanMappingService.mapTo(driveCreateDTO, Drive.class);
 
-        User driver = driveCreateDTO.getDriver();
+        User driver = beanMappingService.mapTo(driveCreateDTO.getDriver(), User.class);
         mappedDrive.setDriver(driver);
         driver.addToBeingDriver(mappedDrive);
 
         mappedDrive.setCapacity(driveCreateDTO.getCapacity());
 
-        City fromCity = driveCreateDTO.getFromCity();
+        City fromCity = beanMappingService.mapTo(driveCreateDTO.getFromCity(), City.class);
         mappedDrive.setFromCity(fromCity);
         fromCity.addToBegginingOfDrives(mappedDrive);
 
-        City toCity = driveCreateDTO.getFromCity();
+        City toCity = beanMappingService.mapTo(driveCreateDTO.getToCity(), City.class);
         mappedDrive.setFromCity(toCity);
         toCity.addToBegginingOfDrives(mappedDrive);
 
@@ -92,7 +92,7 @@ public class DriveFacadeImpl implements DriveFacade {
     @Override
     public void changeDriver(ChangeDriverDTO changeDriverDTO) {
         Drive d = driveService.findDriveById(changeDriverDTO.getDriveId());
-        d.setDriver(changeDriverDTO.getDriver());
+        d.setDriver(beanMappingService.mapTo(changeDriverDTO.getDriver(), User.class));
         driveService.updateDrive(d);
     }
 
