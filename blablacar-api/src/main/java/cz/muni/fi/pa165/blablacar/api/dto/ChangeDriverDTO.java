@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 
 public class ChangeDriverDTO {
 
@@ -8,7 +7,7 @@ public class ChangeDriverDTO {
         return null;
     }
 
-    public User getDriver() {
+    public UserDTO getDriver() {
         return null;
     }
 

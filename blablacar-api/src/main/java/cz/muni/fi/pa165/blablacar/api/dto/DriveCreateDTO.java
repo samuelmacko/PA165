@@ -1,8 +1,5 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
-import cz.muni.fi.pa165.blablacar.persistence.entity.City;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -19,17 +16,17 @@ public class DriveCreateDTO {
     private Long id;
 
     @NotNull
-    private User driver;
+    private UserDTO driver;
 
     @NotNull
     @Min(value = 1, message = "capacity must be at leas one")
     private int capacity;
 
     @NotNull
-    private City fromCity;
+    private CityDTO fromCity;
 
     @NotNull
-    private City toCity;
+    private CityDTO toCity;
 
     @NotNull
     @Min(value = 1, message = "drive must have a positive cost")
@@ -42,7 +39,7 @@ public class DriveCreateDTO {
         return id;
     }
 
-    public User getDriver() {
+    public UserDTO getDriver() {
         return driver;
     }
 
@@ -50,11 +47,11 @@ public class DriveCreateDTO {
         return capacity;
     }
 
-    public City getFromCity() {
+    public CityDTO getFromCity() {
         return fromCity;
     }
 
-    public City getToCity() {
+    public CityDTO getToCity() {
         return toCity;
     }
 
@@ -70,7 +67,7 @@ public class DriveCreateDTO {
         this.id = id;
     }
 
-    public void setDriver(User driver) {
+    public void setDriver(UserDTO driver) {
         this.driver = driver;
     }
 
@@ -78,11 +75,11 @@ public class DriveCreateDTO {
         this.capacity = capacity;
     }
 
-    public void setFromCity(City fromCity) {
+    public void setFromCity(CityDTO fromCity) {
         this.fromCity = fromCity;
     }
 
-    public void setToCity(City toCity) {
+    public void setToCity(CityDTO toCity) {
         this.toCity = toCity;
     }
 

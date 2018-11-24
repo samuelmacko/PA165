@@ -1,9 +1,5 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
-import cz.muni.fi.pa165.blablacar.persistence.entity.City;
-import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -16,12 +12,12 @@ import java.util.Set;
 public class DriveDTO {
 
     private Long id;
-    private User driver;
-    private Set<User> customers;
+    private UserDTO driver;
+    private Set<UserDTO> customers;
     private int capacity;
-    private City fromCity;
-    private City toCity;
-    private Set<Comment> comments;
+    private CityDTO fromCity;
+    private CityDTO toCity;
+    private Set<CommentDTO> comments;
     private BigDecimal price;
     private Date date;
 
@@ -29,11 +25,11 @@ public class DriveDTO {
         return id;
     }
 
-    public User getDriver() {
+    public UserDTO getDriver() {
         return driver;
     }
 
-    public Set<User> getCustomers() {
+    public Set<UserDTO> getCustomers() {
         return customers;
     }
 
@@ -41,15 +37,15 @@ public class DriveDTO {
         return capacity;
     }
 
-    public City getFromCity() {
+    public CityDTO getFromCity() {
         return fromCity;
     }
 
-    public City getToCity() {
+    public CityDTO getToCity() {
         return toCity;
     }
 
-    public Set<Comment> getComments() {
+    public Set<CommentDTO> getComments() {
         return comments;
     }
 
@@ -65,11 +61,11 @@ public class DriveDTO {
         this.id = id;
     }
 
-    public void setDriver(User driver) {
+    public void setDriver(UserDTO driver) {
         this.driver = driver;
     }
 
-    public void setCustomers(Set<User> customers) {
+    public void setCustomers(Set<UserDTO> customers) {
         this.customers = customers;
     }
 
@@ -77,15 +73,15 @@ public class DriveDTO {
         this.capacity = capacity;
     }
 
-    public void setFromCity(City fromCity) {
+    public void setFromCity(CityDTO fromCity) {
         this.fromCity = fromCity;
     }
 
-    public void setToCity(City toCity) {
+    public void setToCity(CityDTO toCity) {
         this.toCity = toCity;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(Set<CommentDTO> comments) {
         this.comments = comments;
     }
 
@@ -97,19 +93,19 @@ public class DriveDTO {
         this.date = date;
     }
 
-    public void addCustomer(User u) {
+    public void addCustomer(UserDTO u) {
         this.customers.add(u);
     }
 
-    public void removeCustomer(User u) {
+    public void removeCustomer(UserDTO u) {
         this.customers.remove(u);
     }
 
-    public void addComment(Comment c) {
+    public void addComment(CommentDTO c) {
         this.comments.add(c);
     }
 
-    public void removeComment(Comment c) {
+    public void removeComment(CommentDTO c) {
         this.comments.remove(c);
     }
 
