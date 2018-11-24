@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;

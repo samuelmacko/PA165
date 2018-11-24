@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.blablacar.persistence.dao;
 
 import com.google.common.base.Preconditions;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
+import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,24 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public List<Comment> findAllCommentsOfUser(User author) throws IllegalArgumentException {
         Preconditions.checkArgument(author != null, "Can not find comments for null user");
-        Preconditions.checkArgument(author.getId() != null, "Can not find comments for user with null id");
-        return em.createQuery("SELECT c FROM Comment c WHERE c.author.id = :id", Comment.class).setParameter("id", author.getId()).getResultList();
+        return findAllCommentsOfUserWithId(author.getId());
+    }
+
+    @Override
+    public List<Comment> findAllCommentsOfUserWithId(Long authorId) throws IllegalArgumentException {
+        Preconditions.checkArgument(authorId != null, "Can not find comments for user with null id");
+        return em.createQuery("SELECT c FROM Comment c WHERE c.author.id = :id", Comment.class).setParameter("id", authorId).getResultList();
+    }
+
+    @Override
+    public List<Comment> findAllCommentsOfDrive(Drive drive) throws IllegalArgumentException {
+        Preconditions.checkArgument(drive != null, "Can not find comments for null drive");
+        return findAllCommentsOfDriveWithId(drive.getId());
+    }
+
+    @Override
+    public List<Comment> findAllCommentsOfDriveWithId(Long driveId) throws IllegalArgumentException {
+        Preconditions.checkArgument(driveId != null, "Can not find comments for user with null id");
+        return em.createQuery("SELECT c FROM Comment c WHERE c.drive.id = :id", Comment.class).setParameter("id", driveId).getResultList();
     }
 }
