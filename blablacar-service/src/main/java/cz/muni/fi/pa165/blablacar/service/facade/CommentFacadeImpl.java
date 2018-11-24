@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.blablacar.service.facade;
 
-import cz.muni.fi.pa165.blablacar.api.dto.CommentCreateDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.CommentDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentCreateDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 import cz.muni.fi.pa165.blablacar.api.facade.CommentFacade;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
@@ -67,7 +67,7 @@ public class CommentFacadeImpl implements CommentFacade {
 
     @Override
     public CommentDTO getComment(Long commentId) {
-        return null;
+        return beanMappingService.mapTo(commentService.findById(commentId), CommentDTO.class);
     }
 
     @Override
