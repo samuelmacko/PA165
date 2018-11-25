@@ -22,33 +22,33 @@ public class City {
     private String name;
 
     @OneToMany(mappedBy = "fromCity")
-    private Set<Drive> beginningOfDrives = new HashSet<>();
+    private Set<Drive> fromDrives = new HashSet<>();
 
     @OneToMany(mappedBy = "toCity")
-    private Set<Drive> endOfDrives = new HashSet<>();
+    private Set<Drive> toDrives = new HashSet<>();
 
-    public Set<Drive> getBeginningOfDrives() {
-        return beginningOfDrives;
+    public Set<Drive> getFromDrives() {
+        return fromDrives;
     }
 
-    public void addToBegginingOfDrives(Drive d) {
-        this.beginningOfDrives.add(d);
+    public void addFromDrive(Drive d) {
+        this.fromDrives.add(d);
     }
 
-    public void setBeginningOfDrives(Set<Drive> beginningOfDrives) {
-        this.beginningOfDrives = beginningOfDrives;
+    public void setFromDrives(Set<Drive> fromDrives) {
+        this.fromDrives = fromDrives;
     }
 
-    public Set<Drive> getEndOfDrives() {
-        return endOfDrives;
+    public Set<Drive> getToDrives() {
+        return toDrives;
     }
 
-    public void setEndOfDrives(Set<Drive> endOfDrives) {
-        this.endOfDrives = endOfDrives;
+    public void setToDrives(Set<Drive> toDrives) {
+        this.toDrives = toDrives;
     }
 
-    public void addToEndOfDrives(Drive d) {
-        this.endOfDrives.add(d);
+    public void addToDrive(Drive d) {
+        this.toDrives.add(d);
     }
 
     public Long getId() {
