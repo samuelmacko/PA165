@@ -44,11 +44,11 @@ public class DriveFacadeImpl implements DriveFacade {
 
         City fromCity = beanMappingService.mapTo(driveCreateDTO.getFromCity(), City.class);
         mappedDrive.setFromCity(fromCity);
-        fromCity.addToBegginingOfDrives(mappedDrive);
+        fromCity.addFromDrive(mappedDrive);
 
         City toCity = beanMappingService.mapTo(driveCreateDTO.getToCity(), City.class);
         mappedDrive.setFromCity(toCity);
-        toCity.addToBegginingOfDrives(mappedDrive);
+        toCity.addToDrive(mappedDrive);
 
         mappedDrive.setPrice(driveCreateDTO.getPrice());
 
