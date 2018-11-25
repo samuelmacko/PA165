@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.blablacar.api.facade;
 
-import cz.muni.fi.pa165.blablacar.api.dto.CommentCreateDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.CommentDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentCreateDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 
 import java.util.List;
 

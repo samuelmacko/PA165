@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.blablacar.api.dto;
+package cz.muni.fi.pa165.blablacar.api.dto.comment;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
