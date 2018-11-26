@@ -37,7 +37,7 @@ public class CityCreateDTO {
 
     @Override
     public String toString() {
-        return "CategoryCreateDTO{" +
+        return "CityCreateDTO{" +
                 "name='" + name + '\'' +
                 '}';
     }
