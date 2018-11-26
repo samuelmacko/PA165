@@ -4,7 +4,9 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -39,6 +41,11 @@ public interface UserService {
     public void addCustomerToDrive(Long driveId, Long userId);
 
     public void removeCustomerFromDrive(Long driveId, Long userId);
+
+    public Map<User, BigDecimal> getUsersReward();
+    public Map<User, BigDecimal> getUsersSpending();
+    public Map<User, BigDecimal> getUsersTotalProfit();
+
 
 }
 

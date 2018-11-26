@@ -10,10 +10,8 @@ import cz.muni.fi.pa165.blablacar.persistence.dao.UserDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.*;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +28,15 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private UserDao userDao;
+
+    @Inject
+    private TimeService timeService;
     
     @Inject
     private DriveDao driveDao;
+
+    @Inject
+    private MailService mailService;
     
     @Override
     public User createUser(User user) throws IllegalArgumentException{
@@ -77,9 +81,26 @@ public class UserServiceImpl implements UserService {
             UserServiceImpl.class + "Add customer to drive: "
                     + "drive has full capacity");
         d.addCustomer(u);
+        //users are logged with email
+        mailService.sendEmail(d.getDriver().getLogin(),"New request for drive", getEmailBody(u, d));
         u.addToBeingCustomer(d);
         log.debug(UserServiceImpl.class + "Adding customer +" + u.toString() +
                 "to drive " + d.toString());
+    }
+
+    private String getEmailBody(User user, Drive drive){
+        return new StringBuilder().append("Customer ")
+                .append(user.getFirstName())
+                .append(" ")
+                .append(user.getLastName())
+                .append(" has requested to join your drive ")
+                .append("from city ")
+                .append(drive.getFromCity().getName())
+                .append(" to city ")
+                .append(drive.getToCity().getName())
+                .append(" on date ")
+                .append(drive.getDate())
+                .toString();
     }
 
     @Override
@@ -177,6 +198,50 @@ public class UserServiceImpl implements UserService {
         log.debug(UserServiceImpl.class + "Find drives as passenger, found " + 
                 result.size() + " drives");
         return result;
+    }
+
+    @Override
+    public Map<User, BigDecimal> getUsersReward() {
+        List<User> users = findAllUsers();
+        Map<User, BigDecimal> usersRewards = new HashMap<>();
+        for(User u : users){
+            BigDecimal userReward = BigDecimal.ZERO;
+            for(Drive drive : u.getBeingDriver()){
+                if(drive.getDate().before(timeService.getCurrentTime())){
+                    userReward = userReward.add(drive.getPrice().multiply(new BigDecimal(drive.getCustomers().size())));
+                }
+            }
+            usersRewards.put(u, userReward);
+        }
+        return usersRewards;
+    }
+
+    @Override
+    public Map<User, BigDecimal> getUsersSpending() {
+        List<User> users = findAllUsers();
+        Map<User, BigDecimal> usersSpending = new HashMap<>();
+        for(User user : users){
+            BigDecimal userSpending = BigDecimal.ZERO;
+            for(Drive drive : user.getBeingCustomer()){
+                if(drive.getDate().before(timeService.getCurrentTime())){
+                    userSpending = userSpending.add(drive.getPrice());
+                }
+            }
+            usersSpending.put(user, userSpending);
+        }
+        return usersSpending;
+    }
+
+    @Override
+    public Map<User, BigDecimal> getUsersTotalProfit() {
+        Map<User, BigDecimal> usersSpending = getUsersSpending();
+        Map<User, BigDecimal> usersRewards = getUsersReward();
+        Map<User, BigDecimal> usersProfit = new HashMap<>();
+
+        for(User user : usersProfit.keySet()){
+            usersProfit.put(user, usersRewards.get(user).subtract(usersSpending.get(user)));
+        }
+        return usersProfit;
     }
     
 }
