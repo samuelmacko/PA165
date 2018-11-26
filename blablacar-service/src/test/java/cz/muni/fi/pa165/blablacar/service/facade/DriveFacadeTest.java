@@ -37,10 +37,10 @@ public class DriveFacadeTest {
     @Mock
     private UserService userService;
 
-    @Mock
+//    @Mock
     private AddCustomerDTO addCustomerDTO;
 
-    @Mock
+//    @Mock
     private RemoveCustomerDTO removeCustomerDTO;
 
     private User user;
@@ -106,6 +106,13 @@ public class DriveFacadeTest {
         driveDTO.setToCity(new CityDTO());
         driveDTO.setDriver(userDTO);
 
+        addCustomerDTO = new AddCustomerDTO();
+        addCustomerDTO.setCustomerId(user2.getId());
+        addCustomerDTO.setDriveId(drive.getId());
+
+        removeCustomerDTO = new RemoveCustomerDTO();
+        removeCustomerDTO.setCustomerId(user2.getId());
+        removeCustomerDTO.setDriveId(drive.getId());
     }
 
     @Test
@@ -135,8 +142,8 @@ public class DriveFacadeTest {
     void addCustomerTest() {
         doNothing().when(userService).addCustomerToDrive(any(), any());
 
-        when(addCustomerDTO.getDriveId()).thenReturn(drive.getId());
-        when(addCustomerDTO.getCustomerId()).thenReturn(user2.getId());
+//        when(addCustomerDTO.getDriveId()).thenReturn(drive.getId());
+//        when(addCustomerDTO.getCustomerId()).thenReturn(user2.getId());
         when(driveService.findDriveById(any())).thenReturn(drive);
         when(userService.findUserById(any())).thenReturn(user2);
         driveFacade.addCustomer(addCustomerDTO);
@@ -148,8 +155,8 @@ public class DriveFacadeTest {
     void removeCustomerTest() {
         doNothing().when(userService).removeCustomerFromDrive(any(), any());
 
-        when(removeCustomerDTO.getDriveId()).thenReturn(drive.getId());
-        when(removeCustomerDTO.getCustomerId()).thenReturn(user2.getId());
+//        when(removeCustomerDTO.getDriveId()).thenReturn(drive.getId());
+//        when(removeCustomerDTO.getCustomerId()).thenReturn(user2.getId());
         when(driveService.findDriveById(any())).thenReturn(drive);
         when(userService.findUserById(any())).thenReturn(user2);
         driveFacade.removeCustomer(removeCustomerDTO);
