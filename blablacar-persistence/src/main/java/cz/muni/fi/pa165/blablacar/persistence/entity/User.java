@@ -119,6 +119,10 @@ public class User {
     public List<Comment> getComments() {
         return comments;
     }
+    
+    public void addToComments(Comment comment){
+        this.comments.add(comment);
+    }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
