@@ -30,8 +30,7 @@ public class DriveServiceTest {
     private DriveServiceImpl driveService;
 
     @BeforeClass
-    public void setup() throws ServiceException
-    {
+    void initMocks() {
         MockitoAnnotations.initMocks(this);
     }
 

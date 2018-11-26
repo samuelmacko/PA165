@@ -8,7 +8,7 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.service.BeanMappingService;
 import cz.muni.fi.pa165.blablacar.service.UserService;
-import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
+//import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ContextConfiguration(classes = ServiceConfiguration.class)
+//@ContextConfiguration(classes = ServiceConfiguration.class)
 public class UserFacadeTest {
 
     @Autowired
