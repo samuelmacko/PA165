@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -94,24 +93,12 @@ public class CityFacadeTest {
     }
 
     @Test
-    void creatCityNullTest() {
-        assertThatThrownBy(() -> cityFacade.createCity(null))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void updateCityNameTest() {
         doNothing().when(cityService).updateCity(any());
         when(cityService.findById(city1.getId())).thenReturn(city1);
         cityFacade.changeName(city1.getId(), "Petrzlenovo");
         city1.setName("Petrzlenovo");
         verify(cityService).updateCity(city1);
-    }
-
-    @Test
-    void changeCityNameIdNullTest() {
-        assertThatThrownBy(() -> cityFacade.changeName(null, "Petrzlenovo"))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -123,11 +110,6 @@ public class CityFacadeTest {
     }
 
     @Test
-    void deleteCityNullTest() {
-        assertThatThrownBy(() -> cityFacade.findCityById(null)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void findCityByIdTest() {
         when(beanMappingService.mapTo(city1, CityDTO.class)).thenReturn(cityDTO1);
         when(cityService.findById(city1.getId())).thenReturn(city1);
@@ -136,21 +118,11 @@ public class CityFacadeTest {
     }
 
     @Test
-    void findCityByIdNullTest() {
-        assertThatThrownBy(() -> cityFacade.findCityById(null)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void findCityByNameTest() {
         when(beanMappingService.mapTo(city1, CityDTO.class)).thenReturn(cityDTO1);
         when(cityService.findByName(city1.getName())).thenReturn(city1);
         CityDTO tempCityDTO = cityFacade.findCityByName(city1.getName());
         assertThat(tempCityDTO).isEqualToComparingFieldByField(cityDTO1);
-    }
-
-    @Test
-    void fingCityByNameNullTest() {
-        assertThatThrownBy(() -> cityFacade.findCityByName(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

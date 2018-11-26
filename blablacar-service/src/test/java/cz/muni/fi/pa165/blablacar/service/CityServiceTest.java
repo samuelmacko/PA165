@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.dao.CityDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
