@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.blablacar.service.facade;
 
-import cz.muni.fi.pa165.blablacar.api.dto.CityDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
@@ -18,9 +18,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -102,7 +100,7 @@ public class UserFacadeTest {
 
     @Test
     void deleteUserTest() {
-        doNothing().when(userService).removeUser(any());
+        doNothing().when(userService).deleteUser(any());
         when(userService.findUserById(user.getId())).thenReturn(user);
 
         userFacade.removeUser(userDTO);
@@ -162,10 +160,10 @@ public class UserFacadeTest {
 
 
     @Test
-    void getDriverDrivesTest() {
+    void findDrivesAsDriverTest() {
         List<Drive> expectedDrives = new ArrayList<>();
         expectedDrives.add(drive);
-        when(userService.getDriverDrives(user.getId())).thenReturn(expectedDrives);
+        when(userService.findDrivesAsDriver(user.getId())).thenReturn(expectedDrives);
 
         List<DriveDTO> expectedDrivesDTO = new ArrayList<>();
         expectedDrivesDTO.add(driveDTO);
@@ -173,17 +171,17 @@ public class UserFacadeTest {
 
 
         Collection<DriveDTO> actualDrivesDTO = userFacade.getDriverDrives(user.getId());
-        verify(userService).getDriverDrives(user.getId());
+        verify(userService).findDrivesAsDriver(user.getId());
 
         assertThat(actualDrivesDTO).
                 containsOnly(driveDTO);
     }
 
     @Test
-    void getPassengerDrivesTest() {
+    void findDrivesAsPassengerTest() {
         List<Drive> expectedDrives = new ArrayList<>();
         expectedDrives.add(drive);
-        when(userService.getPassengerDrives(user.getId())).thenReturn(expectedDrives);
+        when(userService.findDrivesAsPassenger(user.getId())).thenReturn(expectedDrives);
 
         List<DriveDTO> expectedDrivesDTO = new ArrayList<>();
         expectedDrivesDTO.add(driveDTO);
@@ -191,22 +189,16 @@ public class UserFacadeTest {
 
 
         Collection<DriveDTO> actualDrivesDTO = userFacade.getDriverDrives(user.getId());
-        verify(userService).getPassengerDrives(user.getId());
+        verify(userService).findDrivesAsPassenger(user.getId());
 
         assertThat(actualDrivesDTO).
                 containsOnly(driveDTO);
     }
 
     @Test
-    void addDriveAsPassengerTest() {
+    void addCustomerToDriveTest() {
         userFacade.addDriveAsPassenger(user.getId(), drive.getId());
-        verify(userService).addDriveAsPassenger(user.getId(), drive.getId());
-    }
-
-    @Test
-    void addDriveAsDriverTest() {
-        userFacade.addDriveAsDriver(user.getId(), drive.getId());
-        verify(userService).addDriveAsDriver(user.getId(), drive.getId());
+        verify(userService).addCustomerToDrive(user.getId(), drive.getId());
     }
 
 }

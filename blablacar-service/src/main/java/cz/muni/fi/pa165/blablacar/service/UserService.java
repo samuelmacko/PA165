@@ -32,15 +32,13 @@ public interface UserService {
 
     public List<User> findAllUsers();
 
-    public Set<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException;
+    public List<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException;
 
-    public Set<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException;
+    public List<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException;
 
     public void addCustomerToDrive(Long driveId, Long userId);
 
     public void removeCustomerFromDrive(Long driveId, Long userId);
-}
-
 
 }
 

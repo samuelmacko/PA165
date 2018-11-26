@@ -131,7 +131,7 @@ public class UserFacadeImpl implements UserFacade{
 
     @Override
     public List<DriveDTO> getDriverDrives(Long id) {
-        Set<Drive> drives = userService.findDrivesAsDriver(id);
+        List<Drive> drives = userService.findDrivesAsDriver(id);
         log.debug(UserFacadeImpl.class + "Get drives as driver, found "
             + drives.size() + " drives");
         return beanMappingService.mapTo(drives, DriveDTO.class);
@@ -139,7 +139,7 @@ public class UserFacadeImpl implements UserFacade{
 
     @Override
     public List<DriveDTO> getPassengerDrives(Long id) {
-        Set<Drive> drives = userService.findDrivesAsPassenger(id);
+        List<Drive> drives = userService.findDrivesAsPassenger(id);
         log.debug(UserFacadeImpl.class + "Get drives as passenger, found "
             + drives.size() + " drives");
         return beanMappingService.mapTo(drives, DriveDTO.class);

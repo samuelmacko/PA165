@@ -184,13 +184,13 @@ public class UserServiceTest {
 
     @Test
     void removeUserTest() {
-        userService.removeUser(user);
+        userService.deleteUser(user);
         verify(userDao).removeUser(user);
     }
 
     @Test
     void removeNullUserTest() {
-        assertThatThrownBy(() -> userService.removeUser(null))
+        assertThatThrownBy(() -> userService.deleteUser(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

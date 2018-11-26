@@ -9,6 +9,8 @@ import cz.muni.fi.pa165.blablacar.persistence.dao.DriveDao;
 import cz.muni.fi.pa165.blablacar.persistence.dao.UserDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -150,22 +152,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException {
+    public List<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException {
         if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
             + "Find drives as driver: user id is null");
         User u = userDao.findUserById(id);
-        Set<Drive> result = u.getBeingDriver();
+        List<Drive> result = new ArrayList<>(u.getBeingDriver());
         log.debug(UserServiceImpl.class + "Find drives as driver, found " + 
                 result.size() + " drives");
         return result;
     }
 
     @Override
-    public Set<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException {
+    public List<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException {
         if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
             + "Find drives as passenger: user id is null");
         User u = userDao.findUserById(id);
-        Set<Drive> result = u.getBeingCustomer();
+        List<Drive> result = new ArrayList<>(u.getBeingCustomer());
         log.debug(UserServiceImpl.class + "Find drives as passenger, found " + 
                 result.size() + " drives");
         return result;
