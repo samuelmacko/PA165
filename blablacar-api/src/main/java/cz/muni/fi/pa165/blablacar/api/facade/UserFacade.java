@@ -67,7 +67,7 @@ public interface UserFacade {
      * @param driveId specific drive
      * @return
      */
-    boolean addDriveAsPassenger(Long userId, Long driveId);
+    boolean addDriveAsPassenger(Long driveId, Long userId);
     /**
      * Gets all user's drives, where he was drives
      * @param id id of user

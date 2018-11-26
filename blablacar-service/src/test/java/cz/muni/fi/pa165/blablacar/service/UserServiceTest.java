@@ -158,9 +158,27 @@ public class UserServiceTest {
     }
 
     @Test
-    void removeUserTest() {
+    void deleteNullUserTest() {
+        when(userDao.findUserById(user.getId())).thenReturn(null);
+
+        assertThatThrownBy(() -> userService.deleteUser(null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void deleteUserTest() {
+        when(userDao.findUserById(user.getId())).thenReturn(user);
         userService.deleteUser(user);
         verify(userDao).removeUser(user);
+
+    }
+
+    @Test
+    void deleteUserUserNotFoundTest() {
+        when(userDao.findUserById(user.getId())).thenReturn(null);
+
+        assertThatThrownBy(() -> userService.deleteUser(user))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

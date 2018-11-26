@@ -1,30 +1,30 @@
 package cz.muni.fi.pa165.blablacar.service.facade;
 
-import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.service.BeanMappingService;
 import cz.muni.fi.pa165.blablacar.service.UserService;
-//import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-//@ContextConfiguration(classes = ServiceConfiguration.class)
+//import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
+
 public class UserFacadeTest {
 
     @Autowired
@@ -80,6 +80,7 @@ public class UserFacadeTest {
 
     @Test
     void createUserTest() {
+        when(beanMappingService.mapTo(userDTO, User.class)).thenReturn(user);
         when(userService.createUser(user)).thenReturn(user);
 
         Long createdId = userFacade.createUser(userDTO);
@@ -89,7 +90,7 @@ public class UserFacadeTest {
 
     @Test
     void editUserTest() {
-        doNothing().when(userService).editUser(user);
+        when(beanMappingService.mapTo(userDTO, User.class)).thenReturn(user);
         when(userService.findUserById(user.getId())).thenReturn(user);
 
         userFacade.editUser(userDTO);
@@ -100,12 +101,11 @@ public class UserFacadeTest {
 
     @Test
     void deleteUserTest() {
-        doNothing().when(userService).deleteUser(any());
-        when(userService.findUserById(user.getId())).thenReturn(user);
+        when(beanMappingService.mapTo(userDTO, User.class)).thenReturn(user);
 
         userFacade.removeUser(userDTO);
 
-        verify(userService).createUser(user);
+        verify(userService).deleteUser(user);
     }
 
     @Test
@@ -188,7 +188,7 @@ public class UserFacadeTest {
         when(beanMappingService.mapTo(expectedDrives, DriveDTO.class)).thenReturn(expectedDrivesDTO);
 
 
-        Collection<DriveDTO> actualDrivesDTO = userFacade.getDriverDrives(user.getId());
+        Collection<DriveDTO> actualDrivesDTO = userFacade.getPassengerDrives(user.getId());
         verify(userService).findDrivesAsPassenger(user.getId());
 
         assertThat(actualDrivesDTO).
@@ -196,9 +196,10 @@ public class UserFacadeTest {
     }
 
     @Test
-    void addCustomerToDriveTest() {
-        userFacade.addDriveAsPassenger(user.getId(), drive.getId());
-        verify(userService).addCustomerToDrive(user.getId(), drive.getId());
+    void addDriveAsPassengerTest() {
+        doNothing().when(userService).addCustomerToDrive(drive.getId(), user.getId());
+        userFacade.addDriveAsPassenger(drive.getId(), user.getId());
+        verify(userService).addCustomerToDrive(drive.getId(), user.getId());
     }
 
 }

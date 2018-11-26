@@ -88,13 +88,7 @@ public class UserFacadeImpl implements UserFacade{
 
     @Override
     public boolean editUser(UserDTO user) {
-        User u = new User();
-        user.setId(user.getId());
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setLogin(user.getLogin());
-
-        userService.editUser(u);
+        userService.editUser(beanMappingService.mapTo(user, User.class));
         log.debug(UserFacadeImpl.class +
                 "Edited user: " + user.toString());
         return true;
@@ -102,9 +96,7 @@ public class UserFacadeImpl implements UserFacade{
 
     @Override
     public boolean removeUser(UserDTO user) {
-        User u = new User();
-        u.setId(user.getId());
-        userService.deleteUser(u);
+        userService.deleteUser(beanMappingService.mapTo(user, User.class));
         log.debug(UserFacadeImpl.class + "Deleted user " + user.toString());
         return true;
     }
@@ -120,12 +112,10 @@ public class UserFacadeImpl implements UserFacade{
 
 
     @Override
-    public boolean addDriveAsPassenger(Long userId, Long driveId) {
-        User u = userService.findUserById(userId);
-        Drive d = driveService.findDriveById(driveId);
+    public boolean addDriveAsPassenger(Long driveId, Long userId) {
         userService.addCustomerToDrive(driveId, userId);
-        log.debug(UserFacadeImpl.class + "Adding user " + u.toString() + 
-                " to drive " + d.toString());
+        log.debug(UserFacadeImpl.class + "Adding user with id " + userId +
+                " to drive with id" + driveId);
         return true;
     }
 
