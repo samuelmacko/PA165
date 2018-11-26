@@ -1,22 +1,31 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 import java.util.Objects;
 
+import java.util.Set;
+
+/**
+ *
+ * @author Matus Sakala
+ */
+
 public class UserDTO {
-
-    @NotNull
-    @Size(min = 1, max = 50)
-    private String firstName;
-
-    @NotNull
-    @Size(min = 1, max = 50)
-    private String lastName;
-
-    @NotNull
-    @Size(min = 6, max = 50)
+    private Long id;
     private String login;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private Set<DriveDTO> beingDriver;
+    private Set<DriveDTO> beingCustomer;
+    private Set<CommentDTO> comments;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -34,6 +43,34 @@ public class UserDTO {
         this.lastName = lastName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<DriveDTO> getBeingDriver() {
+        return beingDriver;
+    }
+
+    public void setBeingDriver(Set<DriveDTO> beingDriver) {
+        this.beingDriver = beingDriver;
+    }
+
+    public Set<DriveDTO> getBeingCustomer() {
+        return beingCustomer;
+    }
+
+    public void setBeingCustomer(Set<DriveDTO> beingCustomer) {
+        this.beingCustomer = beingCustomer;
+    }
+
+    public Set<CommentDTO> getComments() {
+        return comments;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -42,28 +79,74 @@ public class UserDTO {
         this.login = login;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(getFirstName(), userDTO.getFirstName()) &&
-                Objects.equals(getLastName(), userDTO.getLastName()) &&
-                Objects.equals(getLogin(), userDTO.getLogin());
+
+    public void setComments(Set<CommentDTO> comments) {
+        this.comments = comments;
     }
 
     @Override
     public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + ((login == null) ? 0 : login.hashCode());
+        hash = 97 * hash + ((firstName == null) ? 0 : firstName.hashCode());
+        hash = 97 * hash + ((lastName == null) ? 0 : lastName.hashCode());
+        return hash;
+    }
 
-        return Objects.hash(getFirstName(), getLastName(), getLogin());
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof UserDTO)) {
+            return false;
+        }
+        final UserDTO other = (UserDTO) obj;
+        if (this.id != other.getId()) {
+            return false;
+        }
+        if (this.firstName == null) {
+            if (other.getFirstName() != null)
+                return false;
+        } else {
+            if (!this.firstName.equals(other.getFirstName())) {
+                return false;
+            }
+        }
+        if (this.lastName == null) {
+            if (other.getLastName() != null)
+                return false;
+        } else {
+            if (!this.lastName.equals(other.getLastName())) {
+                return false;
+            }
+        }
+        if (this.login == null) {
+            if (other.getLogin() != null)
+                return false;
+        } else {
+            if (!this.login.equals(other.getLogin())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
-                '}';
+        return "UserDTO{" + "id=" + id +
+                ", login=" + login +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
+                ", password=" + password +
+                ", beingDriver=" + beingDriver +
+                ", beingCustomer=" + beingCustomer +
+                ", comments=" + comments + '}';
     }
+
+
+
 }

@@ -2,62 +2,44 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-public class UserService {
+/**
+ *
+ * @author Matus Sakala
+ */
 
-    public User createUser(User user) {
-        return null;
-    }
+public interface UserService {
+    /**
+     *
+     * @param user
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public User createUser(User user) throws IllegalArgumentException;
 
-    public User editUser(User user) {
-        return null;
-    }
+    public void editUser(User user) throws IllegalArgumentException;
 
-    public User findUserById(Long id) {
-        return null;
-    }
+    public void deleteUser(User user) throws IllegalArgumentException;
 
-    public void addCustomerToDrive(Long driveId, Long userId) {
+    public User findUserById(Long id) throws IllegalArgumentException;
 
-    }
+    public User findUserByFullName(String firstName, String lastName) throws IllegalArgumentException;
 
-    public void removeCustomerFromDrive(Long driveId, Long userId) {
+    public User findUserByLogin(String login) throws IllegalArgumentException;
 
-    }
+    public List<User> findAllUsers();
 
-    public void removeUser(User user) {
-    }
+    public Set<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException;
 
-    public List<User> findAllUsers() {
-        return null;
-    }
+    public Set<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException;
 
-    public User findUserByLogin(String login) {
-        return null;
-    }
+    public void addCustomerToDrive(Long driveId, Long userId);
 
-    public User findUserByFullName(String firstName, String lastName) {
-        return null;
-    }
-
-    public boolean addDriveAsDriver(Long userId, Long driveId) {
-        return false;
-    }
-
-    public boolean addDriveAsPassenger(Long userId, Long driveId) {
-        return false;
-    }
-
-    public Collection<Drive> getDriverDrives(Long id) {
-        return null;
-    }
-
-    public Collection<Drive> getPassengerDrives(Long id) {
-        return null;
-    }
+    public void removeCustomerFromDrive(Long driveId, Long userId);
+}
 
 
 }
