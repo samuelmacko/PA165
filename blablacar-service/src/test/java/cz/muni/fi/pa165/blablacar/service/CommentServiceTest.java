@@ -32,6 +32,9 @@ public class CommentServiceTest {
     @Mock
     private CommentDao commentDao;
 
+    @Mock
+    private TimeServiceImpl timeService;
+    
     @Autowired
     @InjectMocks
     private CommentServiceImpl commentService;
@@ -94,6 +97,22 @@ public class CommentServiceTest {
         comment2.setAuthor(user2);
     }
  
+    
+    @Test
+    void createCommentTest(){
+        doNothing().when(commentDao).addComment(any());
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(2018, Calendar.NOVEMBER, 26);
+        when(timeService.getCurrentTime()).thenReturn(cal.getTime());
+
+        Comment result = commentService.createComment(comment1);
+
+        verify(timeService).getCurrentTime();
+        verify(commentDao).addComment(comment1);
+
+        assertThat(result).isEqualToComparingFieldByField(comment1);
+    }
     
     @Test
     void createNullCommentTest() {
@@ -182,7 +201,7 @@ public class CommentServiceTest {
     }
     
     @Test
-    void findZeroCommentsOnDrive() {
+    void findZeroCommentsOnDriveTest() {
         when(commentDao.findAllCommentsOfDriveWithId(drive1.getId())).thenReturn(new ArrayList<>());
 
         List<Comment> result = commentService.findAllCommentsOfDrive(drive1.getId());

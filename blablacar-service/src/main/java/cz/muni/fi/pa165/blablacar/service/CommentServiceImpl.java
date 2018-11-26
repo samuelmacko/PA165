@@ -12,13 +12,16 @@ public class CommentServiceImpl implements CommentService {
     @Inject
     private CommentDao commentDao;
 
+    @Inject
+    private TimeService timeService;
+    
     @Override
     public Comment createComment(Comment comment) throws IllegalArgumentException {
         if (comment == null) {
             throw new IllegalArgumentException("Comment cannot be null.");
         }
 
-        Date now = new Date();
+        Date now = timeService.getCurrentTime();
         comment.setCreatedDate(now);
         comment.setUpdateDate(now);
         commentDao.addComment(comment);
@@ -58,11 +61,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> findAllCommentsOfDrive(Long id) throws IllegalArgumentException {
+        if(id == null) throw new IllegalArgumentException(CommentServiceImpl.class
+            + "Find all comments of drive: drive id is null");
         return commentDao.findAllCommentsOfDriveWithId(id);
     }
 
     @Override
     public List<Comment> findAllCommentsOfUser(Long id) throws IllegalArgumentException {
+        if(id == null) throw new IllegalArgumentException(CommentServiceImpl.class
+            + "Find all comments of user: user id is null");
         return commentDao.findAllCommentsOfUserWithId(id);
     }
 }
