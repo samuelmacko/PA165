@@ -15,21 +15,21 @@ import java.util.List;
  * @author Matus Sakala
  */
 public interface UserFacade {
-    
+
     /**
      * Creates a user
      * @param userDTO userDTO object from which User will be created
      * @return user id
      */
     Long createUser(UserDTO userDTO);
-    
+
     /**
      * Finds user with specified id
      * @param id user's id
      * @return user with specified id
      */
     UserDTO findUserById(Long id);
-    
+
     /**
      * Finds user with specified login
      * @param login user's login
@@ -65,7 +65,7 @@ public interface UserFacade {
      * Adds drive to user drivesAsPassenger, also adds user to drive's passengers
      * @param userId user to be added
      * @param driveId specific drive
-     * @return 
+     * @return
      */
     boolean addDriveAsPassenger(Long userId, Long driveId);
     /**
@@ -80,5 +80,5 @@ public interface UserFacade {
      * @return collection of drives
      */
     List<DriveDTO> getPassengerDrives(Long id);
-    
+
 }

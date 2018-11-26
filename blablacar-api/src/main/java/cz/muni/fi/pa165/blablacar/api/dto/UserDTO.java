@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * 
+ *
  * @author Matus Sakala
  */
 
@@ -78,7 +78,7 @@ public class UserDTO {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
 
     public void setComments(Set<CommentDTO> comments) {
         this.comments = comments;
@@ -137,16 +137,16 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "id=" + id + 
-                ", login=" + login + 
-                ", firstName=" + firstName + 
-                ", lastName=" + lastName + 
+        return "UserDTO{" + "id=" + id +
+                ", login=" + login +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
                 ", password=" + password +
                 ", beingDriver=" + beingDriver +
                 ", beingCustomer=" + beingCustomer +
                 ", comments=" + comments + '}';
     }
-    
-    
-    
+
+
+
 }

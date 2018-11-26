@@ -23,7 +23,7 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
 
-    public void sendEmailString(String recipent, String subject, String content) throws MessagingException {
+    public void sendEmail(String recipent, String subject, String content) throws MessagingException {
         if (!ENABLE_EMAILS) {
             return;
         }
