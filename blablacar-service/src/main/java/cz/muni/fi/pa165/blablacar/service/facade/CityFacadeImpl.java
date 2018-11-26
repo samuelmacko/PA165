@@ -28,13 +28,16 @@ public class CityFacadeImpl implements CityFacade
 
     @Override
     public Long createCity(CityCreateDTO cityCreateDTO) {
-        City city = new City();
-        city.setName(cityCreateDTO.getName());
-        cityService.createCity(city);
+        if (cityCreateDTO == null) {
+            throw new IllegalArgumentException("cityCreateDTO was null.");
+        }
 
-        log.info("City has been created id(" + city.getId() + ")");
+        City mappedCity = beanMappingService.mapTo(cityCreateDTO, City.class);
+        City createdCity = cityService.createCity(mappedCity);
 
-        return city.getId();
+        log.info("City has been created id(" + createdCity.getId() + ")");
+
+        return createdCity.getId();
     }
 
     @Override
@@ -46,6 +49,9 @@ public class CityFacadeImpl implements CityFacade
     }
 
     public void changeName(Long id, String newName) {
+        if (id == null) {
+            throw new IllegalArgumentException("City id was null.");
+        }
         City city = cityService.findById(id);
         city.setName(newName);
         cityService.updateCity(city);
@@ -61,6 +67,9 @@ public class CityFacadeImpl implements CityFacade
     @Override
     public CityDTO findCityByName(String name)
     {
+        if (name == null) {
+            throw new IllegalArgumentException("City name was null.");
+        }
         City city = cityService.findByName(name);
         return (city == null) ? null : beanMappingService.mapTo(city, CityDTO.class);
     }
@@ -68,6 +77,9 @@ public class CityFacadeImpl implements CityFacade
     @Override
     public CityDTO findCityById(Long id)
     {
+        if (id == null) {
+            throw new IllegalArgumentException("City id was null.");
+        }
         City city = cityService.findById(id);
         return (city == null) ? null : beanMappingService.mapTo(city, CityDTO.class);
     }
