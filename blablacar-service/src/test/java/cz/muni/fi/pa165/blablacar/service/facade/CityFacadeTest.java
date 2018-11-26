@@ -9,9 +9,11 @@ import cz.muni.fi.pa165.blablacar.service.CityServiceImpl;
 import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -75,11 +77,16 @@ public class CityFacadeTest {
         city2 = new City();
         city2.setId(2L);
         city2.setName("Kalerabovo");
+    }
 
+    @AfterMethod
+    void reset() {
+        Mockito.reset(cityService);
     }
 
     @Test
     void createCityTest() {
+        when(beanMappingService.mapTo(cityCreateDTO, City.class)).thenReturn(city1);
         when(cityService.createCity(city1)).thenReturn(city1);
         Long createdId = cityFacade.createCity(cityCreateDTO);
         verify(cityService).createCity(city1);
@@ -112,7 +119,7 @@ public class CityFacadeTest {
         doNothing().when(cityService).deleteCity(any());
         when(cityService.findById(city1.getId())).thenReturn(city1);
         cityFacade.deleteCity(cityDTO1.getId());
-        verify(cityService).createCity(city1);
+        verify(cityService).deleteCity(city1);
     }
 
     @Test
