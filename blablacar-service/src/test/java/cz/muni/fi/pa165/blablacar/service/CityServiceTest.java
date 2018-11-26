@@ -25,7 +25,6 @@ import static org.mockito.Mockito.*;
  *
  * @author Samuel Macko
  */
-//@ContextConfiguration(classes = ServiceConfiguration.class)
 public class CityServiceTest {
 
     @Mock

@@ -2,9 +2,9 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-import java.util.Collection;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Set;
 
 /**
  *

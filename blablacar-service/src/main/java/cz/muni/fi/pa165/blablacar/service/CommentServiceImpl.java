@@ -2,11 +2,13 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.dao.CommentDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
     @Inject
