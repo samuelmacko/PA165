@@ -111,6 +111,10 @@ public class UserServiceImpl implements UserService {
     public void editUser(User user) throws IllegalArgumentException {
         if(user == null) throw new IllegalArgumentException(
                 UserServiceImpl.class +"Edit: user is null");
+        if(user.getFirstName() == null || user.getLastName() == null) throw new IllegalArgumentException(
+            UserServiceImpl.class + "User does not have Full name");
+        if(user.getLogin() == null) throw new IllegalArgumentException(
+            UserServiceImpl.class + "User does not have login");
         userDao.updateUser(user);
         log.debug(UserServiceImpl.class + "User updated:" + user.toString());
     }
