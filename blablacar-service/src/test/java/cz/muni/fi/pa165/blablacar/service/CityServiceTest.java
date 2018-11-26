@@ -2,13 +2,10 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.dao.CityDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
