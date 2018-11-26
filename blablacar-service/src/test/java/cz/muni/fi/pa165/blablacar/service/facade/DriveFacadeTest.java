@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.*;
@@ -34,13 +37,21 @@ public class DriveFacadeTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private AddCustomerDTO addCustomerDTO;
+
     private User user;
+    private User user2;
 
     private Drive drive;
+    private City cityFrom;
+    private City cityTo;
+
 
     private UserDTO userDTO;
 
     private DriveCreateDTO driveCreateDTO;
+    private DriveDTO driveDTO;
 
     @BeforeClass
     void initMocks() {
@@ -56,12 +67,22 @@ public class DriveFacadeTest {
         user.setPassword("asdoajld");
         user.setId(1L);
 
+        user2 = new User();
+        user2.setLogin("driver2");
+        user2.setFirstName("Ben");
+        user2.setLastName("Driver 2");
+        user2.setPassword("asdoajld");
+        user2.setId(2L);
+
         drive = new Drive();
         drive.setId(2L);
         drive.setFromCity(new City());
         drive.setToCity(new City());
         drive.setCapacity(4);
         drive.setDriver(user);
+
+        cityFrom = new City();
+        cityTo = new City();
 
         userDTO = new UserDTO();
         userDTO.setLogin("driver");
@@ -75,11 +96,22 @@ public class DriveFacadeTest {
         driveCreateDTO.setToCity(new CityDTO());
         driveCreateDTO.setDriver(userDTO);
 
+        driveDTO = new DriveDTO();
+        driveDTO.setId(2L);
+        driveDTO.setCapacity(4);
+        driveDTO.setFromCity(new CityDTO());
+        driveDTO.setToCity(new CityDTO());
+        driveDTO.setDriver(userDTO);
+
     }
 
     @Test
     void createDriveTest() {
         when(driveService.addDrive(drive)).thenReturn(drive);
+        when(beanMappingService.mapTo(driveCreateDTO, Drive.class)).thenReturn(drive);
+        when(beanMappingService.mapTo(driveCreateDTO.getDriver(), User.class)).thenReturn(user);
+        when(beanMappingService.mapTo(driveCreateDTO.getFromCity(), City.class)).thenReturn(cityFrom);
+        when(beanMappingService.mapTo(driveCreateDTO.getToCity(), City.class)).thenReturn(cityTo);
 
         Long id = driveFacade.createDrive(driveCreateDTO);
         verify(driveService).addDrive(drive);
@@ -98,34 +130,33 @@ public class DriveFacadeTest {
 
     @Test
     void addCustomerTest() {
-        AddCustomerDTO addCustomerDTO = new AddCustomerDTO();
-//        addCustomerDTO.
-//        doNothing().when(userService).addCustomerToDrive();
-//        when(driveService.findUserById(user.getId())).thenReturn(user);
-//
-//        driveFacade.editUser(userDTO);
-//
-//        verify(driveService).editUser(user);
+        doNothing().when(userService).addCustomerToDrive(any(), any());
 
+        when(addCustomerDTO.getDriveId()).thenReturn(drive.getId());
+        when(addCustomerDTO.getCustomerId()).thenReturn(user2.getId());
+
+        driveFacade.addCustomer(addCustomerDTO);
+
+        verify(userService).addCustomerToDrive(addCustomerDTO.getDriveId(), addCustomerDTO.getCustomerId());
     }
 
     @Test
     void removeCustomerTest() {
-        RemoveCustomerDTO removeCustomerDTO = new RemoveCustomerDTO();
-//        addCustomerDTO.
-//        doNothing().when(userService).addCustomerToDrive();
-//        when(driveService.findUserById(user.getId())).thenReturn(user);
+//        doNothing().when(userService).removeCustomerFromDrive(any(), any());
+//        RemoveCustomerDTO removeCustomerDTO = new RemoveCustomerDTO();
 //
-//        driveFacade.editUser(userDTO);
+//        Long driveiId = removeCustomerDTO.setDriveId(1L);
+//        Long customerId = removeCustomerDTO.setCustomerId(1L);
+//        driveFacade.removeCustomer(removeCustomerDTO);
 //
-//        verify(driveService).editUser(user);
+//        verify(userService).removeCustomerFromDrive(driveiId, customerId);
 
     }
 
     @Test
     void changeCapacityTest() {
         doNothing().when(driveService).updateDrive(drive);
-
+        when(driveService.findDriveById(drive.getId())).thenReturn(drive);
         driveFacade.changeCapacity(drive.getId(), 5);
         verify(driveService).updateDrive(drive);
         assertThat(drive.getCapacity()).isEqualTo(5);
@@ -133,20 +164,45 @@ public class DriveFacadeTest {
 
     @Test
     void changeDriverTest() {
+        ChangeDriverDTO changeDriverDTO = new ChangeDriverDTO();
+        when(beanMappingService.mapTo(changeDriverDTO.getDriver(), User.class)).thenReturn(user2);
+        when(driveService.findDriveById(any())).thenReturn(drive);
 
+        driveFacade.changeDriver(changeDriverDTO);
+        verify(driveService).updateDrive(drive);
+        assertThat(drive.getDriver()).isEqualToComparingFieldByField(user2);
     }
 
     @Test
     void changeDate() {
-
+        doNothing().when(driveService).updateDrive(drive);
+        when(driveService.findDriveById(drive.getId())).thenReturn(drive);
+        driveFacade.changeDate(drive.getId(), new GregorianCalendar(2000, Calendar.JANUARY, 10).getTime());
+        verify(driveService).updateDrive(drive);
+        assertThat(drive.getDate()).isEqualToIgnoringHours(new GregorianCalendar(2000, Calendar.JANUARY, 10).getTime());
     }
     @Test
     void findDriveById() {
+        when(beanMappingService.mapTo(drive, DriveDTO.class)).thenReturn(driveDTO);
+        when(driveService.findDriveById(drive.getId())).thenReturn(drive);
 
+        DriveDTO returned = driveFacade.findDriveById(drive.getId());
+        assertThat(returned).isEqualToComparingFieldByField(driveDTO);
     }
     @Test
     void findAllDrives() {
+        List<Drive> expectedDrives = new ArrayList<>();
+        expectedDrives.add(drive);
+        when(driveService.findAllDrives()).thenReturn(expectedDrives);
 
+        List<DriveDTO> expectedDrivesDTO = new ArrayList<>();
+        expectedDrivesDTO.add(driveDTO);
+        when(beanMappingService.mapTo(expectedDrives, DriveDTO.class)).thenReturn(expectedDrivesDTO);
+
+        Collection<DriveDTO> actualDrivesDTO = new ArrayList<>(driveFacade.findAllDrives());
+
+        verify(driveService).findAllDrives();
+        assertThat(actualDrivesDTO).containsOnly(driveDTO);
     }
 
 
