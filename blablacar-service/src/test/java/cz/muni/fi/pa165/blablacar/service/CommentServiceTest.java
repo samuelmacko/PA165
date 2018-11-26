@@ -21,7 +21,9 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
+import org.testng.annotations.AfterMethod;
 
 /**
  *
@@ -97,6 +99,10 @@ public class CommentServiceTest {
         comment2.setAuthor(user2);
     }
  
+    @AfterMethod
+    void reset(){
+        Mockito.reset(commentDao);
+    }
     
     @Test
     void createCommentTest(){
@@ -146,7 +152,7 @@ public class CommentServiceTest {
         when(commentDao.findAll()).thenReturn(allComments);
 
         List<Comment> result = commentService.findAll();
-
+        verify(commentDao).findAll();
         assertThat(result)
                 .containsExactlyInAnyOrder(comment1, comment2);
     }
@@ -163,6 +169,8 @@ public class CommentServiceTest {
         Comment shouldBeComment2 = commentService.findById(comment2.getId());
         assertThat(shouldBeComment2)
                 .isEqualToComparingFieldByFieldRecursively(comment2);
+        verify(commentDao).findCommentById(comment1.getId());
+        verify(commentDao).findCommentById(comment2.getId());
     }
     
     @Test
@@ -170,7 +178,7 @@ public class CommentServiceTest {
         when(commentDao.findCommentById(any())).thenReturn(null);
 
         Comment result = commentService.findById(-1L);
-
+        verify(commentDao).findCommentById(-1L);
         assertThat(result).isNull();
     }
     
@@ -186,6 +194,8 @@ public class CommentServiceTest {
         List<Comment> ride2Comments = commentService.findAllCommentsOfDrive(drive2.getId());
         assertThat(ride2Comments)
                 .containsExactlyInAnyOrder(comment2);
+        verify(commentDao).findAllCommentsOfDriveWithId(drive1.getId());
+        verify(commentDao).findAllCommentsOfDriveWithId(drive2.getId());
     }
     
     @Test
@@ -196,6 +206,7 @@ public class CommentServiceTest {
                 .thenReturn(new ArrayList<>(drive1.getComments()));
 
         List<Comment> drive1Comments = commentService.findAllCommentsOfDrive(drive1.getId());
+        verify(commentDao).findAllCommentsOfDriveWithId(drive1.getId());
         assertThat(drive1Comments)
         .containsExactlyInAnyOrder(comment1, comment2);
     }
@@ -206,6 +217,7 @@ public class CommentServiceTest {
 
         List<Comment> result = commentService.findAllCommentsOfDrive(drive1.getId());
 
+        verify(commentDao).findAllCommentsOfDriveWithId(drive1.getId());
         assertThat(result)
                 .isEmpty();
     }
@@ -226,6 +238,8 @@ public class CommentServiceTest {
                 .containsExactlyInAnyOrder(comment1);
 
         List<Comment> secondComments = commentService.findAllCommentsOfUser(user2.getId());
+        verify(commentDao).findAllCommentsOfUserWithId(user1.getId());
+        verify(commentDao).findAllCommentsOfUserWithId(user2.getId());
         assertThat(secondComments)
                 .containsExactlyInAnyOrder(comment2);
     }
@@ -237,6 +251,7 @@ public class CommentServiceTest {
         when(commentDao.findAllCommentsOfUserWithId(user1.getId())).thenReturn(new ArrayList<>(user1.getComments()));
 
         List<Comment> comments = commentService.findAllCommentsOfUser(user1.getId());
+        verify(commentDao).findAllCommentsOfUserWithId(user1.getId());
         assertThat(comments)
                 .containsExactlyInAnyOrder(comment1, comment2);
     }
