@@ -25,15 +25,14 @@ import static org.mockito.Mockito.*;
  *
  * @author Samuel Macko
  */
-@ContextConfiguration(classes = ServiceConfiguration.class)
-public class CityServiceTest extends AbstractTestNGSpringContextTests {
+public class CityServiceTest {
 
     @Mock
     private CityDao cityDao;
 
     @Autowired
     @InjectMocks
-    private CityService cityService;
+    private CityServiceImpl cityService;
 
     private City city;
 

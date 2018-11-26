@@ -17,11 +17,13 @@ import java.util.Set;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Matus Sakala
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);

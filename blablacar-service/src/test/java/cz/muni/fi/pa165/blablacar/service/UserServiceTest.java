@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.dao.UserDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class UserServiceTest {
     private UserDao userDao;
 
     @Autowired
-    private UserService userService;
+    @InjectMocks
+    private UserServiceImpl userService;
 
     private User user;
 
@@ -80,31 +82,12 @@ public class UserServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-
-    @Test
-    void createUserEmptyLoginTest() {
-        user.setLogin("");
-
-        assertThatThrownBy(() -> userService.createUser(user))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void testcreateUserEmptyNFirstNameTest() {
-        user.setFirstName("");
-
-        assertThatThrownBy(() -> userService.createUser(user))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-
     @Test
     void createUserEmptyLastNameTest() {
         user.setLastName("");
 
         assertThatThrownBy(() -> userService.createUser(user))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 
     @Test
@@ -132,7 +115,7 @@ public class UserServiceTest {
         }).when(userDao).updateUser(any());
 
         userService.editUser(user);
-        assertThat(user.getFirstName())
+        assertThat(user.getLastName())
                 .isEqualTo(newLastName);
 
     }
@@ -147,7 +130,7 @@ public class UserServiceTest {
         }).when(userDao).updateUser(any());
 
         userService.editUser(user);
-        assertThat(user.getFirstName())
+        assertThat(user.getLogin())
                 .isEqualTo(newLogin);
     }
 

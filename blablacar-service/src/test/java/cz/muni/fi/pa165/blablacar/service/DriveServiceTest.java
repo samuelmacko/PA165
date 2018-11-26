@@ -27,7 +27,7 @@ public class DriveServiceTest {
 
     @Autowired
     @InjectMocks
-    private DriveService driveService;
+    private DriveServiceImpl driveService;
 
     @BeforeClass
     public void setup() throws ServiceException

@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.service.BeanMappingService;
 import cz.muni.fi.pa165.blablacar.service.CityService;
+import cz.muni.fi.pa165.blablacar.service.CityServiceImpl;
 import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
  *
  * @author Samuel Macko
  */
-@ContextConfiguration(classes = ServiceConfiguration.class)
+
 public class CityFacadeTest {
 
     @Autowired
@@ -39,7 +40,7 @@ public class CityFacadeTest {
     private BeanMappingService beanMappingService;
 
     @Mock
-    private CityService cityService;
+    private CityServiceImpl cityService;
 
     private City city1;
     private City city2;
