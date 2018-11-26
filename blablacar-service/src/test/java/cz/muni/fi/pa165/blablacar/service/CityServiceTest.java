@@ -5,10 +5,12 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -47,6 +49,10 @@ public class CityServiceTest {
         city.setId(1L);
         city.setName("Mrkvickovo");
 
+    }
+    @AfterMethod
+    void reset(){
+        Mockito.reset(cityDao);
     }
 
     @Test

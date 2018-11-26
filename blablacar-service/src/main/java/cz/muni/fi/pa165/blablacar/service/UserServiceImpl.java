@@ -119,9 +119,11 @@ public class UserServiceImpl implements UserService {
         if(u == null) throw new IllegalArgumentException(
             UserServiceImpl.class + "Remove customer from drive: "
                     + "user with specified ID not found");
-        if(!d.getCustomers().contains(u) || !u.getBeingCustomer().contains(d)) throw new IllegalArgumentException(
+        if(!d.getCustomers().contains(u) || !u.getBeingCustomer().contains(d)){
+            throw new IllegalArgumentException(
             UserServiceImpl.class + "Remove customer from drive: "
                     + "specified user is not customer on specified drive -- bidirectional relation not matching");
+        }
         d.removeCustomer(u);
         u.getBeingCustomer().remove(d);
         log.debug(UserServiceImpl.class + "removing customer: "
@@ -202,7 +204,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Map<User, BigDecimal> getUsersReward() {
-        List<User> users = findAllUsers();
+        List<User> users = userDao.findAll();
         Map<User, BigDecimal> usersRewards = new HashMap<>();
         for(User u : users){
             BigDecimal userReward = BigDecimal.ZERO;
@@ -238,7 +240,7 @@ public class UserServiceImpl implements UserService {
         Map<User, BigDecimal> usersRewards = getUsersReward();
         Map<User, BigDecimal> usersProfit = new HashMap<>();
 
-        for(User user : usersProfit.keySet()){
+        for(User user : usersSpending.keySet()){
             usersProfit.put(user, usersRewards.get(user).subtract(usersSpending.get(user)));
         }
         return usersProfit;

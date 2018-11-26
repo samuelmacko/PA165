@@ -102,6 +102,7 @@ public class CommentServiceTest {
     @AfterMethod
     void reset(){
         Mockito.reset(commentDao);
+        Mockito.reset(timeService);
     }
     
     @Test

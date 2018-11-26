@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.blablacar.service;
 
+import com.google.common.collect.Lists;
 import cz.muni.fi.pa165.blablacar.persistence.dao.DriveDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
@@ -9,14 +10,18 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -89,6 +94,11 @@ public class DriveServiceTest {
         validComment.setDrive(validDrive);
     }
 
+    @AfterMethod
+    void reset() {
+        Mockito.reset(driveDao);
+    }
+
 
     @Test
     void testAddDrive() {
@@ -98,12 +108,14 @@ public class DriveServiceTest {
         verify(driveDao).addDrive(validDrive);
         assertThat(addedDrive).isEqualToComparingFieldByField(validDrive);
     }
+
     @Test
     void testRemoveDrive() {
         doNothing().when(driveDao).removeDrive(validDrive);
         driveService.removeDrive(validDrive);
         verify(driveDao).removeDrive(validDrive);
     }
+
     @Test
     void testUpdateDrive() {
         validDrive.setCapacity(5);
@@ -111,17 +123,20 @@ public class DriveServiceTest {
         driveService.updateDrive(validDrive);
         verify(driveDao).updateDrive(validDrive);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testAddCustomer() {
         driveService.addCustomer(validDrive, validUser2);
         assertThat(validDrive.getCustomers().contains(validUser2));
         driveService.addCustomer(validDrive, validUser2);
     }
+
     @Test
     void testAddPresentCustomer() {
         driveService.addCustomer(validDrive, validUser2);
         assertThat(validDrive.getCustomers().contains(validUser2));
     }
+
     @Test
     void testRemoveCustomer() {
         driveService.addCustomer(validDrive, validUser2);
@@ -130,21 +145,25 @@ public class DriveServiceTest {
         driveService.removeCustomer(validDrive, validUser2);
         assertThat(!validDrive.getCustomers().contains(validUser2));
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testRemoveNonexistentCustomer() {
         driveService.removeCustomer(validDrive, validUser2);
         assertThat(validDrive.getCustomers().contains(validUser3));
     }
+
     @Test
     void testAddComment() {
         driveService.addComment(validDrive, validComment);
         assertThat(validDrive.getComments().contains(validComment));
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testAddExistingComment() {
         driveService.addComment(validDrive, validComment);
         driveService.addComment(validDrive, validComment);
     }
+
     @Test
     void testRemoveComment() {
         driveService.addComment(validDrive, validComment);
@@ -152,45 +171,69 @@ public class DriveServiceTest {
         driveService.removeComment(validDrive, validComment);
         assertThat(!validDrive.getComments().contains(validComment));
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testRemoveNonexistentComment() {
         driveService.removeComment(validDrive, validComment);
     }
+
     @Test
     void findDriveById() {
+        when(driveDao.findDriveById(validDrive.getId())).thenReturn(validDrive);
 
+        Drive result =driveService.findDriveById(validDrive.getId());
+
+        verify(driveDao).findDriveById(validDrive.getId());
+        assertThat(result).isEqualTo(validDrive);
+    }
+
+    @Test
+    void findAllTest(){
+        when(driveDao.findAll()).thenReturn(Lists.newArrayList(validDrive));
+
+        List<Drive> result = driveService.findAllDrives();
+
+        verify(driveDao).findAll();
+        assertThat(result).isEqualTo(Lists.newArrayList(validDrive));
     }
 
 
-    @Test(expectedExceptions=IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testAddDriveException() {
         driveService.addDrive(null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testRemoveDriveException() {
         driveService.removeDrive(null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testUpdateDriveException() {
         driveService.updateDrive(null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testAddCustomerException() {
         driveService.addCustomer(null, null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testRemoveCustomerException() {
         driveService.removeCustomer(null, null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testAddCommentException() {
         driveService.addComment(null, null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testRemoveCommentException() {
         driveService.removeComment(null, null);
     }
-    @Test(expectedExceptions=IllegalArgumentException.class)
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
     void testFindDriveByIdException() {
         driveService.findDriveById(null);
     }
