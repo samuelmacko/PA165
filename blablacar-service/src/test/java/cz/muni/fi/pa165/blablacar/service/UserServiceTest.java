@@ -83,14 +83,6 @@ public class UserServiceTest {
     }
 
     @Test
-    void createUserEmptyLastNameTest() {
-        user.setLastName("");
-
-        assertThatThrownBy(() -> userService.createUser(user))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void editFirstNameTest() {
         String newFirstName = "RingBearer";
 
