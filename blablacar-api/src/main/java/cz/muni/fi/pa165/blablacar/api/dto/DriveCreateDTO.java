@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
+import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
