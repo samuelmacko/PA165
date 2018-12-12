@@ -67,5 +67,8 @@
         <module>blablacar-persistence</module>
         <module>blablacar-service</module>
         <module>blablacar-api</module>
+        <module>blablacar-spring-mvc</module>
+        <module>blablacar-rest</module>
+        <module>sample-data</module>
     </modules>
 </project>
