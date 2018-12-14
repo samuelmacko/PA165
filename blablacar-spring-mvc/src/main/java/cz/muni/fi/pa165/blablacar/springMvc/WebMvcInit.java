@@ -6,37 +6,33 @@ import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
 import java.util.EnumSet;
 
-public class WebMvcInit implements WebApplicationInitializer {
+public class WebMvcInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
-    public void onStartup(javax.servlet.ServletContext servletContext) throws ServletException {
-        //Context
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(WebMvcConfig.class);
-
-        //Servlet
-        ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
-        registration.addMapping("/");
-        registration.setLoadOnStartup(1);
-
-        //Listener
-        servletContext.addListener(new ContextLoaderListener(rootContext));
-        servletContext.addListener(new RequestContextListener());
-
-        //Filter
-        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
-
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-
-        FilterRegistration.Dynamic characterEncoding = servletContext.addFilter("characterEncoding", characterEncodingFilter);
-        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[]{WebMvcConfig.class};
     }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("utf-8");
+        return new Filter[]{encodingFilter};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
+    }
+
 }
