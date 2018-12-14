@@ -4,7 +4,8 @@ import org.dozer.Mapper;
 
 import java.util.Collection;
 import java.util.List;
-
+import org.springframework.stereotype.Service;
+@Service
 public interface BeanMappingService {
 
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);

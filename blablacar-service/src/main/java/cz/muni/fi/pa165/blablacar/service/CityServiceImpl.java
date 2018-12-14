@@ -5,7 +5,9 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CityServiceImpl implements CityService {
 
     @Inject

@@ -23,6 +23,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>blablacar-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.taglibs</groupId>
             <artifactId>taglibs-standard-spec</artifactId>
         </dependency>
@@ -89,31 +94,18 @@
 
     </dependencies>
 
-    <build>
+     <build>
+        <!-- what to do when only "mvn" is run -->
+        <defaultGoal>cargo:run</defaultGoal>
+        <!-- name of the produced war -->
+        <finalName>blablacar</finalName>
         <plugins>
-            <!-- embedded Tomcat 8 plugin configuration, use "mvn cargo:run" to run -->
+            <!--  embedded Tomcat -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.6.8</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat8x</containerId>
-                        <artifactInstaller>
-                            <groupId>org.apache.tomcat</groupId>
-                            <artifactId>tomcat</artifactId>
-                            <version>${tomcat.version}</version>
-                        </artifactInstaller>
-                    </container>
-                    <deployables>
-                        <deployable>
-                            <properties>
-                                <context>/pa165</context>
-                            </properties>
-                        </deployable>
-                    </deployables>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

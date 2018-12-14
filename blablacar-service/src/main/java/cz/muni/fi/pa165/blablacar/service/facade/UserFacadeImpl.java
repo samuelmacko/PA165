@@ -17,19 +17,23 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /** Implementation of User facade
  *
  * @author Matus Sakala
  */
+@Service
+@Transactional
 public class UserFacadeImpl implements UserFacade{
 
     private final static Logger log = LoggerFactory.getLogger(UserFacadeImpl.class);
 
-    @Inject
+    @Autowired
     private UserService userService;
     
     @Inject

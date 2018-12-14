@@ -6,11 +6,13 @@
 package cz.muni.fi.pa165.blablacar.service;
 
 import java.util.Date;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Matus Sakala
  */
+@Service
 public class TimeServiceImpl implements TimeService {
 
     @Override

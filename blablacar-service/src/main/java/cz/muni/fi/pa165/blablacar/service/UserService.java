@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Matus Sakala
  */
-
+@Service
 public interface UserService {
     /**
      *
