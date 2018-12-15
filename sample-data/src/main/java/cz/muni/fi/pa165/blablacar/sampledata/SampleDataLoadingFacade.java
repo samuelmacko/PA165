@@ -1,8 +1,11 @@
 package cz.muni.fi.pa165.blablacar.sampledata;
 
-import java.io.IOException;
-
+/**
+ * Populates database with sample data.
+ *
+ * @author Martin Geletka
+ */
 public interface SampleDataLoadingFacade {
 
-    void loadData() throws IOException;
+    void loadData();
 }
