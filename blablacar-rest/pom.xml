@@ -104,11 +104,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.glassfish</groupId>-->
-            <!--<artifactId>javax.el</artifactId>-->
-            <!--<scope>test</scope> &lt;!&ndash; conflicts with tomcat libraries, but needed for tests to run &ndash;&gt;-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <scope>test</scope> <!-- conflicts with tomcat libraries, but needed for tests to run -->
+        </dependency>
 
     </dependencies>
 </project>

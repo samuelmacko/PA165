@@ -26,7 +26,7 @@ public class DrivesController {
 //    private UserFacade userFacade;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<DriveDTO> getRides() {
+    public final List<DriveDTO> getDrives() {
         logger.debug("rest getRides()");
 
         return driveFacade.findAllDrives();
@@ -72,7 +72,7 @@ public class DrivesController {
     @RequestMapping(value = "/add-customer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final DriveDTO addCustomer(@RequestBody AddCustomerDTO addCustomerDTO) throws ResourceNotFoundException {
-        logger.debug("rest addCustomer(rideId={}, userId={})", addCustomerDTO.getDriveId(), addCustomerDTO.getCustomerId());
+        logger.debug("rest addCustomer(driveId={}, userId={})", addCustomerDTO.getDriveId(), addCustomerDTO.getCustomerId());
 
         try {
             driveFacade.addCustomer(addCustomerDTO);
@@ -85,7 +85,7 @@ public class DrivesController {
     @RequestMapping(value = "/remove-customer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final DriveDTO removeCustomer(@RequestBody RemoveCustomerDTO removeCustomerDTO) throws ResourceNotFoundException {
-        logger.debug("rest removeCustomer(rideId={}, userId={})", removeCustomerDTO.getDriveId(), removeCustomerDTO.getCustomerId());
+        logger.debug("rest removeCustomer(driveId={}, userId={})", removeCustomerDTO.getDriveId(), removeCustomerDTO.getCustomerId());
 
         try {
             driveFacade.removeCustomer(removeCustomerDTO);
@@ -98,7 +98,7 @@ public class DrivesController {
     @RequestMapping(value = "/edit-capacity", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final DriveDTO editCapacity(@RequestBody DriveDTO driveDTO) throws ResourceNotFoundException {
-        logger.debug("rest editCapacity(rideId={}, seats={})", driveDTO.getId(), driveDTO.getCapacity());
+        logger.debug("rest editCapacity(driveId={}, capacity={})", driveDTO.getId(), driveDTO.getCapacity());
 
         try {
             driveFacade.changeCapacity(driveDTO.getId(), driveDTO.getCapacity());
@@ -111,7 +111,7 @@ public class DrivesController {
     @RequestMapping(value = "/edit-driver", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final DriveDTO editDriver(@RequestBody ChangeDriverDTO changeDriverDTO) throws ResourceNotFoundException {
-        logger.debug("rest editDriver(rideId={}, driverId={})", changeDriverDTO.getDriveId(), changeDriverDTO.getDriver());
+        logger.debug("rest editDriver(driveId={}, driverId={})", changeDriverDTO.getDriveId(), changeDriverDTO.getDriver());
 
         try {
             driveFacade.changeDriver(changeDriverDTO);

@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,11 +17,11 @@ public class DriveDTO {
 
     private Long id;
     private UserDTO driver;
-    private Set<UserDTO> customers;
+    private Set<UserDTO> customers = new HashSet<>();
     private int capacity;
     private CityDTO fromCity;
     private CityDTO toCity;
-    private Set<CommentDTO> comments;
+    private Set<CommentDTO> comments = new HashSet<>();
     private BigDecimal price;
     private Date date;
 

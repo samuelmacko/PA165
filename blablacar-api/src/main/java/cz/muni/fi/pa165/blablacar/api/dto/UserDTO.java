@@ -3,6 +3,7 @@ import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Objects;
 
 import java.util.Set;
@@ -32,9 +33,9 @@ public class UserDTO {
     @Size(min = 8, max=50)
     private String password;
 
-    private Set<DriveDTO> beingDriver;
-    private Set<DriveDTO> beingCustomer;
-    private Set<CommentDTO> comments;
+    private Set<DriveDTO> beingDriver = new HashSet<>();
+    private Set<DriveDTO> beingCustomer = new HashSet<>();
+    private Set<CommentDTO> comments = new HashSet<>();
 
     public Long getId() {
         return id;

@@ -161,8 +161,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             customer.addToBeingCustomer(drive);
         }
 
-        drive.setCapacity(ThreadLocalRandom.current().nextInt(1, 8));
-        drive.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextInt(15, 100)));
+        drive.setCapacity(3);
+        drive.setPrice(new BigDecimal("199.99"));
         drive.setDate(new Date());
 
         return drive;

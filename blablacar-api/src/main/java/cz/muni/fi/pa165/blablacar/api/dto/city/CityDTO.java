@@ -2,17 +2,19 @@ package cz.muni.fi.pa165.blablacar.api.dto.city;
 
 import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
+import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class CityDTO {
 
     private Long id;
     private String name;
-    private Set<DriveDTO> fromDrives;
-    private Set<DriveDTO> toDrives;
+    private Set<Long> fromDrives = new HashSet<>();
+    private Set<Long> toDrives = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -22,20 +24,28 @@ public class CityDTO {
         return name;
     }
 
-    public Set<DriveDTO> getFromDrives() {
+    public Set<Long> getFromDrives() {
         return fromDrives;
     }
 
-    public Set<DriveDTO> getToDrives() {
+    public Set<Long> getToDrives() {
         return toDrives;
     }
 
-    public void setFromDrives(Set<DriveDTO> fromDrives) {
+    public void setFromDrives(Set<Long> fromDrives) {
         this.fromDrives = fromDrives;
     }
 
-    public void setToDrives(Set<DriveDTO> toDrives) {
+    public void addToFromDrives(Long fromDrive) {
+        this.fromDrives.add(fromDrive);
+    }
+
+    public void setToDrives(Set<Long> toDrives) {
         this.toDrives = toDrives;
+    }
+
+    public void addToToDrives(Long toDrive) {
+        this.toDrives.add(toDrive);
     }
 
     public void setId(Long id) {
