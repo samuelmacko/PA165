@@ -1,15 +1,9 @@
 package cz.muni.fi.pa165.blablacar.springMvc;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.request.RequestContextListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.*;
-import java.util.EnumSet;
+import javax.servlet.Filter;
 
 public class WebMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
