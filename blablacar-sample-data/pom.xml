@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sample-data</artifactId>
+    <artifactId>blablacar-sample-data</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
