@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Component
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSession {
 
     private Long userId;
