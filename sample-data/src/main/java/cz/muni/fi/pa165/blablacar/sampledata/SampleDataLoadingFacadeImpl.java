@@ -90,6 +90,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         gandalf.setFirstName("Gandalf");
         gandalf.setLastName("White");
         gandalf.setLogin("wizzard1");
+        gandalf.setIsSuperUser(true);
 
         userService.registerUser(gandalf, "wizzard");
         return gandalf;

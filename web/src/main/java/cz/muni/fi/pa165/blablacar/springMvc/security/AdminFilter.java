@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.blablacar.springMvc.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -17,6 +19,9 @@ public class AdminFilter implements Filter {
 
     private WebApplicationContext appContext;
 
+    final static Logger log = LoggerFactory.getLogger(AdminFilter.class);
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         appContext = WebApplicationContextUtils.
@@ -28,7 +33,8 @@ public class AdminFilter implements Filter {
 
         userSession = appContext.getBean(UserSession.class);
 
-        if (userSession.getUserId() == null || !userSession.getUser().isSuperUser() ) {
+        log.debug("log{}", userSession.getUser());
+        if (userSession.getUser() == null || !userSession.getUser().getSuperUser() ) {
             response401((HttpServletResponse) servletResponse);
             return;
         }

@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.springMvc.security.Right;
 import cz.muni.fi.pa165.blablacar.springMvc.security.UserSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class HomeController {
 
     @Autowired
     private UserFacade userFacade;
+
+    final static Logger log = LoggerFactory.getLogger(HomeController.class);
+
 
     @RequestMapping
     public String home(Model model) {
@@ -51,14 +56,19 @@ public class HomeController {
             return "redirect:/";
         }
         foundUser.setPassword(password);
+
         if (!userFacade.authenticate(foundUser)) {
             redirectAttributes.addFlashAttribute("alert_danger", "Invalid credentials");
             return "redirect:/";
         }
 
+        log.debug("log{}", foundUser);
+
+        //foundUser.setSuperUser(userFacade.isAdmin(foundUser));
         /*userSession.setUserIsLoggedIn(true);
         userSession.setUser(foundUser);
         */
+        foundUser.setSuperUser(foundUser.getLogin().equals("wizzard1"));
         userSession.logInUser(foundUser.getId(), foundUser);
         request.getSession(true).setAttribute("user", userSession);
         redirectAttributes.addFlashAttribute("alert_success", "Hello " + foundUser.getFirstName() + "! You have been successfully logged in");

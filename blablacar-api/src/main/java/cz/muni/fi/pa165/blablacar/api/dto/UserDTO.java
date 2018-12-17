@@ -49,7 +49,7 @@ public class UserDTO {
         return firstName;
     }
 
-    public boolean isSuperUser() {
+    public boolean getSuperUser() {
         return isSuperUser;
     }
 
@@ -171,6 +171,7 @@ public class UserDTO {
                 ", password=" + password +
                 ", beingDriver=" + beingDriver +
                 ", beingCustomer=" + beingCustomer +
+                ", getSuperUser=" + isSuperUser +
                 ", comments=" + comments + '}';
     }
 

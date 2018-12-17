@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @Column
-    private Boolean isSuperUser;
+    private boolean isSuperUser;
 
     @OneToMany(mappedBy = "driver")
     private Set<Drive> beingDriver = new HashSet<>();
@@ -64,7 +64,7 @@ public class User {
         this.beingDriver = beingDriver;
     }
 
-    public Boolean getIsSuperUser() {
+    public boolean getIsSuperUser() {
         return isSuperUser;
     }
 
@@ -114,10 +114,6 @@ public class User {
 
     public String getFirstName() {
         return firstName;
-    }
-    
-    public boolean isAdmin(){
-        return isSuperUser;
     }
 
     public void setFirstName(String fName) {

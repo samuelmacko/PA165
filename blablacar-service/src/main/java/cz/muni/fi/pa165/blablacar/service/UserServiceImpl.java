@@ -252,7 +252,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public boolean isAdmin(User u) {
-        return findUserById(u.getId()).isAdmin();
+        return findUserById(u.getId()).getIsSuperUser();
     }
     
     @Override
