@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation.project"/></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">Blablacar</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -42,6 +42,10 @@
                         <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
                     </ul>
                 </li>
+            <ul class="nav navbar-nav pull-right">
+                <li><my:a href="/drives/find">Find a ride</my:a></li>
+                <li><my:a href="/drives/offer">Offer a ride</my:a></li>
+                <li><my:a href="/cities/">Cities</my:a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -58,16 +62,16 @@
 
     <!-- authenticated user info -->
     <c:if test="${not empty authenticatedUser}">
-    <div class="row">
-        <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+        <div class="row">
+            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </c:if>
 
     <!-- alerts -->
@@ -91,7 +95,6 @@
 
     <!-- footer -->
     <footer class="footer">
-        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
     </footer>
 </div>
 <!-- javascripts placed at the end of the document so the pages load faster -->

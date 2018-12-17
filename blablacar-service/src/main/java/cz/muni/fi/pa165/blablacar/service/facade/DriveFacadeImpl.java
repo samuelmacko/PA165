@@ -110,6 +110,19 @@ public class DriveFacadeImpl implements DriveFacade {
     }
 
     @Override
+    public List<DriveDTO> findDrivesByFromCityId(Long id) {
+        List<Drive> drives = driveService.findDrivesByFromCityId(id);
+        return beanMappingService.mapTo(drives, DriveDTO.class);
+    }
+
+    @Override
+    public List<DriveDTO> findDrivesByToCityId(Long id) {
+        List<Drive> drives = driveService.findDrivesByToCityId(id);
+        return beanMappingService.mapTo(drives, DriveDTO.class);
+    }
+
+
+    @Override
     public List<DriveDTO> findAllDrives() {
         return beanMappingService.mapTo(driveService.findAllDrives(), DriveDTO.class);
     }

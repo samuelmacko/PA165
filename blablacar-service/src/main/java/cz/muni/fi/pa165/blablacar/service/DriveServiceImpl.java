@@ -79,6 +79,20 @@ public class DriveServiceImpl implements DriveService {
     }
 
     @Override
+    public List<Drive> findDrivesByFromCityId(Long id) throws IllegalArgumentException {
+        if (id == null) throw new IllegalArgumentException("id is null");
+
+        return driveDao.findDrivesFromCityId(id);
+    }
+
+    @Override
+    public List<Drive> findDrivesByToCityId(Long id) throws IllegalArgumentException {
+        if (id == null) throw new IllegalArgumentException("id is null");
+
+        return driveDao.findDrivesToCityId(id);
+    }
+
+    @Override
     public List<Drive> findAllDrives() {
         return driveDao.findAll();
     }
