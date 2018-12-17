@@ -7,10 +7,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
-<my:pagetemplate title="Page Not Found (404)">
+<mys:page-template title="Internal error">
     <jsp:attribute name="body">
         <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-        <h3>Might be you misspelling the url, or us not implementing this functionality. :-/</h3>
+        <h1>Page not foundd</h1>
         <a href="${contextPath}" class="btn btn-warning">Back to homepage</a>
     </jsp:attribute>
-</my:pagetemplate>
+</mys:page-template>

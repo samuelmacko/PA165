@@ -12,6 +12,23 @@
 
 <my:pagetemplate title="Cities">
 <jsp:attribute name="body">
-    Cities
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <c:forEach var="city" items="${cities}">
+        <tr class="">
+            <td>
+                <c:out value="${city.name}"></c:out>
+            </td>
+            <td>
+                <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/cities/${city.id}">View</a>
+            </td>
+        </tr>
+        </c:forEach>
+    </table>
 </jsp:attribute>
 </my:pagetemplate>

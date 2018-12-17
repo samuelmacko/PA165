@@ -73,6 +73,22 @@ public interface DriveFacade {
     DriveDTO findDriveById(Long id);
 
     /**
+     * Find all drives by a "from" city id
+     *
+     * @param id id of a "from" city
+     * @return list of drives with a specified "from" city id
+     */
+    List<DriveDTO> findDrivesByFromCityId(Long id);
+
+    /**
+     * Find all drives by a "to" city id
+     *
+     * @param id id of a "to" city
+     * @return list of drives with a specified "to" city id
+     */
+    List<DriveDTO> findDrivesByToCityId(Long id);
+
+    /**
      * Find add drives
      *
      * @return list of all drives in database
