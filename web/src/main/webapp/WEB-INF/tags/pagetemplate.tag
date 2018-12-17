@@ -37,15 +37,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
-                        <li><my:a href="/drive/list"><f:message key="navigation.admin.drives"/></my:a></li>
-                        <li><my:a href="/city/list"><f:message key="navigation.admin.cities"/></my:a></li>
+                        <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
+                        <li><my:a href="/cities/"><f:message key="navigation.admin.cities"/></my:a></li>
                         <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
                     </ul>
                 </li>
             <ul class="nav navbar-nav pull-right">
                 <li><my:a href="/drives/find">Find a ride</my:a></li>
                 <li><my:a href="/drives/offer">Offer a ride</my:a></li>
-                <li><my:a href="/cities/">Cities</my:a></li>
                 <li>
                     <c:if test="${userSession.userIsLoggedIn}">
                         <a href="/pa165/logout">Logout</a>
