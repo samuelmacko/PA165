@@ -8,9 +8,9 @@
 <my:pagetemplate title="User Administration">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
+<!--    <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
         <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
+    </form>-->
 
     <div class="row">
         <div class="col-xs-6">
@@ -29,9 +29,10 @@
     <div class="row">
         <table class="table">
             <tbody>
-                <c:forEach items="${user.comments}" var="comment">
+                <c:forEach items="${comments}" var="comment">
                     <tr>
                         <td>${comment.content}</td>
+                        <td><my:a href="/drives/drive/${comment.driveID.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
             </tbody>

@@ -11,8 +11,8 @@ public class CityDTO {
 
     private Long id;
     private String name;
-    private Set<DriveDTO> fromDrives;
-    private Set<DriveDTO> toDrives;
+    private Set<Long> fromDrives;
+    private Set<Long> toDrives;
 
     public Long getId() {
         return id;
@@ -22,21 +22,23 @@ public class CityDTO {
         return name;
     }
 
-    public Set<DriveDTO> getFromDrives() {
+    public Set<Long> getFromDrives() {
         return fromDrives;
     }
 
-    public Set<DriveDTO> getToDrives() {
-        return toDrives;
-    }
-
-    public void setFromDrives(Set<DriveDTO> fromDrives) {
+    public void setFromDrives(Set<Long> fromDrives) {
         this.fromDrives = fromDrives;
     }
 
-    public void setToDrives(Set<DriveDTO> toDrives) {
+    public Set<Long> getToDrives() {
+        return toDrives;
+    }
+
+    public void setToDrives(Set<Long> toDrives) {
         this.toDrives = toDrives;
     }
+
+    
 
     public void setId(Long id) {
         this.id = id;

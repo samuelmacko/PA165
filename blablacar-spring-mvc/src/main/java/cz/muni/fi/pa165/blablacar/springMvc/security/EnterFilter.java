@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/user/*", "/ride/*", "/comment/*"})
+//@WebFilter(urlPatterns = {"/user/*", "/ride/*", "/comment/*"})
 public class EnterFilter implements Filter {
 
     @Autowired

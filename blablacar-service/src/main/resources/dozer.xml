@@ -4,4 +4,41 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
+		<configuration>
+        <!-- these are always bi-directional -->
+        <custom-converters>
+            <converter type="cz.muni.fi.pa165.blablacar.service.config.DriveIdConverter">
+                <class-a>cz.muni.fi.pa165.blablacar.persistence.entity.Drive</class-a>
+                <class-b>java.lang.Long</class-b>
+            </converter>
+
+            <converter type="cz.muni.fi.pa165.blablacar.service.config.CityIdConverter">
+                <class-a>cz.muni.fi.pa165.blablacar.persistence.entity.City</class-a>
+                <class-b>java.lang.Long</class-b>
+            </converter>
+
+            <converter type="cz.muni.fi.pa165.blablacar.service.config.UserIdConverter">
+                <class-a>cz.muni.fi.pa165.blablacar.persistence.entity.User</class-a>
+                <class-b>java.lang.Long</class-b>
+            </converter>
+
+            <converter type="cz.muni.fi.pa165.blablacar.service.config.CommentIdConverter">
+                <class-a>cz.muni.fi.pa165.blablacar.persistence.entity.Comment</class-a>
+                <class-b>java.lang.Long</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+
+    <mapping>
+        <class-a>cz.muni.fi.pa165.blablacar.persistence.entity.Comment</class-a>
+        <class-b>cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO</class-b>
+        <field>
+            <a>author</a>
+            <b>authorId</b>
+        </field>
+        <field>
+            <a>drive</a>
+            <b>driveId</b>
+        </field>
+    </mapping>
 </mappings>

@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.blablacar.springMvc.controllers;
 
+import cz.muni.fi.pa165.blablacar.api.facade.CommentFacade;
 import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ public class UserController  {
 
     @Autowired
     private UserFacade userFacade;
+    
+    @Autowired
+    private CommentFacade commentFacade;
 
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public String list(Model model) {
@@ -29,6 +33,8 @@ public class UserController  {
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable long id, Model model) {
         log.debug("view({})", id);
+        log.debug("user ocmments({})", commentFacade.getCommentsOfAuthor(id));
+        model.addAttribute("comments", commentFacade.getCommentsOfAuthor(id));
         model.addAttribute("user", userFacade.findUserById(id));
         return "user/view";
     }
