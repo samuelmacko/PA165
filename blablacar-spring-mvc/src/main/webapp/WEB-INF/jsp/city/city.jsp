@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: bruno
   Date: 16/12/2018
-  Time: 18:48
+  Time: 23:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
@@ -10,25 +10,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<my:pagetemplate title="Cities">
+<my:pagetemplate title="City - ${cityDTO.name}">
 <jsp:attribute name="body">
+    <div class="col-md-3">
     <table class="table table-hover">
-        <thead>
-            <tr>
-                <td>Name</td>
-                <td>Actions</td>
-            </tr>
-        </thead>
-        <c:forEach var="city" items="${cities}">
         <tr class="">
+            <td>ID</td>
             <td>
-                <c:out value="${city.name}"></c:out>
-            </td>
-            <td>
-                <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/cities/${city.id}">View</a>
+                <c:out value="${cityDTO.id}"></c:out>
             </td>
         </tr>
-        </c:forEach>
+        <tr class="">
+            <td>Name</td>
+            <td>
+                <c:out value="${cityDTO.name}"></c:out>
+            </td>
+        </tr>
     </table>
+    </div>
 </jsp:attribute>
 </my:pagetemplate>
