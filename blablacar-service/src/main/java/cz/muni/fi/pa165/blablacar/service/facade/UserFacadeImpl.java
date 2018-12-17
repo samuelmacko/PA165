@@ -74,8 +74,9 @@ public class UserFacadeImpl implements UserFacade{
         if(user == null){
             log.debug(UserFacadeImpl.class + "Find user by login: " + 
                     login + ", not found");
+            return null;
         }
-        log.debug(UserFacadeImpl.class + "Found user " + user.toString());
+        log.debug(UserFacadeImpl.class + "Found user " + user);
         return beanMappingService.mapTo(user, UserDTO.class);
     }
 
@@ -86,7 +87,7 @@ public class UserFacadeImpl implements UserFacade{
             log.debug(UserFacadeImpl.class + "Find user by full name " + 
                     firstName + " " + lastName + ", not found");
         }
-        log.debug(UserFacadeImpl.class + "Found user " + user.toString());
+        log.debug(UserFacadeImpl.class + "Found user " + user);
         return beanMappingService.mapTo(user, UserDTO.class);
     }
 
@@ -101,7 +102,7 @@ public class UserFacadeImpl implements UserFacade{
     @Override
     public boolean removeUser(UserDTO user) {
         userService.deleteUser(beanMappingService.mapTo(user, User.class));
-        log.debug(UserFacadeImpl.class + "Deleted user " + user.toString());
+        log.debug(UserFacadeImpl.class + "Deleted user " + user);
         return true;
     }
 
@@ -137,6 +138,17 @@ public class UserFacadeImpl implements UserFacade{
         log.debug(UserFacadeImpl.class + "Get drives as passenger, found "
             + drives.size() + " drives");
         return beanMappingService.mapTo(drives, DriveDTO.class);
+    }
+    
+    @Override
+    public boolean isAdmin(UserDTO u){
+        return userService.isAdmin(beanMappingService.mapTo(u, User.class));
+    }
+    
+    @Override
+    public boolean authenticate(UserDTO u) {
+        return userService.authenticate(
+                userService.findUserById(u.getId()), u.getPassword());
     }
     
 }

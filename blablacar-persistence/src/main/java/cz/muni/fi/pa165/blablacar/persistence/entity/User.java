@@ -115,6 +115,10 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
+    
+    public boolean isAdmin(){
+        return isSuperUser;
+    }
 
     public void setFirstName(String fName) {
         this.firstName = fName;

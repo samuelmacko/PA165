@@ -47,12 +47,8 @@
                 <li><my:a href="/drives/offer">Offer a ride</my:a></li>
                 <li><my:a href="/cities/">Cities</my:a></li>
                 <li>
-                    <c:if test="${sessionScope['user'].isUserLoggedIn}">
-                        ${sessionScope['user'].user.login}
-                        <c:if test="${sessionScope['user'].user.isSuperUser}">
-                            - (SuperUser)
-                        </c:if>
-                        <a href="/logout">Logout</a>
+                    <c:if test="${userSession.userIsLoggedIn}">
+                        <a href="/pa165/logout">Logout</a>
                     </c:if>
                 </li>
             </ul>

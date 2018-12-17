@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/comment/manage","/comment/delete"})
+//@WebFilter(urlPatterns = {"/user/list/all/*", "/comment/list/*"})
 public class AdminFilter implements Filter {
 
     @Autowired

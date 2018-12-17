@@ -25,6 +25,13 @@ public class UserSession {
         setUserIsLoggedIn(true);
         setLastLoggedIn(new Date());
     }
+    
+    public void logoutUser(){
+        setUser(null);
+        setUserId(null);
+        setUserIsLoggedIn(false);
+        setLastLoggedIn(null);
+    }
 
     public Long getUserId() {
         return userId;

@@ -40,7 +40,7 @@ public class HomeController {
         UserDTO foundUser = null;
         try {
             foundUser = userFacade.findUserByLogin(login);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             // empty login || not exist
             redirectAttributes.addFlashAttribute("alert_danger", "User not found");
             return "redirect:/";
@@ -50,21 +50,28 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("alert_danger", "User not found");
             return "redirect:/";
         }
-
-        if (!foundUser.getPassword().equals(password)) {
+        foundUser.setPassword(password);
+        if (!userFacade.authenticate(foundUser)) {
             redirectAttributes.addFlashAttribute("alert_danger", "Invalid credentials");
             return "redirect:/";
         }
 
-        userSession.setUserIsLoggedIn(true);
+        /*userSession.setUserIsLoggedIn(true);
         userSession.setUser(foundUser);
-
+        */
+        userSession.logInUser(foundUser.getId(), foundUser);
         request.getSession(true).setAttribute("user", userSession);
         redirectAttributes.addFlashAttribute("alert_success", "Hello " + foundUser.getFirstName() + "! You have been successfully logged in");
 
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String list(Model model) {
+        userSession.logoutUser();
+        return "redirect:/";
+    }
+    
     @ModelAttribute(name = "userSession")
     public UserSession addUserSession(){
         return userSession;

@@ -111,11 +111,6 @@ public class UserDTO {
         this.login = login;
     }
 
-
-    public void setComments(Set<CommentDTO> comments) {
-        this.comments = comments;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
