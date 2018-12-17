@@ -36,9 +36,5 @@
             <a>author</a>
             <b>authorId</b>
         </field>
-        <field>
-            <a>drive</a>
-            <b>driveId</b>
-        </field>
     </mapping>
 </mappings>

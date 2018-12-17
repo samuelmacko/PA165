@@ -32,7 +32,7 @@
                 <c:forEach items="${comments}" var="comment">
                     <tr>
                         <td>${comment.content}</td>
-                        <td><my:a href="/drives/drive/${comment.driveID.id}" class="btn btn-primary">View drive</my:a></td>
+                        <td><my:a href="/drives/drive/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
             </tbody>
