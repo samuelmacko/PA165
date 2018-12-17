@@ -6,12 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/user")
 public class UserController  {
 
     final static Logger log = LoggerFactory.getLogger(UserController.class);
@@ -19,9 +20,16 @@ public class UserController  {
     @Autowired
     private UserFacade userFacade;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("users", userFacade.getAllUsers());
-        return "home";
+        return "user/list";
+    }
+    
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String view(@PathVariable long id, Model model) {
+        log.debug("view({})", id);
+        model.addAttribute("user", userFacade.findUserById(id));
+        return "user/view";
     }
 }

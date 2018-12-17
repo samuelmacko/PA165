@@ -13,7 +13,11 @@
     <packaging>war</packaging>
 
     <dependencies>
-
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>sample-data</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!-- servlet, JSP, JSTL -->
         <!-- must be this instead of javaee-web for the springmvc-tests to succeed -->
         <dependency>
@@ -104,7 +108,7 @@
         <!-- what to do when only "mvn" is run -->
         <defaultGoal>cargo:run</defaultGoal>
         <!-- name of the produced war -->
-        <finalName>blablacar</finalName>
+        <finalName>pa165</finalName>
         <plugins>
             <!--  embedded Tomcat -->
             <plugin>
