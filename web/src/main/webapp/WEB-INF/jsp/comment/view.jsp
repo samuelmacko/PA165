@@ -5,23 +5,28 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Comments Administration">
+<my:pagetemplate title="Comments Detail">
 <jsp:attribute name="body">
 
     <form method="post" action="${pageContext.request.contextPath}/comment/delete/${comment.id}">
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>
 
-    <p>ID ${comment.id}</p>
-    <p>Created date ${comment.createdDate}</p>
-    <p>Update date ${comment.updatedDate}</p>
+    <p><b>Created date</b> ${comment.createdDate}</p>
+    <p><b>Update date </b>${comment.updateDate}</p>
     <div>
-        <span>Author</span>
-        <td><my:a href="/user/view/${comment.authorID}" class="btn btn-primary">Author</my:a></td>
+        <span><b>Content</b></span>
+        <span>
+                ${comment.content}
+        </span>
     </div>
     <div>
-        <span>Drive</span>
-        <td><my:a href="/drive/view/${comment.driveID}" class="btn btn-primary">Drive</my:a></td>
+        <span><b>Author</b></span>
+        <a href="/pa165/user/view/${comment.authorID}">Author</a>
+    </div>
+    <div>
+        <span><b>Drive </b></span>
+        <a href="/pa165/drives/view/${comment.drive.id}">Drive</a>
     </div>
 
 </jsp:attribute>
