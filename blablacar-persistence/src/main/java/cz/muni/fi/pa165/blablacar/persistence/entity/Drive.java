@@ -33,7 +33,7 @@ public class Drive {
     @ManyToOne
     private City toCity;
 
-    @OneToMany(mappedBy = "drive", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "drive", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private Set<Comment> comments = new HashSet<>();
 
     @Column(nullable = false)
