@@ -55,11 +55,13 @@ public class CommentDaoTest extends AbstractTestNGSpringContextTests {
         user1.setFirstName("Rick");
         user1.setLastName("Sanchez");
         user1.setLogin("Rick101");
+        user1.setPassword("werwerwrwer");
 
         user2 = new User();
         user2.setFirstName("Morty");
         user2.setLastName("Smith");
         user2.setLogin("Moorty");
+        user2.setPassword("yoloeerer");
         LocalDate date = LocalDate.now();
 
 

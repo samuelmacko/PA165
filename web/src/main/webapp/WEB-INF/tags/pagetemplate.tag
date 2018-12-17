@@ -46,6 +46,15 @@
                 <li><my:a href="/drives/find">Find a ride</my:a></li>
                 <li><my:a href="/drives/offer">Offer a ride</my:a></li>
                 <li><my:a href="/cities/">Cities</my:a></li>
+                <li>
+                    <c:if test="${sessionScope['user'].isUserLoggedIn}">
+                        ${sessionScope['user'].user.login}
+                        <c:if test="${sessionScope['user'].user.isSuperUser}">
+                            - (SuperUser)
+                        </c:if>
+                        <a href="/logout">Logout</a>
+                    </c:if>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -61,13 +70,13 @@
     </c:if>
 
     <!-- authenticated user info -->
-    <c:if test="${not empty authenticatedUser}">
+    <c:if test="${sessionScope['user'].isUserLoggedIn}">
         <div class="row">
             <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+                        <c:out value="${sessionScope['user'].login}"/>
                     </div>
                 </div>
             </div>

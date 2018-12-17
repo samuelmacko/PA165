@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
         if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
             + "Find user by id: id is null");
         User result = userDao.findUserById(id);
-        log.debug(UserServiceImpl.class + "User found: " + result.toString());
+        log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
     }
 
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService {
         //users are logged with email
         mailService.sendEmail(d.getDriver().getLogin(),"New request for drive", getEmailBody(u, d));
         u.addToBeingCustomer(d);
-        log.debug(UserServiceImpl.class + "Adding customer +" + u.toString() +
-                "to drive " + d.toString());
+        log.debug(UserServiceImpl.class + "Adding customer +" + u +
+                "to drive " + d);
     }
 
     private String getEmailBody(User user, Drive drive){
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
         d.removeCustomer(u);
         u.getBeingCustomer().remove(d);
         log.debug(UserServiceImpl.class + "removing customer: "
-                + u.toString() + "from drive: " + d.toString());
+                + u + "from drive: " + d);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
         if(user.getLogin() == null) throw new IllegalArgumentException(
             UserServiceImpl.class + "User does not have login");
         userDao.updateUser(user);
-        log.debug(UserServiceImpl.class + "User updated:" + user.toString());
+        log.debug(UserServiceImpl.class + "User updated:" + user);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
         if(userDao.findUserById(user.getId()) == null) throw new IllegalArgumentException(
             UserServiceImpl.class + "Delete: user not found");
         userDao.removeUser(user);
-        log.debug(UserServiceImpl.class + "User deleted:" + user.toString());
+        log.debug(UserServiceImpl.class + "User deleted:" + user);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
         if(lastName == null) throw new IllegalArgumentException(UserServiceImpl.class
             + "Find user by FullName: lastName is null");
         User result = userDao.findUserByFullName(firstName, lastName);
-        log.debug(UserServiceImpl.class + "User found: " + result.toString());
+        log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
     }
 
@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
         if(login == null) throw new IllegalArgumentException(UserServiceImpl.class
             + "Find user by Login: login is null");
         User result = userDao.findUserByLogin(login);
-        log.debug(UserServiceImpl.class + "User found: " + result.toString());
+        log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
     }
 
