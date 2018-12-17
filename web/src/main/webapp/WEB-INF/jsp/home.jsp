@@ -2,19 +2,32 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate>
+<my:pagetemplate title="Home">
 <jsp:attribute name="body">
+<h1>Login ${userSession.user.login}</h1>
 
-    <div class="jumbotron">
-        <h1>Welcome to Blablacar !</h1>
-        <p class="lead">In this seminar project for PA165</p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/example/foo/1/platypus55?b=42"
-              role="button">Find drives</a></p>
-    </div>
-              
-         
+    <c:if test="${not userSession.userIsLoggedIn}">
+        <form:form name="login" method="POST" action="login" modelAttribute="userSession">
+             <table>
+                 <tr>
+                     <td>User Name</td>
+                     <td><form:input path="login"/></td>
+                 </tr>
+                 <tr>
+                     <td>Password</td>
+                     <td><form:password path="password"/></td>
+                 </tr>
+                 <tr>
+                     <td></td>
+                     <td><input type="submit" value="Submit"/></td>
+                 </tr>
+             </table>
+       </form:form>
+    </c:if>
+    <c:if test="${userSession.userIsLoggedIn}">
+        <h2>Hello ${userSession.user.firstName} ${userSession.user.lastName}!</h2>
+    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
