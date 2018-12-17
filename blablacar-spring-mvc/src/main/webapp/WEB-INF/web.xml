@@ -1,42 +1,17 @@
-<web-app version = "2.5"
+<web-app version = "2.4"
          xmlns = "http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation = "http://java.sun.com/xml/ns/j2ee
-   http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd">
+   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-    <display-name>Spring MVC Application</display-name>
+    <display-name>App Name </display-name>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errors</location>
+    </error-page>
 
-    <servlet>
-        <servlet-name>UserActionServlet</servlet-name>
-        <displayable-name xml:lang="en">My Servlet</displayable-name>
-        <description>The Servlet</description>
-        <servlet-class>Servlet.UserActionServlet</servlet-class>
-    </servlet>
-
-
-    <!-- The mapping for the JSP servlet -->
-    <servlet-mapping>
-        <servlet-name>jsp</servlet-name>
-        <url-pattern>*.jsp</url-pattern>
-    </servlet-mapping>
-
-    <resource-ref>
-        <description>BlablaCar Web App</description>
-        <res-ref-name>jdbc/blablacar-spring_db</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
-
-    <!-- Define an error handler for 404 pages -->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error404.jsp</location>
+        <location>/errors</location>
     </error-page>
-
-    <!-- Define an error handler for java.lang.Throwable -->
-    <error-page>
-        <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/jsp/error.jsp</location>
-    </error-page>
-
 </web-app>
