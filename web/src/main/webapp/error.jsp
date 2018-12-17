@@ -10,7 +10,7 @@
 <mys:page-template title="Internal error">
     <jsp:attribute name="body">
         <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-        <h1>Page not foundd</h1>
+        <h1>Page not found</h1>
         <a href="${contextPath}" class="btn btn-warning">Back to homepage</a>
     </jsp:attribute>
 </mys:page-template>
