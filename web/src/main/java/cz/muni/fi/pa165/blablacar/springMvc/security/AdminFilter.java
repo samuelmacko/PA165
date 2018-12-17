@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/comment/manage","/comment/delete"})
+//@WebFilter(urlPatterns = {"/user/list/all/*", "/comment/list/*"})
 public class AdminFilter implements Filter {
 
     @Autowired
@@ -28,7 +28,7 @@ public class AdminFilter implements Filter {
 
         userSession = appContext.getBean(UserSession.class);
 
-        if (userSession.getUserId() == null || !userSession.getRight().equals(Right.ADMIN) ) {
+        if (userSession.getUserId() == null || !userSession.getUser().isSuperUser() ) {
             response401((HttpServletResponse) servletResponse);
             return;
         }

@@ -28,9 +28,10 @@ public class UserDTO {
     @Size(min = 2, max=50)
     private String lastName;
 
-    @NotNull
     @Size(min = 8, max=50)
     private String password;
+
+    private boolean isSuperUser;
 
     private Set<Long> beingDriver;
     private Set<Long> beingCustomer;
@@ -46,6 +47,14 @@ public class UserDTO {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public boolean isSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setSuperUser(boolean superUser) {
+        isSuperUser = superUser;
     }
 
     public void setFirstName(String firstName) {
@@ -91,8 +100,8 @@ public class UserDTO {
     public void setComments(Set<Long> comments) {
         this.comments = comments;
     }
-    
-    
+
+
 
     public String getLogin() {
         return login;
@@ -101,7 +110,6 @@ public class UserDTO {
     public void setLogin(String login) {
         this.login = login;
     }
-
 
     @Override
     public int hashCode() {

@@ -45,6 +45,13 @@ public interface UserService {
     public Map<User, BigDecimal> getUsersReward();
     public Map<User, BigDecimal> getUsersSpending();
     public Map<User, BigDecimal> getUsersTotalProfit();
+    
+    public boolean isAdmin(User u);
+    
+    public boolean authenticate(User u, String password);
+    
+    public void registerUser(User u, String unencryptedPassword);
+
 
 
 }

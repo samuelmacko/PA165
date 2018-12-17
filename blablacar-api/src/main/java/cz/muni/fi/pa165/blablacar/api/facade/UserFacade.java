@@ -80,5 +80,9 @@ public interface UserFacade {
      * @return collection of drives
      */
     List<DriveDTO> getPassengerDrives(Long id);
+    
+    boolean isAdmin(UserDTO u);
+    
+    boolean authenticate(UserDTO u);
 
 }

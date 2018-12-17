@@ -16,15 +16,21 @@ public class UserSession {
     private UserDTO user;
     private boolean userIsLoggedIn = false;
     private Date lastLoggedIn;
-    private Right right = Right.NO_RIGHT;
+    private String login;
+    private String password;
 
-
-    public void logInUser(Long userId, Right right, UserDTO user) {
+    public void logInUser(Long userId, UserDTO user) {
         setUser(user);
         setUserId(userId);
         setUserIsLoggedIn(true);
-        setRight(right);
         setLastLoggedIn(new Date());
+    }
+    
+    public void logoutUser(){
+        setUser(null);
+        setUserId(null);
+        setUserIsLoggedIn(false);
+        setLastLoggedIn(null);
     }
 
     public Long getUserId() {
@@ -59,12 +65,20 @@ public class UserSession {
         this.lastLoggedIn = lastLoggedIn;
     }
 
-    public Right getRight() {
-        return right;
+    public String getLogin() {
+        return login;
     }
 
-    public void setRight(Right right) {
-        this.right = right;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

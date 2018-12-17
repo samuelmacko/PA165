@@ -81,7 +81,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         frodo.setFirstName("Frodo");
         frodo.setLastName("Baggins");
         frodo.setLogin("hobbit1");
-        userService.createUser(frodo);
+        userService.registerUser(frodo,"hobbit");
         return frodo;
     }
 
@@ -90,7 +90,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         gandalf.setFirstName("Gandalf");
         gandalf.setLastName("White");
         gandalf.setLogin("wizzard1");
-        userService.createUser(gandalf);
+
+        userService.registerUser(gandalf, "wizzard");
         return gandalf;
     }
 
@@ -99,7 +100,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         aragorn.setFirstName("Aragorn");
         aragorn.setLastName("Undomiel");
         aragorn.setLogin("walker");
-        userService.createUser(aragorn);
+        aragorn.setPassword("walker");
+
+        userService.registerUser(aragorn, "walker");
         return aragorn;
     }
 
@@ -108,7 +111,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         sam.setFirstName("Samwise");
         sam.setLastName("Gamgee");
         sam.setLogin("hobbit2");
-        userService.createUser(sam);
+        sam.setLogin("hobbit");
+
+        userService.registerUser(sam, "hobbit");
         return sam;
     }
 
