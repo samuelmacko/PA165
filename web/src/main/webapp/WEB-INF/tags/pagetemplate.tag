@@ -37,7 +37,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
-                        <li><my:a href="/drive/list"><f:message key="navigation.admin.drives"/></my:a></li>
+                        <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
                         <li><my:a href="/city/list"><f:message key="navigation.admin.cities"/></my:a></li>
                         <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
                     </ul>
