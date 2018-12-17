@@ -44,6 +44,24 @@ public interface DriveDao {
     public Drive findDriveById(Long id) throws IllegalArgumentException;
 
     /**
+     * Finds drives in database by specific "from" city id
+     *
+     * @param id id of specific "from" city
+     * @return List of drives with specified "from" city id
+     * @throws IllegalArgumentException if id is null
+     */
+    public List<Drive> findDrivesFromCityId(Long id) throws IllegalArgumentException;
+
+    /**
+     * Finds drives in database by specific "to" city id
+     *
+     * @param id id of specific "to" city
+     * @return List of drives with specified "to" city id
+     * @throws IllegalArgumentException if id is null
+     */
+    public List<Drive> findDrivesToCityId(Long id) throws IllegalArgumentException;
+
+    /**
      * Find all drives
      *
      * @return list of all drives in database

@@ -20,7 +20,7 @@ public class CommentDTO {
     private Long authorID;
 
     @NotNull
-    private DriveDTO driveID;
+    private DriveDTO drive;
 
     @NotNull
     private Date createdDate;
@@ -45,12 +45,12 @@ public class CommentDTO {
         this.authorID = authorID;
     }
 
-    public DriveDTO getDriveID() {
-        return driveID;
+    public DriveDTO getDrive() {
+        return drive;
     }
 
-    public void setDriveID(DriveDTO driveID) {
-        this.driveID = driveID;
+    public void setDrive(DriveDTO drive) {
+        this.drive = drive;
     }
 
     public Date getCreatedDate() {
@@ -84,14 +84,14 @@ public class CommentDTO {
         CommentDTO that = (CommentDTO) o;
         return Objects.equals(getContent(), that.getContent()) &&
                 Objects.equals(getAuthorID(), that.getAuthorID()) &&
-                Objects.equals(getDriveID(), that.getDriveID()) &&
+                Objects.equals(getDrive(), that.getDrive()) &&
                 Objects.equals(getCreatedDate(), that.getCreatedDate()) &&
                 Objects.equals(getUpdateDate(), that.getUpdateDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getContent(), getAuthorID(), getDriveID(), getCreatedDate(), getUpdateDate());
+        return Objects.hash(getContent(), getAuthorID(), getDrive(), getCreatedDate(), getUpdateDate());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class CommentDTO {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", authorID=" + authorID +
-                ", driveID=" + driveID +
+                ", drive=" + drive +
                 ", createdDate=" + createdDate +
                 ", updateDate=" + updateDate +
                 '}';

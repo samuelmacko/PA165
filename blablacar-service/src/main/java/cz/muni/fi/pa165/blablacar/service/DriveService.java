@@ -86,6 +86,24 @@ public interface DriveService {
     Drive findDriveById(Long id) throws IllegalArgumentException;
 
     /**
+     * Finds drives in database by specific "from" city id
+     *
+     * @param id id of specific "from" city
+     * @return List of drives with specified "from" city id
+     * @throws IllegalArgumentException if id is null
+     */
+    List<Drive> findDrivesByFromCityId(Long id) throws IllegalArgumentException;
+
+    /**
+     * Finds drives in database by specific "to" city id
+     *
+     * @param id id of specific "to" city
+     * @return List of drives with specified "to" city id
+     * @throws IllegalArgumentException if id is null
+     */
+    List<Drive> findDrivesByToCityId(Long id) throws IllegalArgumentException;
+
+    /**
      * Finds all drives
      *
      * @return list of all drives

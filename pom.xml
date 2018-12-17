@@ -90,8 +90,8 @@
         <module>blablacar-persistence</module>
         <module>blablacar-service</module>
         <module>blablacar-api</module>
+        <module>web</module>
         <module>blablacar-rest</module>
-        <module>blablacar-spring-mvc</module>
         <module>blablacar-sample-data</module>
     </modules>
 </project>

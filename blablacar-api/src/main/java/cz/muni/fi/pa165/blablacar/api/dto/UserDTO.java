@@ -29,13 +29,13 @@ public class UserDTO {
     @Size(min = 2, max=50)
     private String lastName;
 
-    @NotNull
     @Size(min = 8, max=50)
     private String password;
 
-    private Set<DriveDTO> beingDriver = new HashSet<>();
-    private Set<DriveDTO> beingCustomer = new HashSet<>();
-    private Set<CommentDTO> comments = new HashSet<>();
+    private Set<Long> beingDriver = new HashSet<>();
+    private Set<Long> beingCustomer = new HashSet<>();
+    private Set<Long> comments = new HashSet<>();
+    private boolean isSuperUser;
 
     public Long getId() {
         return id;
@@ -47,6 +47,14 @@ public class UserDTO {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public boolean getSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setSuperUser(boolean superUser) {
+        isSuperUser = superUser;
     }
 
     public void setFirstName(String firstName) {
@@ -69,25 +77,31 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Set<DriveDTO> getBeingDriver() {
+    public Set<Long> getBeingDriver() {
         return beingDriver;
     }
 
-    public void setBeingDriver(Set<DriveDTO> beingDriver) {
+    public void setBeingDriver(Set<Long> beingDriver) {
         this.beingDriver = beingDriver;
     }
 
-    public Set<DriveDTO> getBeingCustomer() {
+    public Set<Long> getBeingCustomer() {
         return beingCustomer;
     }
 
-    public void setBeingCustomer(Set<DriveDTO> beingCustomer) {
+    public void setBeingCustomer(Set<Long> beingCustomer) {
         this.beingCustomer = beingCustomer;
     }
 
-    public Set<CommentDTO> getComments() {
+    public Set<Long> getComments() {
         return comments;
     }
+
+    public void setComments(Set<Long> comments) {
+        this.comments = comments;
+    }
+
+
 
     public String getLogin() {
         return login;
@@ -97,10 +111,6 @@ public class UserDTO {
         this.login = login;
     }
 
-
-    public void setComments(Set<CommentDTO> comments) {
-        this.comments = comments;
-    }
 
     @Override
     public int hashCode() {
@@ -162,6 +172,7 @@ public class UserDTO {
                 ", password=" + password +
                 ", beingDriver=" + beingDriver +
                 ", beingCustomer=" + beingCustomer +
+                ", getSuperUser=" + isSuperUser +
                 ", comments=" + comments + '}';
     }
 
