@@ -10,23 +10,83 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<my:pagetemplate title="City - ${cityDTO.name}">
+<my:pagetemplate title="City - ${cityDTO.name} (${cityDTO.id})">
 <jsp:attribute name="body">
-    <div class="col-md-3">
-    <table class="table table-hover">
-        <tr class="">
-            <td>ID</td>
-            <td>
-                <c:out value="${cityDTO.id}"></c:out>
-            </td>
-        </tr>
-        <tr class="">
-            <td>Name</td>
-            <td>
-                <c:out value="${cityDTO.name}"></c:out>
-            </td>
-        </tr>
-    </table>
+    <div class="col-md-6">
+        <h3>Drives FROM ${cityDTO.name}</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>From</td>
+                <td>To</td>
+                <td>Date</td>
+                <td>Price</td>
+                <td>Actions</td>
+            </tr>
+            </thead>
+            <c:forEach var="drive" items="${fromDrives}">
+            <tr class="">
+                <td>
+                    <c:out value="${drive.id}"></c:out>
+                </td>
+                <td>
+                    <c:out value="${drive.fromCity.name}"></c:out>
+                </td>
+                <td>
+                    <c:out value="${drive.toCity.name}"></c:out>
+                </td>
+                <td>
+                    <c:out value="${drive.date}"></c:out>
+                </td>
+                <td>
+                    <c:out value="${drive.price} CZK"></c:out>
+                </td>
+                <td>
+                    <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/${drive.id}">View</a>
+                </td>
+            </tr>
+            </c:forEach>
+        </table>
     </div>
+
+    <div class="col-md-6">
+        <h3>Drives TO ${cityDTO.name}</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>From</td>
+                <td>To</td>
+                <td>Date</td>
+                <td>Price</td>
+                <td>Actions</td>
+            </tr>
+            </thead>
+            <c:forEach var="drive" items="${toDrives}">
+        <tr class="">
+            <td>
+                <c:out value="${drive.id}"></c:out>
+            </td>
+            <td>
+                <c:out value="${drive.fromCity.name}"></c:out>
+            </td>
+            <td>
+                <c:out value="${drive.toCity.name}"></c:out>
+            </td>
+            <td>
+                <c:out value="${drive.date}"></c:out>
+            </td>
+            <td>
+                <c:out value="${drive.price} CZK"></c:out>
+            </td>
+            <td>
+                <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/${drive.id}">View</a>
+            </td>
+        </tr>
+        </c:forEach>
+        </table>
+    </div>
+
 </jsp:attribute>
 </my:pagetemplate>

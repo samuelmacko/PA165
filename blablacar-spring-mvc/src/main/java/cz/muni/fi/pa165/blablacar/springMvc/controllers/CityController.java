@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.blablacar.springMvc.controllers;
 
 import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.api.facade.CityFacade;
+import cz.muni.fi.pa165.blablacar.api.facade.DriveFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class CityController  {
     @Autowired
     private CityFacade cityFacade;
 
+    @Autowired
+    private DriveFacade driveFacade;
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("cities", cityFacade.findAllCities());
@@ -30,6 +35,8 @@ public class CityController  {
     public String showCity(@PathVariable Long cityId, Model model) {
         CityDTO cityDTO = cityFacade.findCityById(cityId);
         model.addAttribute("cityDTO", cityDTO);
+        model.addAttribute("fromDrives", driveFacade.findDrivesByFromCityId(cityId));
+        model.addAttribute("toDrives", driveFacade.findDrivesByToCityId(cityId));
         return "city/city";
     }
 }
