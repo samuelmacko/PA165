@@ -12,17 +12,20 @@
 
             <form:form action="${pageContext.request.contextPath}/drives/create" id="drive-create-form" method="post"
                        modelAttribute="driveCreateDTO" cssClass="form-horizontal">
+                     <%--modelAttribute="driveFormDTO" cssClass="form-horizontal">--%>
 
                 <%--<div class="form-group ${name_error?'has-error':''}">--%>
                 <div class="form-group">
 
+                    <%--<form:label path="fromCityId" cssClass="col-sm-2 control-label">From</form:label>--%>
                     <form:label path="fromCity" cssClass="col-sm-2 control-label">From</form:label>
                     <div class="col-sm-10">
-                        <%--<form:select id="select-to" path="destinationPlaceId" type="text" form="ride-create-form"--%>
-                        <form:select id="select-to" path="fromCity" type="text" form="drive-create-form"
+                            <%--<form:select id="select-to" path="fromCityId" type="text" form="drive-create-form"--%>
+                        <form:select id="select-to" path="fromCity" type="text" form="ride-create-form"
                                      cssClass="form-control">
                             <c:forEach items="${cities}" var="city">
-                               <option value="${city.id}">
+                               <%--<option value="${city.id}">--%>
+                               <option value="${city}">
                                        ${city.name}
                                </option>
                             </c:forEach>
@@ -31,12 +34,15 @@
                     </div>
 
 
+                    <%--<form:label path="toCityId" cssClass="col-sm-2 control-label">To</form:label>--%>
                     <form:label path="toCity" cssClass="col-sm-2 control-label">To</form:label>
                     <div class="col-sm-10">
+                        <%--<form:select id="select-to" path="toCityId" type="text" form="drive-create-form"--%>
                         <form:select id="select-to" path="toCity" type="text" form="drive-create-form"
                                      cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
-                           <option value="${city.id}">
+                           <%--<option value="${city.id}">--%>
+                           <option value="${city}">
                                    ${city.name}
                            </option>
                         </c:forEach>

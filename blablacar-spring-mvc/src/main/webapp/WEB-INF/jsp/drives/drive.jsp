@@ -8,9 +8,19 @@
 <my:pagetemplate title="Drive detail">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/drives/view/${driveDTO.id}">
+    <form method="post" action="${pageContext.request.contextPath}/drives/delete/${driveDTO.id}">
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>
+    <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+
+    <%--<form:form action="${pageContext.request.contextPath}/drives/delete" id="join-ride"--%>
+               <%--method="get">--%>
+        <%--<button type="submit" class="btn btn-primary" name="driveId" value="${driveDTO.id}">--%>
+            <%--Remove ride--%>
+        <%--</button>--%>
+    <%--</form:form>--%>
 
     <div class="col-md-6">
         <h3>Drive: ${driveDTO.id}</h3>
