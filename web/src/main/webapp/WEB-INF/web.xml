@@ -4,6 +4,12 @@
          xsi:schemaLocation = "http://java.sun.com/xml/ns/j2ee
    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
+     <listener>
+            <listener-class>
+                    org.springframework.web.context.request.RequestContextListener 
+            </listener-class>
+     </listener>
+    
     <display-name>App Name </display-name>
     <error-page>
         <error-code>500</error-code>

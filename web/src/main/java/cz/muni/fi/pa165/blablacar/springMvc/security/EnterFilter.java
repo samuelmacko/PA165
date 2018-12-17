@@ -15,7 +15,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//@WebFilter(urlPatterns = {"/user/*", "/drives/*", "/comment/*", "/cities/*", "/city/*"})
+@WebFilter(urlPatterns = {"/user/*", "/drives/*", "/comment/*", "/cities/*", "/city/*"})
 public class EnterFilter implements Filter {
 
     @Autowired
