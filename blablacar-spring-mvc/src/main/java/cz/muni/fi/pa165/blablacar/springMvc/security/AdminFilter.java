@@ -28,7 +28,7 @@ public class AdminFilter implements Filter {
 
         userSession = appContext.getBean(UserSession.class);
 
-        if (userSession.getUserId() == null || !userSession.getRight().equals(Right.ADMIN) ) {
+        if (userSession.getUserId() == null || !userSession.getUser().isSuperUser() ) {
             response401((HttpServletResponse) servletResponse);
             return;
         }
