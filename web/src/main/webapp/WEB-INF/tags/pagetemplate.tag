@@ -43,8 +43,6 @@
                     </ul>
                 </li>
             <ul class="nav navbar-nav pull-right">
-                <li><my:a href="/drives/find">Find a ride</my:a></li>
-                <li><my:a href="/drives/offer">Offer a ride</my:a></li>
                 <li>
                     <c:if test="${userSession.userIsLoggedIn}">
                         <a href="/pa165/logout">Logout</a>
