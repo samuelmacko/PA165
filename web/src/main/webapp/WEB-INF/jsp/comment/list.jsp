@@ -24,7 +24,7 @@
             <tr>
                 <td><my:a href="/user/view/${comment.authorID}" class="btn btn-primary">Author</my:a></td>
                 <td><c:out value="${comment.createdDate}"/></td>
-                <td><my:a href="/drive/view/${comment.drive.id}" class="btn btn-primary">Drive</my:a></td>
+                <td><my:a href="/drives/view/${comment.drive.id}" class="btn btn-primary">Drive</my:a></td>
                 <td><c:out value="${comment.content}"/></td>
                 <td><my:a href="/comment/view/${comment.id}" class="btn btn-primary">Detail</my:a></td>
             </tr>
