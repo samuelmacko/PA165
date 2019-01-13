@@ -8,6 +8,8 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.service.BeanMappingService;
 import cz.muni.fi.pa165.blablacar.service.DriveService;
 import cz.muni.fi.pa165.blablacar.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +36,12 @@ public class DriveFacadeImpl implements DriveFacade {
     @Autowired
     private BeanMappingService beanMappingService;
 
+    private final static Logger log = LoggerFactory.getLogger(DriveFacadeImpl.class);
+
+
     @Override
     public Long createDrive(DriveCreateDTO driveCreateDTO) {
+        log.debug("DriveFacadeImpl: create drive" + driveCreateDTO);
         Drive mappedDrive = new Drive();
         mappedDrive.setDate(driveCreateDTO.getDate());
         mappedDrive.setPrice(driveCreateDTO.getPrice());
@@ -54,7 +60,7 @@ public class DriveFacadeImpl implements DriveFacade {
         fromCity.addFromDrive(mappedDrive);
 
         City toCity = beanMappingService.mapTo(driveCreateDTO.getToCity(), City.class);
-        mappedDrive.setFromCity(toCity);
+        mappedDrive.setToCity(toCity);
         toCity.addToDrive(mappedDrive);
 
         mappedDrive.setPrice(driveCreateDTO.getPrice());

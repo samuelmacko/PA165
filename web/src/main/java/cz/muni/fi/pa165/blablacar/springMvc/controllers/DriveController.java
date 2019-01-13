@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping("/drives")
 public class DriveController {
 
-    final static Logger log = LoggerFactory.getLogger(DriveController.class);
+    private final static Logger log = LoggerFactory.getLogger(DriveController.class);
 
     @Autowired
     private DriveFacade driveFacade;
