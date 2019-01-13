@@ -14,12 +14,13 @@
 
     <div class="row">
         <div class="col-xs-6">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-body">
-            <img class="img-responsive img-rounded"
-                 src="${pageContext.request.contextPath}/users/userImage/${user.id}">
+                    <img src="<c:url value='/images/userImages/user-${user.id}.jpg'/>"
+                         style="width: 150px; height: 150px"
+                    />
                 </div>
-                </div>
+            </div>
         </div>
     </div>
     <p>ID = ${user.id}</p>

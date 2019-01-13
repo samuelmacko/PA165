@@ -12,6 +12,13 @@
 
 <my:pagetemplate title="City - ${cityDTO.name} (${cityDTO.id})">
 <jsp:attribute name="body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img src="<c:url value='/images/cityImages/city-${cityDTO.id}.jpg'/>"
+                         style="width: 400px; height: 250px"
+                    />
+                </div>
+            </div>
     <div class="col-md-6">
         <h3>Drives FROM ${cityDTO.name}</h3>
         <table class="table table-hover">

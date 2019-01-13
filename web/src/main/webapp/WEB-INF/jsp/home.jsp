@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <my:pagetemplate title="Home">
 <jsp:attribute name="body">
 <h1>Login ${userSession.user.login}</h1>
@@ -27,7 +26,14 @@
        </form:form>
     </c:if>
     <c:if test="${userSession.userIsLoggedIn}">
-        <h2>Hello ${userSession.user.firstName} ${userSession.user.lastName}!</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img src="<c:url value='/images/userImages/user-${userSession.user.id}.jpg'/>"
+                         style="width: 150px; height: 150px"
+                    />
+                </div>
+            </div>
+        <h2>Hello ${userSession.user.firstName}  ${userSession.user.lastName}!</h2>
     </c:if>
 </jsp:attribute>
 </my:pagetemplate>

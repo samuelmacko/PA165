@@ -201,8 +201,8 @@ public class DriveController {
 ////    }
 //
 //
-//    @ModelAttribute(name = "userSession")
-//    public UserSession addUserSession(){
-//        return userSession;
-//    }
+    @ModelAttribute(name = "userSession")
+    public UserSession addUserSession(){
+        return userSession;
+    }
 }

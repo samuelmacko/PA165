@@ -106,4 +106,10 @@ public class CommentController {
         model.addAttribute("comments", list);
         return "comment/list";
     }
+
+
+    @ModelAttribute(name = "userSession")
+    public UserSession addUserSession(){
+        return userSession;
+    }
 }
