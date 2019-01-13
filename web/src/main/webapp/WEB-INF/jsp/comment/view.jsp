@@ -15,17 +15,15 @@
     <p><b>Created date</b> ${comment.createdDate}</p>
     <p><b>Update date </b>${comment.updateDate}</p>
     <div>
-        <span><b>Content</b></span>
-        <span>
-                ${comment.content}
-        </span>
+       <p>Content</p>
+        <p>${comment.content}</p>
     </div>
     <div>
-        <span><b>Author</b></span>
+        <p>Author</p>
         <a href="/pa165/user/view/${comment.authorID}">Author</a>
     </div>
     <div>
-        <span><b>Drive </b></span>
+        <p>Drive </p>
         <a href="/pa165/drives/view/${comment.drive.id}">Drive</a>
     </div>
 

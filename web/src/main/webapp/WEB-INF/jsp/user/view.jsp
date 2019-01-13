@@ -12,6 +12,15 @@
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>-->
 
+
+    <div class="row">
+                <div>
+                    <img src="<c:url value='/images/userImages/user-${user.id}.jpg'/>"
+                         style="width: 150px; height: 150px"/>
+                </div>
+            </div>
+        </div>
+    </div>
     <p>ID = ${user.id}</p>
     <p>Name = ${user.firstName} ${user.lastName}</p>
     <p>Login = ${user.login}</p>
@@ -72,7 +81,7 @@
             <tbody>
                 <c:forEach items="${comments}" var="comment">
                     <tr>
-                        <td>${comment.content}</td>
+                        <td><p>${comment.content}</p></td>
                         <td><my:a href="/drives/view/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>

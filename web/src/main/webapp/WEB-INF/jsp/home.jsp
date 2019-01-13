@@ -5,7 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <my:pagetemplate title="Welcome to blablacar">
-<jsp:attribute name="body">
 
     <c:if test="${not userSession.userIsLoggedIn}">
         <h1>Please login before proceeding</h1>
@@ -27,7 +26,11 @@
        </form:form>
     </c:if>
     <c:if test="${userSession.userIsLoggedIn}">
-        <h2>Hello ${userSession.user.firstName} ${userSession.user.lastName}!</h2>
+                <div >
+                    <img src="<c:url value='/images/userImages/user-${userSession.user.id}.jpg'/>"
+                         style="width: 150px; height: 150px"/>
+                </div>
+        <p>Hello ${userSession.user.firstName} ${" "} ${userSession.user.lastName}!</p>
     </c:if>
 </jsp:attribute>
 </my:pagetemplate>

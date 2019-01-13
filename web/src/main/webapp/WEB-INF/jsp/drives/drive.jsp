@@ -35,7 +35,7 @@
         <table class="table table-hover">
 
             <tr>
-                <td><p>driver</p></td>
+                <td><p>Driver</p></td>
                 <td>
                     <p>
                         ${driveDTO.driver.firstName} ${driveDTO.driver.lastName}

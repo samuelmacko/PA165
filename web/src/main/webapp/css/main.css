@@ -1,0 +1,12 @@
+body {
+    background-image: url("https://backgroundcheckall.com/wp-content/uploads/2017/12/way-background-10.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+p, h1, h2, h3 {
+    color: #f0f8dc;
+}

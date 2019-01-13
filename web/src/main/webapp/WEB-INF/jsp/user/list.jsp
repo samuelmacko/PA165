@@ -12,19 +12,19 @@
         <caption>Users</caption>
         <thead>
         <tr>
-            <th>id</th>
-            <th>login</th>
-            <th>fistName</th>
-            <th>lastName</th>
+            <th><p>ID</p></th>
+            <th><p>Login</p></th>
+            <th><p>FistName</p></th>
+            <th><p>Last Name</p></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
-                <td><c:out value="${user.login}"/></td>
-                <td><c:out value="${user.firstName}"/></td>
-                <td><c:out value="${user.lastName}"/></td>
+                <td><p>${user.id}</p></td>
+                <td><p><c:out value="${user.login}"/></p></td>
+                <td><p><c:out value="${user.firstName}"/></p></td>
+                <td><p><c:out value="${user.lastName}"/></p></td>
                 <td><my:a href="/user/view/${user.id}" class="btn btn-primary">View</my:a></td>
             </tr>
         </c:forEach>
