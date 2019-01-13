@@ -19,6 +19,7 @@ public class UserSession {
     private String login;
     private String password;
 
+    
     public void logInUser(Long userId, UserDTO user) {
         setUser(user);
         setUserId(userId);
@@ -92,5 +93,9 @@ public class UserSession {
     @Override
     public int hashCode() {
         return Objects.hash(getUserId());
+    }
+    
+    public boolean isSuperUser(){
+        return user.getSuperUser();
     }
 }

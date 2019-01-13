@@ -5,18 +5,9 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="User Administration">
+<my:pagetemplate title="My Drives">
 <jsp:attribute name="body">
-
-<!--    <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
-        <button type="submit" class="btn btn-primary">Delete</button>
-    </form>-->
-
-    <p>ID = ${user.id}</p>
-    <p>Name = ${user.firstName} ${user.lastName}</p>
-    <p>Login = ${user.login}</p>
-    <br><br>
-    <h1>Drives</h1>
+    
     <div class="row mb-2">
     <div class="col-md-6">
       <div class="card flex-md-row mb-4 shadow-sm h-md-250">
@@ -65,20 +56,5 @@
       </div>
     </div>
   </div>
-    
-    <h2>Comments</h2>
-    <div class="row">
-        <table class="table">
-            <tbody>
-                <c:forEach items="${comments}" var="comment">
-                    <tr>
-                        <td>${comment.content}</td>
-                        <td><my:a href="/drives/view/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
 </jsp:attribute>
 </my:pagetemplate>

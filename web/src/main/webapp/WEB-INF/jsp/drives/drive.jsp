@@ -7,13 +7,21 @@
 
 <my:pagetemplate title="Drive detail">
 <jsp:attribute name="body">
-
-    <form method="post" action="${pageContext.request.contextPath}/drives/delete/${driveDTO.id}">
-        <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
-    <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
-        <button type="submit" class="btn btn-primary">Edit</button>
-    </form>
+    <c:if test="${userSession.user.superUser || userFacade.getDriverDrives(userSession.userId).contains(driveDTO)}">
+        <div class="col-md-12">
+           <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form> 
+        </div>
+    </c:if>
+    
+    <c:if test="${userSession.user.superUser || userFacade.getDriverDrives(userSession.userId).contains(driveDTO)}">
+        <div class="col-md-12">
+            <form method="post" action="${pageContext.request.contextPath}/drives/delete/${driveDTO.id}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </c:if>
 
     <%--<form:form action="${pageContext.request.contextPath}/drives/delete" id="join-ride"--%>
                <%--method="get">--%>

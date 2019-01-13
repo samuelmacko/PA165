@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Home">
+<my:pagetemplate title="Welcome to blablacar">
 <jsp:attribute name="body">
-<h1>Login ${userSession.user.login}</h1>
 
     <c:if test="${not userSession.userIsLoggedIn}">
+        <h1>Please login before proceeding</h1>
         <form:form name="login" method="POST" action="login" modelAttribute="userSession">
              <table>
                  <tr>

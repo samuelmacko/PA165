@@ -7,70 +7,49 @@
 
 <my:pagetemplate title="Create a drive">
 <jsp:attribute name="body">
-
-    <div class="row">
-
-            <form:form action="${pageContext.request.contextPath}/drives/create" id="drive-create-form" method="post"
-                       modelAttribute="driveCreateDTO" cssClass="form-horizontal">
-                     <%--modelAttribute="driveFormDTO" cssClass="form-horizontal">--%>
-
-                <%--<div class="form-group ${name_error?'has-error':''}">--%>
-                <div class="form-group">
-
-                    <%--<form:label path="fromCityId" cssClass="col-sm-2 control-label">From</form:label>--%>
-                    <form:label path="fromCity" cssClass="col-sm-2 control-label">From</form:label>
-                    <div class="col-sm-10">
-                            <%--<form:select id="select-to" path="fromCityId" type="text" form="drive-create-form"--%>
-                        <form:select id="select-to" path="fromCity" type="text" form="ride-create-form"
-                                     cssClass="form-control">
-                            <c:forEach items="${cities}" var="city">
-                               <%--<option value="${city.id}">--%>
-                               <option value="${city}">
-                                       ${city.name}
-                               </option>
-                            </c:forEach>
-                        </form:select>
-                        <%--<form:errors path="destinationPlaceId" cssClass="help-block"/>--%>
-                    </div>
-
-
-                    <%--<form:label path="toCityId" cssClass="col-sm-2 control-label">To</form:label>--%>
-                    <form:label path="toCity" cssClass="col-sm-2 control-label">To</form:label>
-                    <div class="col-sm-10">
-                        <%--<form:select id="select-to" path="toCityId" type="text" form="drive-create-form"--%>
-                        <form:select id="select-to" path="toCity" type="text" form="drive-create-form"
-                                     cssClass="form-control">
+    <form:form action="${pageContext.request.contextPath}/drives/create"  method="post"
+               modelAttribute="driveCreateDTO" cssClass="form-horizontal">
+        <div class="form-group">
+            <form:label path="fromCity" cssClass="col-sm-2 control-label">From</form:label>
+                <div class="col-sm-10">
+                    <form:select path="fromCity" cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
-                           <%--<option value="${city.id}">--%>
-                           <option value="${city}">
-                                   ${city.name}
-                           </option>
+                            <form:option value="${city}">${city.name}</form:option>
+                        </c:forEach>
+                </form:select>
+            </div>
+        </div>
+        <div class="form-group">
+            <form:label path="toCity" cssClass="col-sm-2 control-label">To</form:label>
+                <div class="col-sm-10">
+                    <form:select path="toCity" cssClass="form-control">
+                        <c:forEach items="${cities}" var="city">
+                            <form:option value="${cityFacade.findCityById(city.id)}">${city.name}</form:option>
                         </c:forEach>
                     </form:select>
-                    </div>
-
-                    <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
-                    <div class="col-sm-10">
-                        <form:input id="input-date" path="date" type="date" form="drive-create-form"
-                                    cssClass="form-control"/>
-                        <%--<form:errors path="departure" cssClass="help-block"/>--%>
-                    </div>
-
-                    <form:label path="price" cssClass="col-sm-2 control-label">Price</form:label>
-                    <div class="col-sm-10">
-                        <form:input id="input-price" path="price" type="number" cssClass="form-control"/>
-                    </div>
-
-                    <form:label path="capacity" cssClass="col-sm-2 control-label">Capacity</form:label>
-                    <div class="col-sm-10">
-                        <form:input id="input-capacity" path="capacity" type="number" cssClass="form-control"/>
-                        <%--<form:errors path="capacity" cssClass="help-block"/>--%>
-                    </div>
-
-                    <button type="submit" class="btn btn-default pull-right" style="margin-top:1%; margin-right:15px;">Create a drive</button>
                 </div>
-            </form:form>
-    </div>
+        </div>
+        <div class="form-group">        
+            <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
+                <div class="col-sm-10">
+                    <form:input id="input-date" path="date" type="date" form="drive-create-form" cssClass="form-control"/>
+                </div>
+        </div>
+        <div class="form-group">
+            <form:label path="price" cssClass="col-sm-2 control-label">Price</form:label>
+            <div class="col-sm-10">
+                <form:input id="input-price" path="price" type="number" cssClass="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">    
+            <form:label path="capacity" cssClass="col-sm-2 control-label">Capacity</form:label>
+            <div class="col-sm-10">
+                <form:input id="input-capacity" path="capacity" type="number" cssClass="form-control"/>
+                <%-- <form:errors path="capacity" cssClass="help-block"/> --%>
+            </div>
+        </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:1%; margin-right:15px;">Create a drive</button>
+    </form:form>
 
 </jsp:attribute>
 </my:pagetemplate>

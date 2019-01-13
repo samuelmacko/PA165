@@ -45,41 +45,56 @@ public class DriveController {
     @Autowired
     private UserSession userSession;
 
+    @ModelAttribute(name="userSession")
+    public UserSession addUserSession(){
+        return userSession;
+    }
+    
+    @ModelAttribute(name="driveFacade")
+    public DriveFacade addDriveFacade(){
+        return driveFacade;
+    }
+    
+    @ModelAttribute(name="userFacade")
+    public UserFacade addUserFacade(){
+        return userFacade;
+    }
+    
+    
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createDrive(@Valid @ModelAttribute("driveCreateDTO") DriveCreateDTO drive,
-//    public String createDrive(@Valid @ModelAttribute("driveFormDTO") DriveFormDTO drive,
                              BindingResult result,
                              Model model,
                              RedirectAttributes redirectAttributes,
                              HttpServletRequest request,
                              HttpServletResponse response) {
-
-//        DriveCreateDTO driveDTO = new DriveCreateDTO();
-//        driveDTO.setId(drive.getId());
-//        driveDTO.setDriver(userSession.getUser());
-//        driveDTO.setCapacity(drive.getCapacity());
-//        driveDTO.setPrice(drive.getPrice());
-//        driveDTO.setDate(drive.getDate());
-//        driveDTO.setFromCity(cityFacade.findCityById(drive.getFromCityId()));
-//        driveDTO.setToCity(cityFacade.findCityById(drive.getToCityId()));
-
-        log.debug("create(drive={})", drive);
-
-//        drive.setFromCity(cityFacade.findCityById());
-//        drive.setFromCity(cityFacade.findCityById());
-
+ 
+        log.error("Drive = "+drive.toString());
+        
 //        if (drive.getFromCity().getId().equals(drive.getToCity().getId())){
 //            model.addAttribute("alert_danger", "From and To cities must be different.");
 //            return "drives/new";
 //        }
-
+//        
+        DriveCreateDTO driveDTO = new DriveCreateDTO();
+        //driveDTO.setId(drive.getId());
+        driveDTO.setDriver(userSession.getUser());
+        driveDTO.setCapacity(drive.getCapacity());
+        driveDTO.setPrice(drive.getPrice());
+        driveDTO.setDate(drive.getDate());
+        driveDTO.setFromCity(cityFacade.findCityById(drive.getFromCity().getId()));
+        driveDTO.setToCity(cityFacade.findCityById(drive.getToCity().getId()));
+//
+//        log.debug("create(drive={})", drive);
+//      
 //        if (!isValidBinding(result, model)) {
 //            return "drives/new";
 //        }
+        log.error(driveDTO.toString());
 
-        Long id = driveFacade.createDrive(drive);
+        Long id = driveFacade.createDrive(driveDTO);
 //        Long id = driveFacade.createDrive(driveDTO);
-//        redirectAttributes.addFlashAttribute("alert_success", "Drive was successfully created.");
+        redirectAttributes.addFlashAttribute("alert_success", "Drive was successfully created.");
 
         //redirect to ride with this comment
 //        return "redirect:/drives/list-driver";
@@ -90,16 +105,28 @@ public class DriveController {
     public String createNewDrive(){
         return "drives/new";
     }
-//
+    
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public String findDrive(){
+        return "drives/find";
+    }
+    
     @ModelAttribute
-    public void addDriveForm(ModelMap model) {
+    public String addDriveForm(ModelMap model) {
         DriveCreateDTO newDrive = new DriveCreateDTO();
 //        DriveFormDTO newDrive = new DriveFormDTO();
         List<CityDTO> cities = new ArrayList<>(cityFacade.findAllCities());
         newDrive.setDriver(userSession.getUser());
         model.addAttribute("driveCreateDTO", newDrive);
 //        model.addAttribute("driveFormDTO", newDrive);
-        model.addAttribute("cities" , cities);
+        //model.addAttribute("cities" , cities);
+        return "drives/new";
+    }
+    
+    @ModelAttribute("cities")
+    public List<CityDTO> addCities(){
+        List<CityDTO> cities = new ArrayList<>(cityFacade.findAllCities());
+        return cities;
     }
 //
     @RequestMapping(value = "/view/{driveId}", method = RequestMethod.GET)

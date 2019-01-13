@@ -136,5 +136,12 @@ public class DriveCreateDTO {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "DriveCreateDTO{" + "id=" + id + ", driver=" + driver + ", capacity=" + capacity + ", fromCity=" + fromCity + ", toCity=" + toCity + ", price=" + price + ", date=" + date + '}';
+    }
+    
+    
+
 
 }

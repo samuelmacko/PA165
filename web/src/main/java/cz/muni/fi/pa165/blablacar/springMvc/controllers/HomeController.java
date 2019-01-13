@@ -56,7 +56,6 @@ public class HomeController {
             return "redirect:/";
         }
         foundUser.setPassword(password);
-
         if (!userFacade.authenticate(foundUser)) {
             redirectAttributes.addFlashAttribute("alert_danger", "Invalid credentials");
             return "redirect:/";

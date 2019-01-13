@@ -40,12 +40,23 @@ public class UserController  {
         return userSession;
     }
     
+    
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable long id, Model model) {
         log.debug("view({})", id);
         log.debug("user ocmments({})", commentFacade.getCommentsOfAuthor(id));
         model.addAttribute("comments", commentFacade.getCommentsOfAuthor(id));
+        model.addAttribute("drivesAsDriver", userFacade.getDriverDrives(id));
+        model.addAttribute("drivesAsPassenger", userFacade.getPassengerDrives(id));
         model.addAttribute("user", userFacade.findUserById(id));
         return "user/view";
+    }
+    
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable long id, Model model) {
+        model.addAttribute("drivesAsDriver", userFacade.getDriverDrives(id));
+        model.addAttribute("drivesAsPassenger", userFacade.getPassengerDrives(id));
+        model.addAttribute("user", userFacade.findUserById(id));
+        return "user/show";
     }
 }

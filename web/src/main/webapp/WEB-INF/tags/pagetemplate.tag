@@ -33,22 +33,45 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
-                        <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
-                        <li><my:a href="/cities/"><f:message key="navigation.admin.cities"/></my:a></li>
-                        <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
-                    </ul>
-                </li>
-            <ul class="nav navbar-nav pull-right">
-                <li>
-                    <c:if test="${userSession.userIsLoggedIn}">
+                <c:if test="${userSession.user.superUser}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
+                            <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
+                            <li><my:a href="/cities/"><f:message key="navigation.admin.cities"/></my:a></li>
+                            <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
+                        </ul>
+                    </li>
+                </c:if>>
+            <c:if test="${userSession.userIsLoggedIn}">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/pa165/drives/find">Find drive</a>
+                    </li>
+                </ul>
+            </c:if>
+            <c:if test="${userSession.userIsLoggedIn}">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/pa165/drives/new">Offer drive</a>
+                    </li>
+                </ul>
+            </c:if>
+            <c:if test="${userSession.userIsLoggedIn}">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/pa165/user/show/${userSession.userId}">My drives</a>
+                    </li>
+                </ul>
+            </c:if> 
+            <c:if test="${userSession.userIsLoggedIn}">
+                <ul class="nav navbar-nav fixed-right">
+                    <li>
                         <a href="/pa165/logout">Logout</a>
-                    </c:if>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </c:if>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
