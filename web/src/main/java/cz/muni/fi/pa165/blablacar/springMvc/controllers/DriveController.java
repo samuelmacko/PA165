@@ -74,7 +74,11 @@ public class DriveController {
         driveCreateDTO.setDriver(userSession.getUser());
         driveCreateDTO.setCapacity(drive.getCapacity());
         driveCreateDTO.setPrice(drive.getPrice());
-        driveCreateDTO.setDate(drive.getDate());
+        if(drive.getDate() == null){
+            driveCreateDTO.setDate(new Date());
+        } else {
+            driveCreateDTO.setDate(drive.getDate());
+        }
         driveCreateDTO.setFromCity(cityFacade.findCityById(drive.getFromCityId()));
         driveCreateDTO.setToCity(cityFacade.findCityById(drive.getToCityId()));
 

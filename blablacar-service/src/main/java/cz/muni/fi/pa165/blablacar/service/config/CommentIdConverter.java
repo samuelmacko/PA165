@@ -7,16 +7,21 @@ package cz.muni.fi.pa165.blablacar.service.config;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
 import cz.muni.fi.pa165.blablacar.service.CommentService;
+
 import javax.inject.Inject;
+
 import org.dozer.DozerConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author Matus Sakala
  */
 public class CommentIdConverter extends DozerConverter<Comment, Long> {
     @Inject
     private CommentService commentService;
+    private final static Logger log = LoggerFactory.getLogger(CommentIdConverter.class);
+
 
     public CommentIdConverter() {
         super(Comment.class, Long.class);
@@ -29,6 +34,15 @@ public class CommentIdConverter extends DozerConverter<Comment, Long> {
 
     @Override
     public Comment convertFrom(Long id, Comment comment) {
-        return id == null ? null : commentService.findById(id);
+        if (id == null) {
+            return null;
+        }
+        Comment foundDrive = null;
+        try {
+            foundDrive = commentService.findById(id);
+        } catch (Exception ex) {
+            log.debug("Cannot find drive with id" + id);
+        }
+        return foundDrive;
     }
 }
