@@ -4,6 +4,7 @@ package cz.muni.fi.pa165.blablacar.api.dto;
         import javax.validation.constraints.NotNull;
         import java.math.BigDecimal;
         import java.util.Date;
+        import java.util.Objects;
 
 public class DriveFormDTO {
 
@@ -75,4 +76,33 @@ public class DriveFormDTO {
         return date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DriveFormDTO)) return false;
+        DriveFormDTO that = (DriveFormDTO) o;
+        return getCapacity() == that.getCapacity() &&
+                Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getFromCityId(), that.getFromCityId()) &&
+                Objects.equals(getToCityId(), that.getToCityId()) &&
+                Objects.equals(getPrice(), that.getPrice()) &&
+                Objects.equals(getDate(), that.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCapacity(), getFromCityId(), getToCityId(), getPrice(), getDate());
+    }
+
+    @Override
+    public String toString() {
+        return "DriveFormDTO{" +
+                "id=" + id +
+                ", capacity=" + capacity +
+                ", fromCityId=" + fromCityId +
+                ", toCityId=" + toCityId +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
+    }
 }

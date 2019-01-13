@@ -37,4 +37,9 @@
             <b>authorId</b>
         </field>
     </mapping>
+
+    <mapping>
+        <class-a>cz.muni.fi.pa165.blablacar.api.dto.DriveCreateDTO</class-a>
+        <class-b>cz.muni.fi.pa165.blablacar.persistence.entity.Drive</class-b>
+    </mapping>
 </mappings>

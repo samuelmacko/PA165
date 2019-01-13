@@ -34,7 +34,12 @@ public class DriveFacadeImpl implements DriveFacade {
 
     @Override
     public Long createDrive(DriveCreateDTO driveCreateDTO) {
-        Drive mappedDrive = beanMappingService.mapTo(driveCreateDTO, Drive.class);
+        Drive mappedDrive = new Drive();
+        mappedDrive.setDate(driveCreateDTO.getDate());
+        mappedDrive.setPrice(driveCreateDTO.getPrice());
+        mappedDrive.setCapacity(driveCreateDTO.getCapacity());
+        mappedDrive.setToCity(beanMappingService.mapTo(driveCreateDTO.getToCity(), City.class));
+        mappedDrive.setFromCity(beanMappingService.mapTo(driveCreateDTO.getFromCity(), City.class));
 
         User driver = beanMappingService.mapTo(driveCreateDTO.getDriver(), User.class);
         mappedDrive.setDriver(driver);
