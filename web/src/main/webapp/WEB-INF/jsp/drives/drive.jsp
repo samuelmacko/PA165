@@ -11,9 +11,9 @@
     <form method="post" action="${pageContext.request.contextPath}/drives/delete/${driveDTO.id}">
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>
-    <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
-        <button type="submit" class="btn btn-primary">Edit</button>
-    </form>
+    <%--<form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">--%>
+        <%--<button type="submit" class="btn btn-primary">Edit</button>--%>
+    <%--</form>--%>
 
     <%--<form:form action="${pageContext.request.contextPath}/drives/delete" id="join-ride"--%>
                <%--method="get">--%>
@@ -27,7 +27,7 @@
         <table class="table table-hover">
 
             <tr>
-                <td><p>driver</p></td>
+                <td><p>Driver</p></td>
                 <td>
                     <p>
                         ${driveDTO.driver.firstName} ${driveDTO.driver.lastName}

@@ -12,46 +12,44 @@
 
 <my:pagetemplate title="City - ${cityDTO.name} (${cityDTO.id})">
 <jsp:attribute name="body">
-            <div class="panel panel-default">
-                <div class="panel-body">
+                <div>
                     <img src="<c:url value='/images/cityImages/city-${cityDTO.id}.jpg'/>"
                          style="width: 400px; height: 250px"
                     />
                 </div>
-            </div>
     <div class="col-md-6">
         <h3>Drives FROM ${cityDTO.name}</h3>
         <table class="table table-hover">
             <thead>
             <tr>
-                <td>ID</td>
-                <td>From</td>
-                <td>To</td>
-                <td>Date</td>
-                <td>Price</td>
-                <td>Actions</td>
+                <td><p>ID</p></td>
+                <td><p>From</p></td>
+                <td><p>To</p></td>
+                <td><p>Date</p></td>
+                <td><p>Price</p></td>
+                <td><p>Actions</p></td>
             </tr>
             </thead>
             <c:forEach var="drive" items="${fromDrives}">
             <tr class="">
-                <td>
+                <td><p>
                     <c:out value="${drive.id}"></c:out>
-                </td>
-                <td>
+                </p></td>
+                <td></p>
                     <c:out value="${drive.fromCity.name}"></c:out>
-                </td>
-                <td>
+                    </p></td>
+                <td></p>
                     <c:out value="${drive.toCity.name}"></c:out>
-                </td>
-                <td>
+                    </p></td>
+                <td><p>
                     <c:out value="${drive.date}"></c:out>
-                </td>
-                <td>
+                </p></td>
+                <td><p>
                     <c:out value="${drive.price} CZK"></c:out>
-                </td>
-                <td>
+                </p></td>
+                <td><p>
                     <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/${drive.id}">View</a>
-                </td>
+                </p></td>
             </tr>
             </c:forEach>
         </table>

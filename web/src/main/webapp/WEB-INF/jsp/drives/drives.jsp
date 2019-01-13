@@ -12,24 +12,24 @@
         <caption>Drives</caption>
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Driver</th>
-            <th>Capacity</th>
-            <th>Date</th>
-            <th>From</th>
-            <th>To</th>
+            <th><p>Id<p></th>
+            <th><p>Driver</p></th>
+            <th><p>Capacity</p></th>
+            <th><p>Date</p></th>
+            <th><p>From</p></th>
+            <th><p>To</p></th>
             <th>...</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${drives}" var="drive">
             <tr>
-                <td><c:out value="${drive.id}"/></td>
-                <td><c:out value="${drive.driver.firstName} ${drive.driver.lastName}"/></td>
-                <td><c:out value="${drive.capacity}"/></td>
-                <td><c:out value="${drive.date.date}.${drive.date.month}.${drive.date.year}"/></td>
-                <td><c:out value="${drive.fromCity.name}"/></td>
-                <td><c:out value="${drive.toCity.name}"/></td>
+                <td><p><c:out value="${drive.id}"/></p></td>
+                <td><p><c:out value="${drive.driver.firstName} ${drive.driver.lastName}"/></p></td>
+                <td><p><c:out value="${drive.capacity}"/></p></td>
+                <td><p><c:out value="${drive.date.date}.${drive.date.month}.${drive.date.year}"/></p></td>
+                <td><p><c:out value="${drive.fromCity.name}"/></p></td>
+                <td><p><c:out value="${drive.toCity.name}"/></p></td>
                 <td>
                     <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/view/${drive.id}">View</a>
                 </td>

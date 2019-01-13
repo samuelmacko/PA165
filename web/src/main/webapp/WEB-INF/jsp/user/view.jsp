@@ -13,12 +13,9 @@
     </form>-->
 
     <div class="row">
-        <div class="col-xs-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
+                <div>
                     <img src="<c:url value='/images/userImages/user-${user.id}.jpg'/>"
-                         style="width: 150px; height: 150px"
-                    />
+                         style="width: 150px; height: 150px"/>
                 </div>
             </div>
         </div>
@@ -32,8 +29,8 @@
             <tbody>
                 <c:forEach items="${comments}" var="comment">
                     <tr>
-                        <td>${comment.content}</td>
-                        <td><my:a href="/drives/drive/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>
+                        <td><p>${comment.content}</p></td>
+                        <td><my:a href="/drives/view/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
             </tbody>

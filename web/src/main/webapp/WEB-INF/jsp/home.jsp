@@ -26,14 +26,11 @@
        </form:form>
     </c:if>
     <c:if test="${userSession.userIsLoggedIn}">
-            <div class="panel panel-default">
-                <div class="panel-body">
+                <div >
                     <img src="<c:url value='/images/userImages/user-${userSession.user.id}.jpg'/>"
-                         style="width: 150px; height: 150px"
-                    />
+                         style="width: 150px; height: 150px"/>
                 </div>
-            </div>
-        <h2>Hello ${userSession.user.firstName}  ${userSession.user.lastName}!</h2>
+        <p>Hello ${userSession.user.firstName} ${" "} ${userSession.user.lastName}!</p>
     </c:if>
 </jsp:attribute>
 </my:pagetemplate>

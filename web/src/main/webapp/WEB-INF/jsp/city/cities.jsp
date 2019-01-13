@@ -15,17 +15,19 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <td>Name</td>
-                <td>Actions</td>
+                <td><p>Name</p></td>
+                <td><p>Actions</p></td>
             </tr>
         </thead>
         <c:forEach var="city" items="${cities}">
         <tr class="">
-            <td>
+            <td> <p>
                 <c:out value="${city.name}"></c:out>
+            </p>
             </td>
-            <td>
+            <td> <p>
                 <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/cities/${city.id}">View</a>
+            </p>
             </td>
         </tr>
         </c:forEach>
