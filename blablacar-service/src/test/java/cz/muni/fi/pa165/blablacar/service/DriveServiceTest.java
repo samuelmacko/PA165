@@ -6,14 +6,11 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.City;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-//import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
-import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -24,6 +21,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
+
+//import cz.muni.fi.pa165.blablacar.service.config.ServiceConfiguration;
 
 //@ContextConfiguration(classes = ServiceConfiguration.class)
 public class DriveServiceTest {
@@ -181,14 +180,14 @@ public class DriveServiceTest {
     void findDriveById() {
         when(driveDao.findDriveById(validDrive.getId())).thenReturn(validDrive);
 
-        Drive result =driveService.findDriveById(validDrive.getId());
+        Drive result = driveService.findDriveById(validDrive.getId());
 
         verify(driveDao).findDriveById(validDrive.getId());
         assertThat(result).isEqualTo(validDrive);
     }
 
     @Test
-    void findAllTest(){
+    void findAllTest() {
         when(driveDao.findAll()).thenReturn(Lists.newArrayList(validDrive));
 
         List<Drive> result = driveService.findAllDrives();

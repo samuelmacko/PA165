@@ -48,7 +48,8 @@
                     <c:out value="${drive.price} CZK"></c:out>
                 </p></td>
                 <td><p>
-                    <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/${drive.id}">View</a>
+                    <a class="btn btn-xs btn-primary"
+                       href="${pageContext.request.contextPath}/drives/${drive.id}">View</a>
                 </p></td>
             </tr>
             </c:forEach>

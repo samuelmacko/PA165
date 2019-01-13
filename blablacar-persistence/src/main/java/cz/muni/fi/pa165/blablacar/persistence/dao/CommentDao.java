@@ -73,6 +73,7 @@ public interface CommentDao {
 
     /**
      * Find all comments of given drive
+     *
      * @param drive to retrieve comments
      * @return list of all comment of given drive
      * @throws IllegalArgumentException
@@ -81,6 +82,7 @@ public interface CommentDao {
 
     /**
      * Find all comments of given driveId
+     *
      * @param driveId of drive
      * @return list of all comment of given drive
      * @throws IllegalArgumentException

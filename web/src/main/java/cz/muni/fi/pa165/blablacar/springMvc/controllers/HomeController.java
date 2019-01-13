@@ -2,8 +2,6 @@ package cz.muni.fi.pa165.blablacar.springMvc.controllers;
 
 import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
 import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-import cz.muni.fi.pa165.blablacar.springMvc.security.Right;
 import cz.muni.fi.pa165.blablacar.springMvc.security.UserSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/")
@@ -38,7 +34,7 @@ public class HomeController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login (@ModelAttribute("userSession") UserSession userSession, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String login(@ModelAttribute("userSession") UserSession userSession, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         String login = userSession.getLogin();
         String password = userSession.getPassword();
 
@@ -80,9 +76,9 @@ public class HomeController {
         userSession.logoutUser();
         return "redirect:/";
     }
-    
+
     @ModelAttribute(name = "userSession")
-    public UserSession addUserSession(){
+    public UserSession addUserSession() {
         return userSession;
     }
 }

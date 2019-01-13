@@ -16,8 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CityFacadeImpl implements CityFacade
-{
+public class CityFacadeImpl implements CityFacade {
     private final static Logger log = LoggerFactory.getLogger(CityFacadeImpl.class);
 
     @Inject
@@ -59,14 +58,12 @@ public class CityFacadeImpl implements CityFacade
         log.info("City name has been updated for city id(" + city.getId() + ")");
     }
 
-    public List<CityDTO> findAllCities()
-    {
+    public List<CityDTO> findAllCities() {
         return beanMappingService.mapTo(cityService.findAll(), CityDTO.class);
     }
 
     @Override
-    public CityDTO findCityByName(String name)
-    {
+    public CityDTO findCityByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("City name was null.");
         }
@@ -75,8 +72,7 @@ public class CityFacadeImpl implements CityFacade
     }
 
     @Override
-    public CityDTO findCityById(Long id)
-    {
+    public CityDTO findCityById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("City id was null.");
         }

@@ -34,7 +34,7 @@ public class AdminFilter implements Filter {
         userSession = appContext.getBean(UserSession.class);
 
         log.debug("log{}", userSession.getUser());
-        if (userSession.getUser() == null || !userSession.getUser().getSuperUser() ) {
+        if (userSession.getUser() == null || !userSession.getUser().getSuperUser()) {
             response401((HttpServletResponse) servletResponse);
             return;
         }

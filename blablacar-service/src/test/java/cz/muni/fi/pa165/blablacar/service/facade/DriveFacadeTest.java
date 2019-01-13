@@ -19,7 +19,6 @@ import org.testng.annotations.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.mockito.Mockito.*;
 
 public class DriveFacadeTest {
@@ -37,10 +36,10 @@ public class DriveFacadeTest {
     @Mock
     private UserService userService;
 
-//    @Mock
+    //    @Mock
     private AddCustomerDTO addCustomerDTO;
 
-//    @Mock
+    //    @Mock
     private RemoveCustomerDTO removeCustomerDTO;
 
     private User user;
@@ -192,6 +191,7 @@ public class DriveFacadeTest {
         verify(driveService).updateDrive(drive);
         assertThat(drive.getDate()).isEqualToIgnoringHours(new GregorianCalendar(2000, Calendar.JANUARY, 10).getTime());
     }
+
     @Test
     void findDriveById() {
         when(beanMappingService.mapTo(drive, DriveDTO.class)).thenReturn(driveDTO);
@@ -200,6 +200,7 @@ public class DriveFacadeTest {
         DriveDTO returned = driveFacade.findDriveById(drive.getId());
         assertThat(returned).isEqualToComparingFieldByField(driveDTO);
     }
+
     @Test
     void findAllDrives() {
         List<Drive> expectedDrives = new ArrayList<>();
@@ -215,7 +216,6 @@ public class DriveFacadeTest {
         verify(driveService).findAllDrives();
         assertThat(actualDrivesDTO).containsOnly(driveDTO);
     }
-
 
 
 }

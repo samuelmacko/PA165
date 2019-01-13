@@ -1,15 +1,11 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
-import cz.muni.fi.pa165.blablacar.api.dto.comment.CommentDTO;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.Objects;
-
 import java.util.Set;
 
 /**
- *
  * @author Matus Sakala
  */
 
@@ -18,18 +14,18 @@ public class UserDTO {
     private Long id;
 
     @NotNull
-    @Size(min = 5, max=50)
+    @Size(min = 5, max = 50)
     private String login;
 
     @NotNull
-    @Size(min = 2, max=50)
+    @Size(min = 2, max = 50)
     private String firstName;
 
     @NotNull
-    @Size(min = 2, max=50)
+    @Size(min = 2, max = 50)
     private String lastName;
 
-    @Size(min = 8, max=50)
+    @Size(min = 8, max = 50)
     private String password;
 
     private Set<Long> beingDriver = new HashSet<>();
@@ -100,7 +96,6 @@ public class UserDTO {
     public void setComments(Set<Long> comments) {
         this.comments = comments;
     }
-
 
 
     public String getLogin() {
@@ -175,7 +170,6 @@ public class UserDTO {
                 ", getSuperUser=" + isSuperUser +
                 ", comments=" + comments + '}';
     }
-
 
 
 }

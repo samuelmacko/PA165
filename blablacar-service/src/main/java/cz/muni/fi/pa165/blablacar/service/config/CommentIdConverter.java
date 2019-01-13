@@ -7,12 +7,11 @@ package cz.muni.fi.pa165.blablacar.service.config;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
 import cz.muni.fi.pa165.blablacar.service.CommentService;
-
-import javax.inject.Inject;
-
 import org.dozer.DozerConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
 
 /**
  * @author Matus Sakala

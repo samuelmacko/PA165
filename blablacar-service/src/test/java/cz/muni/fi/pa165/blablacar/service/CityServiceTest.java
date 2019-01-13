@@ -7,8 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -49,8 +47,9 @@ public class CityServiceTest {
         city.setName("Mrkvickovo");
 
     }
+
     @AfterMethod
-    void reset(){
+    void reset() {
         Mockito.reset(cityDao);
     }
 

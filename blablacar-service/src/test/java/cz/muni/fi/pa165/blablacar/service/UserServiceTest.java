@@ -75,7 +75,7 @@ public class UserServiceTest {
     }
 
     @AfterMethod
-    void reset(){
+    void reset() {
         Mockito.reset(userDao);
         Mockito.reset(driveDao);
         Mockito.reset(timeService);
@@ -241,7 +241,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void findDrivesAsDriverTest(){
+    void findDrivesAsDriverTest() {
         user.addToBeingDriver(drive);
         drive.addCustomer(user);
 
@@ -252,7 +252,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void findDrivesAsPassengerTest(){
+    void findDrivesAsPassengerTest() {
         drive.addCustomer(user);
         user.addToBeingCustomer(drive);
 
@@ -263,7 +263,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void addCustomerToDriveTest(){
+    void addCustomerToDriveTest() {
         drive.addCustomer(user);
         user.addToBeingCustomer(drive);
 
@@ -276,7 +276,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void removeCustomerFromDriveTest(){
+    void removeCustomerFromDriveTest() {
         drive.addCustomer(user);
         user.addToBeingCustomer(drive);
 
@@ -297,7 +297,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void getUserRewardsTest(){
+    void getUserRewardsTest() {
         user.addToBeingDriver(drive);
         drive.setDriver(user);
 
@@ -316,8 +316,9 @@ public class UserServiceTest {
         assertThat(expected).isEqualTo(result);
 
     }
+
     @Test
-    void getUserSpendingTest(){
+    void getUserSpendingTest() {
         drive.addCustomer(user);
         user.addToBeingCustomer(drive);
 
@@ -335,7 +336,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void getUserProfitsTest(){
+    void getUserProfitsTest() {
         drive.addCustomer(user);
         user.addToBeingCustomer(drive);
 

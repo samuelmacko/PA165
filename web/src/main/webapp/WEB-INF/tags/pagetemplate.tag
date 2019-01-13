@@ -14,8 +14,10 @@
     <title><c:out value="${title}"/></title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
     <!-- bootstrap loaded from content delivery network -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <jsp:invoke fragment="head"/>
     <link href="<c:url value="/css/main.css" />" rel="stylesheet">
 </head>
@@ -24,7 +26,8 @@
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -35,44 +38,45 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <c:if test="${userSession.user.superUser}">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
-                            <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
-                            <li><my:a href="/cities/"><f:message key="navigation.admin.cities"/></my:a></li>
-                            <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation.admin"/><b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><my:a href="/user/list/all"><f:message key="navigation.admin.users"/></my:a></li>
+                        <li><my:a href="/drives/list"><f:message key="navigation.admin.drives"/></my:a></li>
+                        <li><my:a href="/cities/"><f:message key="navigation.admin.cities"/></my:a></li>
+                        <li><my:a href="/comment/list"><f:message key="navigation.admin.comments"/></my:a></li>
+                    </ul>
+                </li>
                 </c:if>>
-            <c:if test="${userSession.userIsLoggedIn}">
+                <c:if test="${userSession.userIsLoggedIn}">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/pa165/drives/find">Find drive</a>
                     </li>
                 </ul>
-            </c:if>
-            <c:if test="${userSession.userIsLoggedIn}">
+                </c:if>
+                <c:if test="${userSession.userIsLoggedIn}">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/pa165/drives/new">Offer drive</a>
                     </li>
                 </ul>
-            </c:if>
-            <c:if test="${userSession.userIsLoggedIn}">
+                </c:if>
+                <c:if test="${userSession.userIsLoggedIn}">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/pa165/user/show/${userSession.userId}">My drives</a>
                     </li>
                 </ul>
-            </c:if> 
-            <c:if test="${userSession.userIsLoggedIn}">
+                </c:if>
+                <c:if test="${userSession.userIsLoggedIn}">
                 <ul class="nav navbar-nav fixed-right">
                     <li>
                         <a href="/pa165/logout">Logout</a>
                     </li>
                 </ul>
-            </c:if>
+                </c:if>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -125,6 +129,8 @@
 </div>
 <!-- javascripts placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>

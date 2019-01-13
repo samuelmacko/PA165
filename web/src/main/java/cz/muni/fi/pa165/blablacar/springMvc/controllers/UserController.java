@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/user")
-public class UserController  {
+public class UserController {
 
     final static Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserFacade userFacade;
-    
+
     @Autowired
     private UserSession userSession;
-    
+
     @Autowired
     private CommentFacade commentFacade;
 
@@ -34,13 +34,13 @@ public class UserController  {
         model.addAttribute("users", userFacade.getAllUsers());
         return "user/list";
     }
-    
-    @ModelAttribute(name="userSession")
-    public UserSession addUserSession(){
+
+    @ModelAttribute(name = "userSession")
+    public UserSession addUserSession() {
         return userSession;
     }
-    
-    
+
+
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable long id, Model model) {
         log.debug("view({})", id);
@@ -51,7 +51,7 @@ public class UserController  {
         model.addAttribute("user", userFacade.findUserById(id));
         return "user/view";
     }
-    
+
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String show(@PathVariable long id, Model model) {
         model.addAttribute("drivesAsDriver", userFacade.getDriverDrives(id));

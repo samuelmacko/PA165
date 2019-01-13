@@ -26,7 +26,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("utf-8",true);
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("utf-8", true);
         ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
 
         return new Filter[]{encodingFilter, shallowEtagHeaderFilter};

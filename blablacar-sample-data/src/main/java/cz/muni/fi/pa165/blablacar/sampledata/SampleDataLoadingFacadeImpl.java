@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @Transactional
@@ -81,7 +80,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         frodo.setFirstName("Frodo");
         frodo.setLastName("Baggins");
         frodo.setLogin("hobbit1");
-        userService.registerUser(frodo,"hobbit");
+        userService.registerUser(frodo, "hobbit");
         return frodo;
     }
 

@@ -9,52 +9,52 @@
 <jsp:attribute name="body">
     
     <div class="row mb-2">
-    <div class="col-md-6">
-      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-          <strong class="d-inline-block mb-2 text-primary">Drives as driver</strong>
-          <table class="table">
-            <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>View</th>
-                </tr>
-        </thead>  
-            <tbody>
-                <c:forEach items="${drivesAsDriver}" var="drive">
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <strong class="d-inline-block mb-2 text-primary">Drives as driver</strong>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${drivesAsDriver}" var="drive">
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-          <strong class="d-inline-block mb-2 text-primary">Drives as passenger</strong>
-          <table class="table">
-            <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>View</th>
-                </tr>
-        </thead>  
-            <tbody>
-                <c:forEach items="${drivesAsPassenger}" var="drive">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <strong class="d-inline-block mb-2 text-primary">Drives as passenger</strong>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${drivesAsPassenger}" var="drive">
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
-      </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </jsp:attribute>
 </my:pagetemplate>

@@ -20,7 +20,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Map<String, String> getResources() {
 
-        Map<String,String> resourcesMap = new HashMap<>();
+        Map<String, String> resourcesMap = new HashMap<>();
 
         resourcesMap.put("drives_uri", ApiUris.ROOT_URI_DRIVES);
 

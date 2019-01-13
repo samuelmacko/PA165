@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
-		<configuration>
+    <configuration>
         <!-- these are always bi-directional -->
         <custom-converters>
             <converter type="cz.muni.fi.pa165.blablacar.service.config.DriveIdConverter">

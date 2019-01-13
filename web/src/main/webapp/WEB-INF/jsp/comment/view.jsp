@@ -15,7 +15,7 @@
     <p><b>Created date</b> ${comment.createdDate}</p>
     <p><b>Update date </b>${comment.updateDate}</p>
     <div>
-       <p>Content</p>
+        <p>Content</p>
         <p>${comment.content}</p>
     </div>
     <div>

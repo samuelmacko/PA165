@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.blablacar.springMvc.security;
 
-import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
-import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -10,10 +10,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.DatatypeConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @WebFilter(urlPatterns = {"/user/*", "/drives/*", "/comment/*", "/cities/*", "/city/*"})
 public class EnterFilter implements Filter {
@@ -23,9 +19,9 @@ public class EnterFilter implements Filter {
 
     private WebApplicationContext appContext;
 
-    
+
     final static Logger log = LoggerFactory.getLogger(EnterFilter.class);
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         appContext = WebApplicationContextUtils.
@@ -49,6 +45,7 @@ public class EnterFilter implements Filter {
     public void destroy() {
 
     }
+
     private void response401(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().println("<html><body><h1>401 Unauthorized</h1>You do not have permissions to access...</body></html>");

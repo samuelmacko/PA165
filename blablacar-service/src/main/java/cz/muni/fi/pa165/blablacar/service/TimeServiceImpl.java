@@ -5,11 +5,11 @@
  */
 package cz.muni.fi.pa165.blablacar.service;
 
-import java.util.Date;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
- *
  * @author Matus Sakala
  */
 @Service
@@ -19,5 +19,5 @@ public class TimeServiceImpl implements TimeService {
     public Date getCurrentTime() {
         return new Date();
     }
-    
+
 }

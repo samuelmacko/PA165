@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/cities")
-public class CityController  {
+public class CityController {
 
     final static Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -45,7 +45,7 @@ public class CityController  {
     }
 
     @ModelAttribute(name = "userSession")
-    public UserSession addUserSession(){
+    public UserSession addUserSession() {
         return userSession;
     }
 }

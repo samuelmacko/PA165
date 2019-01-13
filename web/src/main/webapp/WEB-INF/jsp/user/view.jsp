@@ -14,11 +14,11 @@
 
 
     <div class="row">
-                <div>
-                    <img src="<c:url value='/images/userImages/user-${user.id}.jpg'/>"
-                         style="width: 150px; height: 150px"/>
-                </div>
-            </div>
+        <div>
+            <img src="<c:url value='/images/userImages/user-${user.id}.jpg'/>"
+                 style="width: 150px; height: 150px"/>
+        </div>
+    </div>
         </div>
     </div>
     <p>ID = ${user.id}</p>
@@ -27,59 +27,59 @@
     <br><br>
     <h1>Drives</h1>
     <div class="row mb-2">
-    <div class="col-md-6">
-      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-          <strong class="d-inline-block mb-2 text-primary">Drives as driver</strong>
-          <table class="table">
-            <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>View</th>
-                </tr>
-        </thead>  
-            <tbody>
-                <c:forEach items="${drivesAsDriver}" var="drive">
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <strong class="d-inline-block mb-2 text-primary">Drives as driver</strong>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${drivesAsDriver}" var="drive">
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-          <strong class="d-inline-block mb-2 text-primary">Drives as passenger</strong>
-          <table class="table">
-            <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>View</th>
-                </tr>
-        </thead>  
-            <tbody>
-                <c:forEach items="${drivesAsPassenger}" var="drive">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <strong class="d-inline-block mb-2 text-primary">Drives as passenger</strong>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${drivesAsPassenger}" var="drive">
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
-      </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
     
     <h2>Comments</h2>
     <div class="row">
         <table class="table">
             <tbody>
-                <c:forEach items="${comments}" var="comment">
+            <c:forEach items="${comments}" var="comment">
                     <tr>
                         <td><p>${comment.content}</p></td>
                         <td><my:a href="/drives/view/${comment.drive.id}" class="btn btn-primary">View drive</my:a></td>

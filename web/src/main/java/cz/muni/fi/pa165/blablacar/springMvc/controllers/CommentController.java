@@ -90,7 +90,7 @@ public class CommentController {
 
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String addCommentForm(@RequestParam(value = "driveId", required = true) Long driveId, ModelMap model){
+    public String addCommentForm(@RequestParam(value = "driveId", required = true) Long driveId, ModelMap model) {
         CommentCreateDTO newComment = new CommentCreateDTO();
         newComment.setDriveId(driveId);
         newComment.setAuthorId(userSession.getUserId());
@@ -109,7 +109,7 @@ public class CommentController {
 
 
     @ModelAttribute(name = "userSession")
-    public UserSession addUserSession(){
+    public UserSession addUserSession() {
         return userSession;
     }
 }

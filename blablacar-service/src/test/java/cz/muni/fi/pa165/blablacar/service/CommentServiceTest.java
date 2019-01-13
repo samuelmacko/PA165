@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package cz.muni.fi.pa165.blablacar.service;
-import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
+
 import cz.muni.fi.pa165.blablacar.persistence.dao.CommentDao;
-import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Comment;
+import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
+import cz.muni.fi.pa165.blablacar.persistence.entity.User;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,25 +22,22 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import org.mockito.InjectMocks;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
-import org.testng.annotations.AfterMethod;
 
 /**
- *
  * @author Matus Sakala
  */
 public class CommentServiceTest {
-    
+
     @Mock
     private CommentDao commentDao;
 
     @Mock
     private TimeServiceImpl timeService;
-    
+
     @Autowired
     @InjectMocks
     private CommentServiceImpl commentService;
@@ -49,17 +50,17 @@ public class CommentServiceTest {
 
     private Comment comment1;
     private Comment comment2;
-    
-    
+
+
     @BeforeClass
     void initMocks() {
         MockitoAnnotations.initMocks(this);
     }
-    
+
     @BeforeMethod
     void prepareComment() {
         Calendar calendar = Calendar.getInstance();
- 
+
         comment1 = new Comment();
         comment1.setId(3L);
         comment1.setContent("first comment");
@@ -98,15 +99,15 @@ public class CommentServiceTest {
         user2.addToComments(comment2);
         comment2.setAuthor(user2);
     }
- 
+
     @AfterMethod
-    void reset(){
+    void reset() {
         Mockito.reset(commentDao);
         Mockito.reset(timeService);
     }
-    
+
     @Test
-    void createCommentTest(){
+    void createCommentTest() {
         doNothing().when(commentDao).addComment(any());
 
         Calendar cal = Calendar.getInstance();
@@ -120,13 +121,13 @@ public class CommentServiceTest {
 
         assertThat(result).isEqualToComparingFieldByField(comment1);
     }
-    
+
     @Test
     void createNullCommentTest() {
         assertThatThrownBy(() -> commentService.createComment(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    
+
     @Test
     void updateCommentTest() {
         comment1.setContent("changed text");
@@ -137,13 +138,13 @@ public class CommentServiceTest {
 
         verify(commentDao).updateComment(comment1);
     }
-    
+
     @Test
     void updateNullCommentTest() {
         assertThatThrownBy(() -> commentService.updateComment(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    
+
     @Test
     void findAllTest() {
         List<Comment> allComments = new ArrayList<>();
@@ -157,7 +158,7 @@ public class CommentServiceTest {
         assertThat(result)
                 .containsExactlyInAnyOrder(comment1, comment2);
     }
-    
+
     @Test
     void findByIdTest() {
         when(commentDao.findCommentById(comment1.getId())).thenReturn(comment1);
@@ -173,7 +174,7 @@ public class CommentServiceTest {
         verify(commentDao).findCommentById(comment1.getId());
         verify(commentDao).findCommentById(comment2.getId());
     }
-    
+
     @Test
     void findByIdNotFoundTest() {
         when(commentDao.findCommentById(any())).thenReturn(null);
@@ -182,7 +183,7 @@ public class CommentServiceTest {
         verify(commentDao).findCommentById(-1L);
         assertThat(result).isNull();
     }
-    
+
     @Test
     void findCommentsWithDriveTest() {
         when(commentDao.findAllCommentsOfDriveWithId(drive1.getId())).thenReturn(new ArrayList<>(drive1.getComments()));
@@ -198,7 +199,7 @@ public class CommentServiceTest {
         verify(commentDao).findAllCommentsOfDriveWithId(drive1.getId());
         verify(commentDao).findAllCommentsOfDriveWithId(drive2.getId());
     }
-    
+
     @Test
     void findMultipleCommentsOnDriveTest() {
         comment2.setDrive(drive1);
@@ -209,9 +210,9 @@ public class CommentServiceTest {
         List<Comment> drive1Comments = commentService.findAllCommentsOfDrive(drive1.getId());
         verify(commentDao).findAllCommentsOfDriveWithId(drive1.getId());
         assertThat(drive1Comments)
-        .containsExactlyInAnyOrder(comment1, comment2);
+                .containsExactlyInAnyOrder(comment1, comment2);
     }
-    
+
     @Test
     void findZeroCommentsOnDriveTest() {
         when(commentDao.findAllCommentsOfDriveWithId(drive1.getId())).thenReturn(new ArrayList<>());
@@ -222,13 +223,13 @@ public class CommentServiceTest {
         assertThat(result)
                 .isEmpty();
     }
-    
+
     @Test
     void findCommentsOnNullDrive() {
         assertThatThrownBy(() -> commentService.findAllCommentsOfDrive(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    
+
     @Test
     void findCommentsWithAuthorTest() {
         when(commentDao.findAllCommentsOfUserWithId(user1.getId())).thenReturn(new ArrayList<>(user1.getComments()));
@@ -244,7 +245,7 @@ public class CommentServiceTest {
         assertThat(secondComments)
                 .containsExactlyInAnyOrder(comment2);
     }
-    
+
     @Test
     void findCommentsWithAuthorMultipleCommentsTest() {
         comment2.setAuthor(user1);
@@ -256,15 +257,15 @@ public class CommentServiceTest {
         assertThat(comments)
                 .containsExactlyInAnyOrder(comment1, comment2);
     }
-    
+
     @Test
     void findCommentsWithAuthorNullTest() {
         assertThatThrownBy(() -> commentService.findAllCommentsOfUser(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    
+
     @Test
-    void deleteNullCommentTest(){
+    void deleteNullCommentTest() {
         assertThatThrownBy(() -> commentService.deleteComment(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }

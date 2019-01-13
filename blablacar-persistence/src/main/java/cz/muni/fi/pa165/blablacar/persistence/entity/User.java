@@ -131,8 +131,8 @@ public class User {
     public List<Comment> getComments() {
         return comments;
     }
-    
-    public void addToComments(Comment comment){
+
+    public void addToComments(Comment comment) {
         this.comments.add(comment);
     }
 

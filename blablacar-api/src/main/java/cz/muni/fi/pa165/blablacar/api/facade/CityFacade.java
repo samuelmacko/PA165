@@ -1,10 +1,8 @@
 package cz.muni.fi.pa165.blablacar.api.facade;
 
-import cz.muni.fi.pa165.blablacar.api.dto.*;
 import cz.muni.fi.pa165.blablacar.api.dto.city.CityCreateDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,7 +30,7 @@ public interface CityFacade {
     /**
      * Change a name
      *
-     * @param id id of a city
+     * @param id      id of a city
      * @param newName new name of the city
      */
     void changeName(Long id, String newName);

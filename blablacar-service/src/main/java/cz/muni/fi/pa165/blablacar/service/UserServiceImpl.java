@@ -9,20 +9,22 @@ import cz.muni.fi.pa165.blablacar.persistence.dao.DriveDao;
 import cz.muni.fi.pa165.blablacar.persistence.dao.UserDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.persistence.entity.User;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.*;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.inject.Inject;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author Matus Sakala
  */
 @Service
@@ -35,21 +37,21 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private TimeService timeService;
-    
+
     @Inject
     private DriveDao driveDao;
 
     @Inject
     private MailService mailService;
-    
+
     @Override
-    public User createUser(User user) throws IllegalArgumentException{
-        if(user == null) throw new IllegalArgumentException(
+    public User createUser(User user) throws IllegalArgumentException {
+        if (user == null) throw new IllegalArgumentException(
                 UserServiceImpl.class + "Create: user is null");
-        if(user.getFirstName() == null || user.getLastName() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have Full name");
-        if(user.getLogin() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have login");
+        if (user.getFirstName() == null || user.getLastName() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have Full name");
+        if (user.getLogin() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have login");
         userDao.addUser(user);
         log.debug(UserServiceImpl.class +
                 "User created: " + user.toString());
@@ -58,8 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long id) {
-        if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find user by id: id is null");
+        if (id == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find user by id: id is null");
         User result = userDao.findUserById(id);
         log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
@@ -67,32 +69,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addCustomerToDrive(Long driveId, Long userId) {
-        if(userId == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Add customer to drive: "
-                    + "userID is null");
-        if(driveId == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Add customer to drive: "
-                    + "driveID is null");
+        if (userId == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Add customer to drive: "
+                        + "userID is null");
+        if (driveId == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Add customer to drive: "
+                        + "driveID is null");
         Drive d = driveDao.findDriveById(driveId);
-        if(d == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Add customer to drive: "
-                    + "drive with specified ID not found");
+        if (d == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Add customer to drive: "
+                        + "drive with specified ID not found");
         User u = userDao.findUserById(userId);
-        if(u == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Add customer to drive: "
-                    + "user with specified ID not found");
-        if(d.getCustomers().size() == d.getCapacity()) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Add customer to drive: "
-                    + "drive has full capacity");
+        if (u == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Add customer to drive: "
+                        + "user with specified ID not found");
+        if (d.getCustomers().size() == d.getCapacity()) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Add customer to drive: "
+                        + "drive has full capacity");
         d.addCustomer(u);
         //users are logged with email
-        mailService.sendEmail(d.getDriver().getLogin(),"New request for drive", getEmailBody(u, d));
+        mailService.sendEmail(d.getDriver().getLogin(), "New request for drive", getEmailBody(u, d));
         u.addToBeingCustomer(d);
         log.debug(UserServiceImpl.class + "Adding customer +" + u +
                 "to drive " + d);
     }
 
-    private String getEmailBody(User user, Drive drive){
+    private String getEmailBody(User user, Drive drive) {
         return new StringBuilder().append("Customer ")
                 .append(user.getFirstName())
                 .append(" ")
@@ -109,24 +111,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeCustomerFromDrive(Long driveId, Long userId) {
-        if(userId == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Remove customer from drive: "
-                    + "userID is null");
-        if(driveId == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Remove customer from drive: "
-                    + "driveID is null");
+        if (userId == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Remove customer from drive: "
+                        + "userID is null");
+        if (driveId == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Remove customer from drive: "
+                        + "driveID is null");
         Drive d = driveDao.findDriveById(driveId);
-        if(d == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Remove customer from drive: "
-                    + "drive with specified ID not found");
+        if (d == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Remove customer from drive: "
+                        + "drive with specified ID not found");
         User u = userDao.findUserById(userId);
-        if(u == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Remove customer from drive: "
-                    + "user with specified ID not found");
-        if(!d.getCustomers().contains(u) || !u.getBeingCustomer().contains(d)){
+        if (u == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Remove customer from drive: "
+                        + "user with specified ID not found");
+        if (!d.getCustomers().contains(u) || !u.getBeingCustomer().contains(d)) {
             throw new IllegalArgumentException(
-            UserServiceImpl.class + "Remove customer from drive: "
-                    + "specified user is not customer on specified drive -- bidirectional relation not matching");
+                    UserServiceImpl.class + "Remove customer from drive: "
+                            + "specified user is not customer on specified drive -- bidirectional relation not matching");
         }
         d.removeCustomer(u);
         u.getBeingCustomer().remove(d);
@@ -136,32 +138,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editUser(User user) throws IllegalArgumentException {
-        if(user == null) throw new IllegalArgumentException(
-                UserServiceImpl.class +"Edit: user is null");
-        if(user.getFirstName() == null || user.getLastName() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have Full name");
-        if(user.getLogin() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have login");
+        if (user == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Edit: user is null");
+        if (user.getFirstName() == null || user.getLastName() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have Full name");
+        if (user.getLogin() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have login");
         userDao.updateUser(user);
         log.debug(UserServiceImpl.class + "User updated:" + user);
     }
 
     @Override
     public void deleteUser(User user) throws IllegalArgumentException {
-        if(user == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Delete: user is null");
-        if(userDao.findUserById(user.getId()) == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "Delete: user not found");
+        if (user == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Delete: user is null");
+        if (userDao.findUserById(user.getId()) == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "Delete: user not found");
         userDao.removeUser(user);
         log.debug(UserServiceImpl.class + "User deleted:" + user);
     }
 
     @Override
     public User findUserByFullName(String firstName, String lastName) throws IllegalArgumentException {
-        if(firstName == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find user by FullName: firstName is null");
-        if(lastName == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find user by FullName: lastName is null");
+        if (firstName == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find user by FullName: firstName is null");
+        if (lastName == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find user by FullName: lastName is null");
         User result = userDao.findUserByFullName(firstName, lastName);
         log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
@@ -169,8 +171,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByLogin(String login) throws IllegalArgumentException {
-        if(login == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find user by Login: login is null");
+        if (login == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find user by Login: login is null");
         User result = userDao.findUserByLogin(login);
         log.debug(UserServiceImpl.class + "User found: " + result);
         return result;
@@ -179,29 +181,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsers() {
         List<User> found = userDao.findAll();
-        log.debug(UserServiceImpl.class + "Find all users: found " + 
+        log.debug(UserServiceImpl.class + "Find all users: found " +
                 found.size() + " users");
         return found;
     }
 
     @Override
     public List<Drive> findDrivesAsDriver(Long id) throws IllegalArgumentException {
-        if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find drives as driver: user id is null");
+        if (id == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find drives as driver: user id is null");
         User u = userDao.findUserById(id);
         List<Drive> result = new ArrayList<>(u.getBeingDriver());
-        log.debug(UserServiceImpl.class + "Find drives as driver, found " + 
+        log.debug(UserServiceImpl.class + "Find drives as driver, found " +
                 result.size() + " drives");
         return result;
     }
 
     @Override
     public List<Drive> findDrivesAsPassenger(Long id) throws IllegalArgumentException {
-        if(id == null) throw new IllegalArgumentException(UserServiceImpl.class
-            + "Find drives as passenger: user id is null");
+        if (id == null) throw new IllegalArgumentException(UserServiceImpl.class
+                + "Find drives as passenger: user id is null");
         User u = userDao.findUserById(id);
         List<Drive> result = new ArrayList<>(u.getBeingCustomer());
-        log.debug(UserServiceImpl.class + "Find drives as passenger, found " + 
+        log.debug(UserServiceImpl.class + "Find drives as passenger, found " +
                 result.size() + " drives");
         return result;
     }
@@ -210,10 +212,10 @@ public class UserServiceImpl implements UserService {
     public Map<User, BigDecimal> getUsersReward() {
         List<User> users = userDao.findAll();
         Map<User, BigDecimal> usersRewards = new HashMap<>();
-        for(User u : users){
+        for (User u : users) {
             BigDecimal userReward = BigDecimal.ZERO;
-            for(Drive drive : u.getBeingDriver()){
-                if(drive.getDate().before(timeService.getCurrentTime())){
+            for (Drive drive : u.getBeingDriver()) {
+                if (drive.getDate().before(timeService.getCurrentTime())) {
                     userReward = userReward.add(drive.getPrice().multiply(new BigDecimal(drive.getCustomers().size())));
                 }
             }
@@ -226,10 +228,10 @@ public class UserServiceImpl implements UserService {
     public Map<User, BigDecimal> getUsersSpending() {
         List<User> users = findAllUsers();
         Map<User, BigDecimal> usersSpending = new HashMap<>();
-        for(User user : users){
+        for (User user : users) {
             BigDecimal userSpending = BigDecimal.ZERO;
-            for(Drive drive : user.getBeingCustomer()){
-                if(drive.getDate().before(timeService.getCurrentTime())){
+            for (Drive drive : user.getBeingCustomer()) {
+                if (drive.getDate().before(timeService.getCurrentTime())) {
                     userSpending = userSpending.add(drive.getPrice());
                 }
             }
@@ -244,22 +246,22 @@ public class UserServiceImpl implements UserService {
         Map<User, BigDecimal> usersRewards = getUsersReward();
         Map<User, BigDecimal> usersProfit = new HashMap<>();
 
-        for(User user : usersSpending.keySet()){
+        for (User user : usersSpending.keySet()) {
             usersProfit.put(user, usersRewards.get(user).subtract(usersSpending.get(user)));
         }
         return usersProfit;
     }
-    
+
     @Override
     public boolean isAdmin(User u) {
         return findUserById(u.getId()).getIsSuperUser();
     }
-    
+
     @Override
     public boolean authenticate(User u, String password) {
         return validatePassword(password, u.getPassword());
     }
-    
+
     //see  https://crackstation.net/hashing-security.htm#javasourcecode
     private static String createHash(String password) {
         final int SALT_BYTE_SIZE = 24;
@@ -285,8 +287,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public static boolean validatePassword(String password, String correctHash) {
-        if(password==null) return false;
-        if(correctHash==null) throw new IllegalArgumentException("password hash is null");
+        if (password == null) return false;
+        if (correctHash == null) throw new IllegalArgumentException("password hash is null");
         String[] params = correctHash.split(":");
         int iterations = Integer.parseInt(params[0]);
         byte[] salt = fromHex(params[1]);
@@ -325,19 +327,19 @@ public class UserServiceImpl implements UserService {
         int paddingLength = (array.length * 2) - hex.length();
         return paddingLength > 0 ? String.format("%0" + paddingLength + "d", 0) + hex : hex;
     }
-    
+
     @Override
     public void registerUser(User u, String unencryptedPassword) {
-        if(u == null) throw new IllegalArgumentException(
+        if (u == null) throw new IllegalArgumentException(
                 UserServiceImpl.class + "Create: user is null");
-        if(u.getFirstName() == null || u.getLastName() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have Full name");
-        if(u.getLogin() == null) throw new IllegalArgumentException(
-            UserServiceImpl.class + "User does not have login");
+        if (u.getFirstName() == null || u.getLastName() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have Full name");
+        if (u.getLogin() == null) throw new IllegalArgumentException(
+                UserServiceImpl.class + "User does not have login");
         log.debug(UserServiceImpl.class +
                 "User registeed: " + u.toString());
         u.setPassword(createHash(unencryptedPassword));
         userDao.addUser(u);
     }
-    
+
 }

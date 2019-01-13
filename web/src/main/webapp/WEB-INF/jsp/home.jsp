@@ -26,7 +26,7 @@
        </form:form>
     </c:if>
     <c:if test="${userSession.userIsLoggedIn}">
-                <div >
+                <div>
                     <img src="<c:url value='/images/userImages/user-${userSession.user.id}.jpg'/>"
                          style="width: 150px; height: 150px"/>
                 </div>

@@ -12,7 +12,8 @@
         <caption>Drives</caption>
         <thead>
         <tr>
-            <th><p>Id<p></th>
+            <th><p>Id
+                <p></th>
             <th><p>Driver</p></th>
             <th><p>Capacity</p></th>
             <th><p>Date</p></th>
@@ -27,7 +28,7 @@
                 <td><p><c:out value="${drive.id}"/></p></td>
                 <td><p><c:out value="${drive.driver.firstName} ${drive.driver.lastName}"/></p></td>
                 <td><p><c:out value="${drive.capacity}"/></p></td>
-                <td><p><c:out value="${drive.date.date}.${drive.date.month}.${drive.date.year}"/></p></td>
+                <td><p><c:out value="${drive.date.date}.${drive.date.month + 1}.${drive.date.year + 1900}"/></p></td>
                 <td><p><c:out value="${drive.fromCity.name}"/></p></td>
                 <td><p><c:out value="${drive.toCity.name}"/></p></td>
                 <td>

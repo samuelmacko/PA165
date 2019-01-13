@@ -7,13 +7,13 @@ package cz.muni.fi.pa165.blablacar.service.config;
 
 import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.service.DriveService;
-import javax.inject.Inject;
 import org.dozer.DozerConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+
 /**
- *
  * @author Matus Sakala
  */
 public class DriveIdConverter extends DozerConverter<Drive, Long> {
@@ -34,13 +34,13 @@ public class DriveIdConverter extends DozerConverter<Drive, Long> {
 
     @Override
     public Drive convertFrom(Long id, Drive drive) {
-        if(id == null){
+        if (id == null) {
             return null;
         }
         Drive foundDrive = null;
         try {
             foundDrive = driveService.findDriveById(id);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             log.debug("Cannot find drive with id" + id);
         }
         return foundDrive;

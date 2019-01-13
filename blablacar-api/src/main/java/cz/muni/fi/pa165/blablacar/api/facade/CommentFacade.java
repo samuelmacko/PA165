@@ -20,7 +20,7 @@ public interface CommentFacade {
     /**
      * Sets new content for existing comment
      *
-     * @param commentId of comment which content will be changed
+     * @param commentId  of comment which content will be changed
      * @param newContent content to set
      */
     void changeContent(Long commentId, String newContent);

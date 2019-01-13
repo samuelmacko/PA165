@@ -7,12 +7,12 @@
 
 <my:pagetemplate title="Create a drive">
 <jsp:attribute name="body">
-    <form:form action="${pageContext.request.contextPath}/drives/find"  method="post"
+    <form:form action="${pageContext.request.contextPath}/drives/find" method="post"
                modelAttribute="driveCreateDTO" cssClass="form-horizontal">
         
     <div class="form-group">
         <form:label path="fromCity" cssClass="col-sm-2 control-label">From</form:label>
-            <div class="col-sm-10">
+        <div class="col-sm-10">
                 <form:select path="fromCity" cssClass="form-control">
                     <c:forEach items="${cities}" var="city">
                         <form:option value="${city}">${city.name}</form:option>
@@ -22,13 +22,13 @@
     </div>
     <div class="form-group">
         <form:label path="toCity" cssClass="col-sm-2 control-label">To</form:label>
-            <div class="col-sm-10">
+        <div class="col-sm-10">
                 <form:select path="toCity" cssClass="form-control">
                     <c:forEach items="${cities}" var="city">
                         <form:option value="${cityFacade.findCityById(city.id)}">${city.name}</form:option>
                     </c:forEach>
                 </form:select>
-            </div>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Find</button>
     </form:form>

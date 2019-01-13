@@ -74,7 +74,7 @@ public class DriveController {
         driveCreateDTO.setDriver(userSession.getUser());
         driveCreateDTO.setCapacity(drive.getCapacity());
         driveCreateDTO.setPrice(drive.getPrice());
-        if(drive.getDate() == null){
+        if (drive.getDate() == null) {
             driveCreateDTO.setDate(new Date());
         } else {
             driveCreateDTO.setDate(drive.getDate());

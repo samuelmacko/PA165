@@ -13,35 +13,35 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.User;
 import cz.muni.fi.pa165.blablacar.service.BeanMappingService;
 import cz.muni.fi.pa165.blablacar.service.DriveService;
 import cz.muni.fi.pa165.blablacar.service.UserService;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/** Implementation of User facade
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.List;
+
+/**
+ * Implementation of User facade
  *
  * @author Matus Sakala
  */
 @Service
 @Transactional
-public class UserFacadeImpl implements UserFacade{
+public class UserFacadeImpl implements UserFacade {
 
     private final static Logger log = LoggerFactory.getLogger(UserFacadeImpl.class);
 
     @Autowired
     private UserService userService;
-    
+
     @Inject
     private DriveService driveService;
 
     @Autowired
     private BeanMappingService beanMappingService;
-    
+
     @Override
     public Long createUser(UserDTO userDTO) {
         User mappedUser = beanMappingService.mapTo(userDTO, User.class);
@@ -56,7 +56,7 @@ public class UserFacadeImpl implements UserFacade{
     @Override
     public UserDTO findUserById(Long id) {
         User user = userService.findUserById(id);
-        if (user == null){
+        if (user == null) {
             log.debug(UserFacadeImpl.class +
                     "Find user by id: " + id + ", not found");
             return null;
@@ -71,8 +71,8 @@ public class UserFacadeImpl implements UserFacade{
     @Override
     public UserDTO findUserByLogin(String login) {
         User user = userService.findUserByLogin(login);
-        if(user == null){
-            log.debug(UserFacadeImpl.class + "Find user by login: " + 
+        if (user == null) {
+            log.debug(UserFacadeImpl.class + "Find user by login: " +
                     login + ", not found");
             return null;
         }
@@ -83,8 +83,8 @@ public class UserFacadeImpl implements UserFacade{
     @Override
     public UserDTO findUserByFullName(String firstName, String lastName) {
         User user = userService.findUserByFullName(firstName, lastName);
-        if(user == null){
-            log.debug(UserFacadeImpl.class + "Find user by full name " + 
+        if (user == null) {
+            log.debug(UserFacadeImpl.class + "Find user by full name " +
                     firstName + " " + lastName + ", not found");
         }
         log.debug(UserFacadeImpl.class + "Found user " + user);
@@ -128,7 +128,7 @@ public class UserFacadeImpl implements UserFacade{
     public List<DriveDTO> getDriverDrives(Long id) {
         List<Drive> drives = userService.findDrivesAsDriver(id);
         log.debug(UserFacadeImpl.class + "Get drives as driver, found "
-            + drives.size() + " drives");
+                + drives.size() + " drives");
         return beanMappingService.mapTo(drives, DriveDTO.class);
     }
 
@@ -136,19 +136,19 @@ public class UserFacadeImpl implements UserFacade{
     public List<DriveDTO> getPassengerDrives(Long id) {
         List<Drive> drives = userService.findDrivesAsPassenger(id);
         log.debug(UserFacadeImpl.class + "Get drives as passenger, found "
-            + drives.size() + " drives");
+                + drives.size() + " drives");
         return beanMappingService.mapTo(drives, DriveDTO.class);
     }
-    
+
     @Override
-    public boolean isAdmin(UserDTO u){
+    public boolean isAdmin(UserDTO u) {
         return userService.isAdmin(beanMappingService.mapTo(u, User.class));
     }
-    
+
     @Override
     public boolean authenticate(UserDTO u) {
         return userService.authenticate(
                 userService.findUserById(u.getId()), u.getPassword());
     }
-    
+
 }

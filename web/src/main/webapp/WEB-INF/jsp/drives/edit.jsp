@@ -28,7 +28,9 @@
                             <%--<form:errors path="capacity" cssClass="help-block"/>--%>
                     </div>
 
-                    <button type="submit" class="btn btn-default pull-right" style="margin-top:1%; margin-right:15px;">Edit a drive</button>
+                    <button type="submit" class="btn btn-default pull-right" style="margin-top:1%; margin-right:15px;">
+                        Edit a drive
+                    </button>
                 </div>
             </form:form>
     </div>

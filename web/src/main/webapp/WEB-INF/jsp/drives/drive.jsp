@@ -9,9 +9,9 @@
 <jsp:attribute name="body">
     <c:if test="${userSession.user.superUser || userFacade.getDriverDrives(userSession.userId).contains(driveDTO)}">
         <div class="col-md-12">
-           <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
+            <form method="post" action="${pageContext.request.contextPath}/drives/edit/${driveDTO.id}">
                 <button type="submit" class="btn btn-primary">Edit</button>
-            </form> 
+            </form>
         </div>
     </c:if>
     
@@ -24,10 +24,10 @@
     </c:if>
 
     <%--<form:form action="${pageContext.request.contextPath}/drives/delete" id="join-ride"--%>
-               <%--method="get">--%>
-        <%--<button type="submit" class="btn btn-primary" name="driveId" value="${driveDTO.id}">--%>
-            <%--Remove ride--%>
-        <%--</button>--%>
+    <%--method="get">--%>
+    <%--<button type="submit" class="btn btn-primary" name="driveId" value="${driveDTO.id}">--%>
+    <%--Remove ride--%>
+    <%--</button>--%>
     <%--</form:form>--%>
 
     <div class="col-md-6">
@@ -38,8 +38,9 @@
                 <td><p>Driver</p></td>
                 <td>
                     <p>
-                        ${driveDTO.driver.firstName} ${driveDTO.driver.lastName}
-                        <a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/user/view/${driveDTO.driver.id}">View</a>
+                            ${driveDTO.driver.firstName} ${driveDTO.driver.lastName}
+                        <a class="btn btn-xs btn-primary"
+                           href="${pageContext.request.contextPath}/user/view/${driveDTO.driver.id}">View</a>
                     </p>
                 </td>
             </tr>
@@ -81,7 +82,9 @@
             <c:forEach items="${driveDTO.comments}" var="comment">
                 <tr>
                     <td><p>${comment.content}</p></td>
-                    <td><p><a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/user/view/${comment.authorID}">Author</a></p></td>
+                    <td><p><a class="btn btn-xs btn-primary"
+                              href="${pageContext.request.contextPath}/user/view/${comment.authorID}">Author</a></p>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

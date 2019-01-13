@@ -7,11 +7,11 @@
 
 <my:pagetemplate title="Create a drive">
 <jsp:attribute name="body">
-    <form:form action="${pageContext.request.contextPath}/drives/create"  method="post"
+    <form:form action="${pageContext.request.contextPath}/drives/create" method="post"
                modelAttribute="driveFormDTO" cssClass="form-horizontal">
         <div class="form-group">
             <form:label path="fromCityId" cssClass="col-sm-2 control-label">From</form:label>
-                <div class="col-sm-10">
+            <div class="col-sm-10">
                     <form:select path="fromCityId" cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
                             <form:option value="${city.id}">${city.name}</form:option>
@@ -21,19 +21,19 @@
         </div>
         <div class="form-group">
             <form:label path="toCityId" cssClass="col-sm-2 control-label">To</form:label>
-                <div class="col-sm-10">
+            <div class="col-sm-10">
                     <form:select path="toCityId" cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
                             <form:option value="${city.id}">${city.name}</form:option>
                         </c:forEach>
                     </form:select>
-                </div>
+            </div>
         </div>
-        <div class="form-group">        
+        <div class="form-group">
             <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
-                <div class="col-sm-10">
-                    <form:input id="input-date" path="date" type="date" cssClass="form-control"/>
-                </div>
+            <div class="col-sm-10">
+                <form:input id="input-date" path="date" type="date" cssClass="form-control"/>
+            </div>
         </div>
         <div class="form-group">
             <form:label path="price" cssClass="col-sm-2 control-label">Price</form:label>
@@ -41,14 +41,15 @@
                 <form:input id="input-price" path="price" type="number" cssClass="form-control"/>
             </div>
         </div>
-        <div class="form-group">    
+        <div class="form-group">
             <form:label path="capacity" cssClass="col-sm-2 control-label">Capacity</form:label>
             <div class="col-sm-10">
                 <form:input id="input-capacity" path="capacity" type="number" cssClass="form-control"/>
-                <%-- <form:errors path="capacity" cssClass="help-block"/> --%>
+                    <%-- <form:errors path="capacity" cssClass="help-block"/> --%>
             </div>
         </div>
-            <button type="submit" class="btn btn-primary" style="margin-top:1%; margin-right:15px;">Create a drive</button>
+            <button type="submit" class="btn btn-primary" style="margin-top:1%; margin-right:15px;">Create a drive
+            </button>
     </form:form>
 
 </jsp:attribute>

@@ -1,10 +1,10 @@
 package cz.muni.fi.pa165.blablacar.api.dto;
 
-        import javax.validation.constraints.Min;
-        import javax.validation.constraints.NotNull;
-        import java.math.BigDecimal;
-        import java.util.Date;
-        import java.util.Objects;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Objects;
 
 public class DriveFormDTO {
 

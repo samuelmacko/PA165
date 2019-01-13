@@ -27,10 +27,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-        <groupId>cglib</groupId>
-        <artifactId>cglib</artifactId>
-        <version>3.1</version>
-    </dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.1</version>
+        </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>blablacar-service</artifactId>
@@ -109,7 +109,7 @@
 
     </dependencies>
 
-     <build>
+    <build>
         <!-- what to do when only "mvn" is run -->
         <defaultGoal>cargo:run</defaultGoal>
         <!-- name of the produced war -->

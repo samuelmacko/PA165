@@ -9,13 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Matus Sakala
  */
 @Service
 public interface UserService {
     /**
-     *
      * @param user
      * @return
      * @throws IllegalArgumentException
@@ -43,15 +41,16 @@ public interface UserService {
     public void removeCustomerFromDrive(Long driveId, Long userId);
 
     public Map<User, BigDecimal> getUsersReward();
-    public Map<User, BigDecimal> getUsersSpending();
-    public Map<User, BigDecimal> getUsersTotalProfit();
-    
-    public boolean isAdmin(User u);
-    
-    public boolean authenticate(User u, String password);
-    
-    public void registerUser(User u, String unencryptedPassword);
 
+    public Map<User, BigDecimal> getUsersSpending();
+
+    public Map<User, BigDecimal> getUsersTotalProfit();
+
+    public boolean isAdmin(User u);
+
+    public boolean authenticate(User u, String password);
+
+    public void registerUser(User u, String unencryptedPassword);
 
 
 }

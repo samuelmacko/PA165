@@ -2,10 +2,10 @@ package cz.muni.fi.pa165.blablacar.service;
 
 import cz.muni.fi.pa165.blablacar.persistence.dao.CityDao;
 import cz.muni.fi.pa165.blablacar.persistence.entity.City;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CityServiceImpl implements CityService {

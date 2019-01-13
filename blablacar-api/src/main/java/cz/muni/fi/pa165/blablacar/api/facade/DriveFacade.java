@@ -44,7 +44,7 @@ public interface DriveFacade {
     /**
      * Change a capacity
      *
-     * @param id id of a drive
+     * @param id          id of a drive
      * @param newCapacity capacity to be assigned
      */
     void changeCapacity(Long id, int newCapacity);
@@ -59,7 +59,7 @@ public interface DriveFacade {
     /**
      * Change a date
      *
-     * @param id id of a drive
+     * @param id      id of a drive
      * @param newDate date to be assigned
      */
     void changeDate(Long id, Date newDate);

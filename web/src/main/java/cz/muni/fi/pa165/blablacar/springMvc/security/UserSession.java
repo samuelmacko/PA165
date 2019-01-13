@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.blablacar.springMvc.security;
 
 import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,15 +17,15 @@ public class UserSession {
     private String login;
     private String password;
 
-    
+
     public void logInUser(Long userId, UserDTO user) {
         setUser(user);
         setUserId(userId);
         setUserIsLoggedIn(true);
         setLastLoggedIn(new Date());
     }
-    
-    public void logoutUser(){
+
+    public void logoutUser() {
         setUser(null);
         setUserId(null);
         setUserIsLoggedIn(false);
@@ -94,8 +92,8 @@ public class UserSession {
     public int hashCode() {
         return Objects.hash(getUserId());
     }
-    
-    public boolean isSuperUser(){
+
+    public boolean isSuperUser() {
         return user.getSuperUser();
     }
 }

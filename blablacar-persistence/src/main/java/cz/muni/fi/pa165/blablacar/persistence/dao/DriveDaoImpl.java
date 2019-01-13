@@ -67,7 +67,8 @@ public class DriveDaoImpl implements DriveDao {
             throw new IllegalArgumentException("id is null");
         }
         return em.createQuery("SELECT d FROM Drive d WHERE d.toCity.id = :id", Drive.class).setParameter("id", id)
-                .getResultList();    }
+                .getResultList();
+    }
 
     @Override
     public List<Drive> findAll() {
