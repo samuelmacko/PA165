@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <my:pagetemplate title="Welcome to blablacar">
-
+<jsp:attribute name="body">
     <c:if test="${not userSession.userIsLoggedIn}">
         <h1>Please login before proceeding</h1>
         <form:form name="login" method="POST" action="login" modelAttribute="userSession">
