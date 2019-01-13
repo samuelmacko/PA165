@@ -8,23 +8,23 @@
 <my:pagetemplate title="Create a drive">
 <jsp:attribute name="body">
     <form:form action="${pageContext.request.contextPath}/drives/create"  method="post"
-               modelAttribute="driveCreateDTO" cssClass="form-horizontal">
+               modelAttribute="driveFormDTO" cssClass="form-horizontal">
         <div class="form-group">
-            <form:label path="fromCity" cssClass="col-sm-2 control-label">From</form:label>
+            <form:label path="fromCityId" cssClass="col-sm-2 control-label">From</form:label>
                 <div class="col-sm-10">
-                    <form:select path="fromCity" cssClass="form-control">
+                    <form:select path="fromCityId" cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
-                            <form:option value="${city}">${city.name}</form:option>
+                            <form:option value="${city.id}">${city.name}</form:option>
                         </c:forEach>
                 </form:select>
             </div>
         </div>
         <div class="form-group">
-            <form:label path="toCity" cssClass="col-sm-2 control-label">To</form:label>
+            <form:label path="toCityId" cssClass="col-sm-2 control-label">To</form:label>
                 <div class="col-sm-10">
-                    <form:select path="toCity" cssClass="form-control">
+                    <form:select path="toCityId" cssClass="form-control">
                         <c:forEach items="${cities}" var="city">
-                            <form:option value="${cityFacade.findCityById(city.id)}">${city.name}</form:option>
+                            <form:option value="${city.id}">${city.name}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>
@@ -32,7 +32,7 @@
         <div class="form-group">        
             <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
                 <div class="col-sm-10">
-                    <form:input id="input-date" path="date" type="date" form="drive-create-form" cssClass="form-control"/>
+                    <form:input id="input-date" path="date" type="date" cssClass="form-control"/>
                 </div>
         </div>
         <div class="form-group">

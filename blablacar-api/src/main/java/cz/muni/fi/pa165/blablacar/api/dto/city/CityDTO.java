@@ -1,11 +1,5 @@
 package cz.muni.fi.pa165.blablacar.api.dto.city;
 
-import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
-import cz.muni.fi.pa165.blablacar.persistence.entity.City;
-import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
-
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

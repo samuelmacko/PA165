@@ -93,7 +93,6 @@ public class DriveFacadeTest {
         userDTO.setLastName("Driver");
 
         driveCreateDTO = new DriveCreateDTO();
-        driveCreateDTO.setId(2L);
         driveCreateDTO.setCapacity(4);
         driveCreateDTO.setFromCity(new CityDTO());
         driveCreateDTO.setToCity(new CityDTO());

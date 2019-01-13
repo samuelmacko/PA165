@@ -3,19 +3,16 @@ package cz.muni.fi.pa165.blablacar.springMvc.controllers;
 import cz.muni.fi.pa165.blablacar.api.dto.DriveCreateDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.DriveFormDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.UserDTO;
 import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.api.facade.CityFacade;
 import cz.muni.fi.pa165.blablacar.api.facade.DriveFacade;
 import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
-import cz.muni.fi.pa165.blablacar.persistence.dao.CityDao;
 import cz.muni.fi.pa165.blablacar.springMvc.security.UserSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -45,55 +43,57 @@ public class DriveController {
     @Autowired
     private UserSession userSession;
 
-    @ModelAttribute(name="userSession")
-    public UserSession addUserSession(){
+    @ModelAttribute(name = "userSession")
+    public UserSession addUserSession() {
         return userSession;
     }
-    
-    @ModelAttribute(name="driveFacade")
-    public DriveFacade addDriveFacade(){
+
+    @ModelAttribute(name = "driveFacade")
+    public DriveFacade addDriveFacade() {
         return driveFacade;
     }
-    
-    @ModelAttribute(name="userFacade")
-    public UserFacade addUserFacade(){
+
+    @ModelAttribute(name = "userFacade")
+    public UserFacade addUserFacade() {
         return userFacade;
     }
-    
-    
+
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createDrive(@Valid @ModelAttribute("driveCreateDTO") DriveCreateDTO drive,
-                             BindingResult result,
-                             Model model,
-                             RedirectAttributes redirectAttributes,
-                             HttpServletRequest request,
-                             HttpServletResponse response) {
- 
-        log.error("Drive = "+drive.toString());
-        
-//        if (drive.getFromCity().getId().equals(drive.getToCity().getId())){
-//            model.addAttribute("alert_danger", "From and To cities must be different.");
-//            return "drives/new";
-//        }
-//        
-        DriveCreateDTO driveDTO = new DriveCreateDTO();
-        //driveDTO.setId(drive.getId());
-        driveDTO.setDriver(userSession.getUser());
-        driveDTO.setCapacity(drive.getCapacity());
-        driveDTO.setPrice(drive.getPrice());
-        driveDTO.setDate(drive.getDate());
-        driveDTO.setFromCity(cityFacade.findCityById(drive.getFromCity().getId()));
-        driveDTO.setToCity(cityFacade.findCityById(drive.getToCity().getId()));
+    public String createDrive(@ModelAttribute("driveFormDTO") DriveFormDTO drive,
+                              BindingResult result,
+                              Model model,
+                              RedirectAttributes redirectAttributes,
+                              HttpServletRequest request,
+                              HttpServletResponse response) {
+
+        log.info("DriveForm = " + drive.toString());
+
+
+        DriveCreateDTO driveCreateDTO = new DriveCreateDTO();
+        driveCreateDTO.setDriver(userSession.getUser());
+        driveCreateDTO.setCapacity(drive.getCapacity());
+        driveCreateDTO.setPrice(drive.getPrice());
+        if(drive.getDate() == null){
+            driveCreateDTO.setDate(new Date());
+        } else {
+            driveCreateDTO.setDate(drive.getDate());
+        }
+        driveCreateDTO.setFromCity(cityFacade.findCityById(drive.getFromCityId()));
+        driveCreateDTO.setToCity(cityFacade.findCityById(drive.getToCityId()));
+
+        log.info("DriveCreate = " + driveCreateDTO.toString());
+
 //
 //        log.debug("create(drive={})", drive);
 //      
 //        if (!isValidBinding(result, model)) {
 //            return "drives/new";
 //        }
-        log.error(driveDTO.toString());
+        log.info(drive.toString());
 
-        Long id = driveFacade.createDrive(driveDTO);
-//        Long id = driveFacade.createDrive(driveDTO);
+        Long id = driveFacade.createDrive(driveCreateDTO);
+//        Long id = driveFacade.createDrive(driveCreateDTO);
         redirectAttributes.addFlashAttribute("alert_success", "Drive was successfully created.");
 
         //redirect to ride with this comment
@@ -102,33 +102,27 @@ public class DriveController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String createNewDrive(){
+    public String createNewDrive(Model model) {
+        log.debug("new()");
+        DriveFormDTO driveFormDTO = new DriveFormDTO();
+        driveFormDTO.setDate(new Date());
+        model.addAttribute("driveFormDTO", driveFormDTO);
         return "drives/new";
     }
-    
+
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public String findDrive(){
+    public String findDrive() {
         return "drives/find";
     }
-    
-    @ModelAttribute
-    public String addDriveForm(ModelMap model) {
-        DriveCreateDTO newDrive = new DriveCreateDTO();
-//        DriveFormDTO newDrive = new DriveFormDTO();
-        List<CityDTO> cities = new ArrayList<>(cityFacade.findAllCities());
-        newDrive.setDriver(userSession.getUser());
-        model.addAttribute("driveCreateDTO", newDrive);
-//        model.addAttribute("driveFormDTO", newDrive);
-        //model.addAttribute("cities" , cities);
-        return "drives/new";
-    }
-    
+
+
     @ModelAttribute("cities")
-    public List<CityDTO> addCities(){
+    public List<CityDTO> addCities() {
         List<CityDTO> cities = new ArrayList<>(cityFacade.findAllCities());
         return cities;
     }
-//
+
+    //
     @RequestMapping(value = "/view/{driveId}", method = RequestMethod.GET)
     public String showDrive(@PathVariable Long driveId, Model model) {
         DriveDTO driveDTO = driveFacade.findDriveById(driveId);
@@ -138,11 +132,11 @@ public class DriveController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editDrive(@Valid @ModelAttribute("driveDTO") DriveDTO drive,
-                           BindingResult result,
-                           Model model,
-                           RedirectAttributes redirectAttributes,
-                           HttpServletResponse response,
-                           HttpServletRequest request) {
+                            BindingResult result,
+                            Model model,
+                            RedirectAttributes redirectAttributes,
+                            HttpServletResponse response,
+                            HttpServletRequest request) {
 
         log.debug("update(drive={})", drive);
 
@@ -162,9 +156,9 @@ public class DriveController {
         return "redirect:/drives/list";
     }
 
-//    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/new", method = RequestMethod.GET)
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String editExistingDrive(){
+    public String editExistingDrive() {
         return "drives/edit";
     }
 
@@ -179,8 +173,8 @@ public class DriveController {
 
     @RequestMapping(value = "/delete")
     public String deleteDrive(@RequestParam(value = "driveId", required = true) Long driveId, Model model,
-                             RedirectAttributes redirectAttributes, HttpServletRequest request,
-                             HttpServletResponse response) {
+                              RedirectAttributes redirectAttributes, HttpServletRequest request,
+                              HttpServletResponse response) {
 
         driveFacade.removeDrive(driveId);
 

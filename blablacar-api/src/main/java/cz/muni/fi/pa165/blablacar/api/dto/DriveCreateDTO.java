@@ -140,8 +140,8 @@ public class DriveCreateDTO {
     public String toString() {
         return "DriveCreateDTO{" + "id=" + id + ", driver=" + driver + ", capacity=" + capacity + ", fromCity=" + fromCity + ", toCity=" + toCity + ", price=" + price + ", date=" + date + '}';
     }
-    
-    
+
+
 
 
 }

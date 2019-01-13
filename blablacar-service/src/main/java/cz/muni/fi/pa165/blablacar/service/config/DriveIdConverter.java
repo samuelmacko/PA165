@@ -9,6 +9,8 @@ import cz.muni.fi.pa165.blablacar.persistence.entity.Drive;
 import cz.muni.fi.pa165.blablacar.service.DriveService;
 import javax.inject.Inject;
 import org.dozer.DozerConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -17,6 +19,9 @@ import org.dozer.DozerConverter;
 public class DriveIdConverter extends DozerConverter<Drive, Long> {
     @Inject
     private DriveService driveService;
+
+    private final static Logger log = LoggerFactory.getLogger(DriveIdConverter.class);
+
 
     public DriveIdConverter() {
         super(Drive.class, Long.class);
@@ -29,6 +34,15 @@ public class DriveIdConverter extends DozerConverter<Drive, Long> {
 
     @Override
     public Drive convertFrom(Long id, Drive drive) {
-        return id == null ? null : driveService.findDriveById(id);
+        if(id == null){
+            return null;
+        }
+        Drive foundDrive = null;
+        try {
+            foundDrive = driveService.findDriveById(id);
+        } catch (Exception ex){
+            log.debug("Cannot find drive with id" + id);
+        }
+        return foundDrive;
     }
 }
