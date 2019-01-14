@@ -216,7 +216,6 @@ public class DriveController {
         newCustomer.setCustomerId(userSession.getUserId());
         newCustomer.setDriveId(id);
         driveFacade.addCustomer(newCustomer);
-        driveFacade.changeCapacity(driveDTO.getId(), driveDTO.getCapacity() - 1);
         return "redirect:/user/show/"+userSession.getUserId().toString();
     }
   
