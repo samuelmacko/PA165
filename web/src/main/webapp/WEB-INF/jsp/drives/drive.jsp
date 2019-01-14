@@ -78,6 +78,11 @@
         </table>
 
         <h3>Comments</h3>
+        <div class="col-md-12">
+            <form method="post" action="${pageContext.request.contextPath}/comment/new/?driveId=${driveDTO.id}">
+                <button type="submit" class="btn btn-primary">Leave a comment</button>
+            </form>
+        </div>
         <table class="table table-hover">
             <c:forEach items="${driveDTO.comments}" var="comment">
                 <tr>

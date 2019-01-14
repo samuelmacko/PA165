@@ -5,21 +5,24 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Create a drive">
+<my:pagetemplate title="Edit a drive">
 <jsp:attribute name="body">
 
     <div class="row">
 
-            <form:form action="${pageContext.request.contextPath}/drives/edit" id="drive-create-form" method="post"
-                       modelAttribute="driveCreateDTO" cssClass="form-horizontal">
+            <form:form action="${pageContext.request.contextPath}/drives/edit" method="post"
+                       modelAttribute="editDriveDTO" cssClass="form-horizontal">
                      <%--modelAttribute="driveFormDTO" cssClass="form-horizontal">--%>
 
                 <%--<div class="form-group ${name_error?'has-error':''}">--%>
+                <form:input class="form-control" path="id" type="text" value="${editDriveDTO.id}" cssClass="hidden" />
                 <div class="form-group">
 
-                    <form:label path="price" cssClass="col-sm-2 control-label">Price</form:label>
-                    <div class="col-sm-10">
-                        <form:input id="input-price" path="price" type="number" cssClass="form-control"/>
+                    <div class="form-group">
+                        <form:label path="date" cssClass="col-sm-2 control-label">Date</form:label>
+                        <div class="col-sm-10">
+                            <input id="input-date" type="date" path="date" name = "dateOld" class="form-control"/>
+                        </div>
                     </div>
 
                     <form:label path="capacity" cssClass="col-sm-2 control-label">Capacity</form:label>

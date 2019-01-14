@@ -1,18 +1,11 @@
 package cz.muni.fi.pa165.blablacar.springMvc.controllers;
 
-import cz.muni.fi.pa165.blablacar.api.dto.AddCustomerDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.DriveCreateDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.DriveDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.DriveFormDTO;
-import cz.muni.fi.pa165.blablacar.api.dto.RemoveCustomerDTO;
+import cz.muni.fi.pa165.blablacar.api.dto.*;
 import cz.muni.fi.pa165.blablacar.api.dto.city.CityDTO;
 import cz.muni.fi.pa165.blablacar.api.facade.CityFacade;
 import cz.muni.fi.pa165.blablacar.api.facade.DriveFacade;
 import cz.muni.fi.pa165.blablacar.api.facade.UserFacade;
-import cz.muni.fi.pa165.blablacar.spring.mvc.forms.DriveCreateDTOValidator;
 import cz.muni.fi.pa165.blablacar.springMvc.security.UserSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +18,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
 
 @Controller
 @RequestMapping("/drives")
@@ -66,21 +56,6 @@ public class DriveController {
     public UserFacade addUserFacade() {
         return userFacade;
     }
-
-    
-     /*@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-        sdf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-    }*/
-    
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        if (binder.getTarget() instanceof DriveFormDTO) {
-//            binder.addValidators(new DriveCreateDTOValidator());
-//        }
-//    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createDrive(@ModelAttribute("driveFormDTO") DriveFormDTO drive,
@@ -241,6 +216,7 @@ public class DriveController {
         newCustomer.setCustomerId(userSession.getUserId());
         newCustomer.setDriveId(id);
         driveFacade.addCustomer(newCustomer);
+        driveFacade.changeCapacity(driveDTO.getId(), driveDTO.getCapacity() - 1);
         return "redirect:/user/show/"+userSession.getUserId().toString();
     }
   
@@ -279,45 +255,36 @@ public class DriveController {
     
   
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editDrive(@Valid @ModelAttribute("driveDTO") DriveDTO drive,
+    public String editDrive(@ModelAttribute("editDriveDTO") DriveDTO drive,
                             BindingResult result,
                             Model model,
                             RedirectAttributes redirectAttributes,
                             HttpServletResponse response,
                             HttpServletRequest request) {
 
-        log.debug("update(drive={})", drive);
+        log.debug("update(drive) " + drive);
 
-//        if ( isValidBinding(result, model)) {
-//            model.addAttribute("rideCreateDTO", ride);
-//            String referer = request.getHeader("Referer");
-//            return "redirect:" + referer;
-//        }
+        if(drive != null && drive.getId() != null){
+            driveFacade.changeCapacity(drive.getId(), drive.getCapacity());
+            if(drive.getDate() != null){
+                driveFacade.changeDate(drive.getId(), drive.getDate());
+            }
+        }
 
-//        driveFacade.changePrice(ride.getId(), ride.getSeatPrice());
-        driveFacade.changeCapacity(drive.getId(), drive.getCapacity());
-        driveFacade.changeDate(drive.getId(), drive.getDate());
+        redirectAttributes.addFlashAttribute("alert_success", "Drive " + " has been updated.");
 
-        redirectAttributes.addFlashAttribute("alert_success", "Drive " + userSession.getUserId() + " has been updated.");
-
-//        return "redirect:/drive/showDrive/" + drive.getId();
         return "redirect:/drives/list";
     }
 
-    //    @RequestMapping(value = "/new", method = RequestMethod.GET)
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String editExistingDrive() {
+    public String editExistingDrive(@PathVariable long id, Model model) {
+        DriveDTO driveDTO = driveFacade.findDriveById(id);
+        log.debug("editing drive " + driveDTO);
+
+        model.addAttribute("editDriveDTO", driveDTO);
         return "drives/edit";
     }
 
-//    @ModelAttribute
-//    public void editDriveForm(ModelMap model) {
-//        DriveDTO drive = new DriveDTO();
-////        DriveFormDTO newDrive = new DriveFormDTO();
-////        newDrive.setDriver(userSession.getUser());
-//        model.addAttribute("driveDTO", drive);
-////        model.addAttribute("driveFormDTO", newDrive);
-//    }
 
     @RequestMapping(value = "/delete")
     public String deleteDrive(@RequestParam(value = "driveId", required = true) Long driveId, Model model,
@@ -347,28 +314,6 @@ public class DriveController {
         return "drives/drives";
     }
 
-//    @RequestMapping("")
-//    public String redirectTo404Page(Model model, HttpServletRequest request, HttpServletResponse response) {
-//        return "error404";
-//    }
-//
-//    //    @RequestMapping(value = "/find", method = RequestMethod.POST)
-////    public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
-////                                   Model model,
-////                                   BindingResult result,
-////                                   RedirectAttributes redirectAttributest) {
-////        model.addAttribute("rides", placeFacade.getRidesWithOriginatingAndDestinationPlace(Long.valueOf(placeForm.getFrom()),Long.valueOf(placeForm.getTo())));
-////        return "rides/search";
-////    }
-////    @RequestMapping(value = "/connection", method = RequestMethod.GET)
-////    public String listSearchResult(@RequestParam(required=true) String placeFrom,
-////                                   @RequestParam(required=true) String placeTo,
-////                                   Model model) {
-////
-////        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlaceByName(placeFrom,placeTo));
-////        return "rides/all"; //create new view with search on top
-////    }
-//
-//
+
 
 }

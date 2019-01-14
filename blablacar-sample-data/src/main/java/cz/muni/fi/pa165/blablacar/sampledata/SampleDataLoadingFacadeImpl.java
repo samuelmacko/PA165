@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -168,8 +169,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         drive.setCapacity(3);
         drive.setPrice(new BigDecimal("199.99"));
-        drive.setDate(new Date());
-
+        Date dateOfDrive = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dateOfDrive);
+        c.add(Calendar.DATE, 1);
+        drive.setDate(c.getTime());
         return drive;
     }
 

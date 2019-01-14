@@ -19,14 +19,11 @@
              <form:form action="${pageContext.request.contextPath}/comment/create" id="comment-create-form"
                         method="post" modelAttribute="commentCreateDTO">
                 <div class="form-group ${text_error ? 'has-error' : ''}">
-                    <form:input class="form-control" path="" type="text" value="${commentCreateDTO.rideId}"
-                                cssClass="hidden"/>
-                    <form:input class="form-control" path="authorId" type="text" value="${commentCreateDTO.authorId}"
-                                cssClass="hidden"/>
-                    <form:errors path="rideId" cssClass="help-block"/>
-                    <form:label path="text" cssClass="control-label">Write comment</form:label>
-                    <form:errors path="text" cssClass="help-block"/>
-                    <form:textarea cssClass="form-control" form="comment-create-form" path="text" name="text" cols="30"
+                    <form:input class="form-control" path="driveId" type="text" value="${commentCreateDTO.driveId}" cssClass="hidden" />
+                    <form:input class="form-control" path="authorId" type="text" value="${commentCreateDTO.authorId}" cssClass="hidden" />
+                    <form:label path="content" cssClass="control-label">Write comment</form:label>
+                    <form:errors path="content" cssClass="help-block"/>
+                    <form:textarea cssClass="form-control" form="comment-create-form" path="content" name="text" cols="30"
                                    rows="10"></form:textarea>
                     <button class="btn btn-default pull-right" style="margin-top:1%" type="submit">Comment</button>
                 </div>

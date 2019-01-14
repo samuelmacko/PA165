@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -68,29 +65,17 @@ public class CommentController {
                                    HttpServletResponse response) {
 
         log.debug("create(formBean={})", comment);
+        if(comment != null && comment.getAuthorId() != null && comment.getDriveId() != null){
+            commentFacade.createComment(comment);
 
-        if (result.hasErrors()) {
-            for (ObjectError ge : result.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : result.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
-            }
-            model.addAttribute("commentCreateDTO", comment);
-            return "comment/new";
         }
-        //create
-        Long id = commentFacade.createComment(comment);
-        //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Drive " + comment.getDriveId() + " was commented");
-        //redirect to drive with this comment
-        return "redirect:../drive/showDrive/" + comment.getDriveId();
+        return "redirect:../drives/list";
     }
 
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String addCommentForm(@RequestParam(value = "driveId", required = true) Long driveId, ModelMap model) {
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String addCommentForm(@RequestParam(value = "driveId", required = true) Long driveId, Model model) {
+        log.debug("adding comment for drive with id=" + driveId);
         CommentCreateDTO newComment = new CommentCreateDTO();
         newComment.setDriveId(driveId);
         newComment.setAuthorId(userSession.getUserId());
