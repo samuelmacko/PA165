@@ -38,7 +38,7 @@ import org.springframework.web.bind.WebDataBinder;
 @RequestMapping("/drives")
 public class DriveController {
 
-    final static Logger log = LoggerFactory.getLogger(DriveController.class);
+    private final static Logger log = LoggerFactory.getLogger(DriveController.class);
 
     @Autowired
     private DriveFacade driveFacade;
