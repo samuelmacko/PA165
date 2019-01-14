@@ -17,6 +17,7 @@
                     <tr>
                         <th>From</th>
                         <th>To</th>
+                        <th>Date</th>
                         <th>View</th>
                     </tr>
                     </thead>
@@ -25,6 +26,7 @@
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
+                        <td><p>${drive.date.date}.${drive.date.month + 1}.${drive.date.year + 1900}</p></td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
                     </tr>
                 </c:forEach>
@@ -40,7 +42,9 @@
                     <tr>
                         <th>From</th>
                         <th>To</th>
+                        <th>Date</th>
                         <th>View</th>
+                        <th>...</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,7 +52,9 @@
                     <tr>
                         <td>${drive.fromCity.name}</td>
                         <td>${drive.toCity.name}</td>
+                        <td><p>${drive.date.date}.${drive.date.month + 1}.${drive.date.year + 1900}</p></td>
                         <td><my:a href="/drives/view/${drive.id}" class="btn btn-primary">View drive</my:a></td>
+                        <td><a class="btn btn-xs btn-primary" href="${pageContext.request.contextPath}/drives/leave/${drive.id}">Leave</a></td>
                     </tr>
                 </c:forEach>
                     </tbody>

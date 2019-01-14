@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td><p>Date</p></td>
-                <td><p>${driveDTO.date.date}.${driveDTO.date.month}.${driveDTO.date.year}</p></td>
+                <td><p>${driveDTO.date.date}.${driveDTO.date.month + 1}.${driveDTO.date.year + 1900}</p></td>
             </tr>
         </table>
 

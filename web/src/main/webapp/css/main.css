@@ -4,9 +4,17 @@ body {
     background-attachment: fixed;
     background-position: center;
     min-height: 100vh;
-    overflow-y: hidden;
 }
 
 p, h1, h2, h3 {
+    color: #f0f8dc;
+}
+
+button{
+    text-align: center;
+    width: 250px;
+}
+
+th, td{
     color: #f0f8dc;
 }

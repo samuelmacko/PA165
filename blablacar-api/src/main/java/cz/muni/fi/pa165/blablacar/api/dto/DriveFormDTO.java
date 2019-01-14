@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class DriveFormDTO {
 
@@ -26,6 +29,8 @@ public class DriveFormDTO {
     private BigDecimal price;
 
     @NotNull
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="DD-MM-YYYY")
     private Date date;
 
     public Long getId() {
