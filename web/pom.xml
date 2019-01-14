@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>sample-data</artifactId>
+            <artifactId>blablacar-sample-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- servlet, JSP, JSTL -->
